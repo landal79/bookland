@@ -1,81 +1,41 @@
-angular.module('bookland', ['ngRoute'])
-	.config(function ($routeProvider) {
-		$routeProvider
-			.when('/', {
-				templateUrl: 'views/list.html',
-				controller: 'ListController',
-				controllerAs: 'listCtrl',
-				name: 'list'
-			})
-			.when('/new', {
-				templateUrl: 'views/edit.html',
-				controller: 'EditController',
-				controllerAs: 'editCtrl',
-				name: 'edit'
-			})
-			.when('/book/:id', {
-				templateUrl: 'views/detail.html',
-				controller: 'DetailController',
-				controllerAs: 'detailCtrl',
-				name: 'detail'
-			})
-			.when('/settings', {
-				templateUrl: 'views/settings.html',
-				controller: 'SettingsController',
-				controllerAs: 'settings',
-				name: 'settings'
-			})
-			.when('/about', {
-				templateUrl: 'views/about.html',
-				controller: 'AboutController',
-				controllerAs: 'about',
-				name: 'about'
-			})
-			.otherwise({
-				redirectTo: '/'
-			});
-	})
-	.factory('books', ['$http',
-		function ($http) {
-			return $http.get('json/books.json')
-				.success(function (data, status, headers, config) {
-					console.info("success:\n" + headers);
-				}).
-			error(function (data, status, headers, config) {
-				console.error("error:\n" + status);
-			}).then(function (response) {
-				return response.data.results;
-			});
-	}])
-	.controller('NavController', ['$route',
-		function ($route) {
-			this.is = function (title) {
-				if (!$route.current) {
-					return false;
-				}
-				return $route.current.name == title;
-			};
-	}])
-	.controller('ListController', ['$scope', 'books',
-		function ($scope, books) {
-			books.then(function (results) {
-				$scope.items = results;
-			});
+'use strict';
 
+booklandModule.controller('NavController', ['$route',
+    function ($route) {
+        this.is = function (title) {
+            if (!$route.current) {
+                return false;
+            }
+            return $route.current.name == title;
+        };
+}]).controller('ListController', ['$scope', 'books',
+    function ($scope, books) {
+        /*books.then(function (results) {
+            $scope.items = results;
+        });*/
+        $scope.items = books.list();
 }])
-	.controller('EditController', ['$scope',
-		function ($scope) {
-
+.controller('EditController', ['$scope', 'books', '$location',
+    function ($scope, books, $location) {
+        
+    $scope.book = {};
+        
+    $scope.save = function() {
+        alert('Save pressed!');
+        books.add($scope.book);
+        $location.path("/");
+    };
 }])
-	.controller('DetailController', ['$scope', '$routeParams', 'books',
-		function ($scope, $routeParams, books) {
-			books.then(function (books) {
-				$scope.detail = books[$routeParams.id];
-			});
+.controller('DetailController', ['$scope', '$routeParams', 'books',
+    function ($scope, $routeParams, books) {
+//        books.then(function (books) {
+//            $scope.detail = books[$routeParams.id];
+//     });
+              $scope.detail = books.get($routeParams.id);
 }])
-	.controller('SettingsController', function () {
-		// TODO
-	})
-	.controller('AboutController', function () {
-		// TODO
-	});
+.controller('SettingsController', function () {
+    // TODO
+})
+.controller('AboutController', function () {
+    // TODO
+});
