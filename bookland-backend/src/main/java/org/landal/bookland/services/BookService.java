@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
 
 import org.landal.bookland.model.Author;
 import org.landal.bookland.model.Book;
@@ -13,6 +15,9 @@ import org.landal.bookland.model.Book;
 @Stateless
 @LocalBean
 public class BookService {
+
+	@Inject
+	private EntityManager em;
 
 	public static List<Book> books;
 
