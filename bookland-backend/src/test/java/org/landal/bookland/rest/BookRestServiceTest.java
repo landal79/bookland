@@ -1,4 +1,4 @@
-package org.landal.bookland.services;
+package org.landal.bookland.rest;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -20,6 +20,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.landal.bookland.model.Book;
 import org.landal.bookland.rest.BookRestService;
+import org.landal.bookland.services.BookService;
 
 @RunWith(Arquillian.class)
 public class BookRestServiceTest {

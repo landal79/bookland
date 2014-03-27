@@ -34,6 +34,10 @@ public class BookService {
 
 	}
 
+	public void persist(Book book){
+		em.persist(book);
+	}
+
 	public List<Book> getAll() {
 		return Collections.unmodifiableList(books);
 	}
