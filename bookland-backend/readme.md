@@ -1,6 +1,6 @@
 Bookland Backend
 ================
 
-- read the list of books
+- read the books list
 
 

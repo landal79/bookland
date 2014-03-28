@@ -29,7 +29,7 @@ public class Book implements Serializable {
 	private String description;
 
 	@OneToMany
-	@JoinColumn(name = "AUTHOR_ID", referencedColumnName = "BOOK_ID")
+	@JoinColumn(name = "AUTHOR_ID", referencedColumnName = "ID")
 	private List<Author> authors;
 
 	public Book() {

@@ -27,11 +27,11 @@ public class BookServiceTest {
 		return ShrinkWrap
 				.create(WebArchive.class, "test.war")
 				.addPackages(true, Book.class.getPackage(),
-						BookService.class.getPackage(), Resources.class.getPackage())
-				.addAsManifestResource("test-persistence.xml",
-						"persistence.xml")
+						BookService.class.getPackage(),
+						Resources.class.getPackage())
+				.addAsResource("test-persistence.xml",
+						"META-INF/persistence.xml")
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
-		// .setWebXML("web.xml");
 	}
 
 	@Inject
@@ -45,16 +45,10 @@ public class BookServiceTest {
 
 		userTransaction.begin();
 
-		Book book = new Book() {
-
-			private static final long serialVersionUID = 1L;
-
-			{
-				setIsbn("1111111111111111");
-				setDescription("description");
-				setTitle("title");
-			}
-		};
+		Book book = new Book();
+		book.setIsbn("1111111111111111");
+		book.setDescription("description");
+		book.setTitle("title");
 
 		bookService.persist(book);
 
