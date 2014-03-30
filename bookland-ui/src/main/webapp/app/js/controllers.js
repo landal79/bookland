@@ -10,16 +10,15 @@ booklandModule.controller('NavController', ['$route',
         };
 }]).controller('ListController', ['$scope', 'books',
     function ($scope, books) {
-        /*books.then(function (results) {
-            $scope.items = results;
-        });*/
-        $scope.items = books.list();
-}])
+	        books.then(function(books) {
+	        	$scope.items = books;
+	        });
+} ])
 .controller('EditController', ['$scope', 'books', '$location',
     function ($scope, books, $location) {
-        
+
     $scope.book = {};
-        
+
     $scope.save = function() {
         alert('Save pressed!');
         books.add($scope.book);

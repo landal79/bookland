@@ -2,23 +2,32 @@ package org.landal.bookland.model;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+@XmlRootElement(name = "book")
 @Entity
 @Table(name = "BOOKS")
+@NamedQueries({ @NamedQuery(name = Book.DELETE, query = "delete from Book") })
 public class Book implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+
+	public static final String DELETE = "Book.delete";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,7 +37,7 @@ public class Book implements Serializable {
 	private String title;
 	private String description;
 
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name = "AUTHOR_ID", referencedColumnName = "ID")
 	private List<Author> authors;
 
@@ -43,6 +52,11 @@ public class Book implements Serializable {
 		this.title = title;
 		this.description = description;
 		this.authors = Arrays.asList(authors);
+	}
+
+	public String toString() {
+		return new ToStringBuilder(this).append("id", id).append("isbn", isbn)
+				.toString();
 	}
 
 	public Long getId() {
@@ -78,7 +92,7 @@ public class Book implements Serializable {
 	}
 
 	public List<Author> getAuthors() {
-		return authors;
+		return Collections.unmodifiableList(authors);
 	}
 
 	public void setAuthors(List<Author> authors) {

@@ -8,7 +8,9 @@
 		</thead>
 		<tr ng-repeat="item in items">
 			<td ng-bind="item.title"></td>
-			<td ng-bind="item.authors"></td>
+			<td>
+				<span ng-repeat="author in item.authors">{{author.name}} {{author.surname}}</span>
+			</td>
 			<td>
 				<a href="#/book/{{$index}}">{{item.id}}</a>
 			</td>

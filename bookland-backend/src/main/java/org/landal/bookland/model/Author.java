@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 @Entity
 @Table(name = "AUTHORS")
 public class Author implements Serializable{
@@ -23,8 +25,6 @@ public class Author implements Serializable{
 	public Author() {
 	}
 
-
-
 	public Author(Long id, String name, String surname) {
 		super();
 		this.id = id;
@@ -32,6 +32,9 @@ public class Author implements Serializable{
 		this.surname = surname;
 	}
 
+	public String toString(){
+		return ToStringBuilder.reflectionToString(this);
+	}
 
 
 	public Long getId() {

@@ -43,6 +43,11 @@ public class BookServiceTest {
 	@Test
 	public void test_get_all() throws Exception {
 
+//		userTransaction.begin();
+
+		bookService.cancelAll();
+
+		userTransaction.commit();
 		userTransaction.begin();
 
 		Book book = new Book();

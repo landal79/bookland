@@ -38,52 +38,16 @@ var booklandModule = angular.module('bookland', ['ngRoute'])
 			});
 	})
 	.factory('books', ['$http',
-		function ($http) {
-            
-            function ListHolder() {  
-                
-                var list = {};
-                
-                this.setResult = function(data){
-                    this.list = data;
-                }; 
-                
-                this.getResult = function(){
-                    return this.list;
-                }
-            };
-                                        
-            var books = new ListHolder();                      
-            
-			$http.get('json/books.json')
-				.success(function (data, status, headers, config) {
-					console.info("success:\n" + headers);
-                    books.setResult(data.results);
-				}).
-                error(function (data, status, headers, config) {
-                    console.error("error:\n" + status);               
+		function ($http, $scope) {
+
+			return $http.get('/bookland-backend/rest/books')
+//				.success(function (data, status, headers, config) {
+//					console.info("success:\n" + headers);
+//				})
+//                .error(function (data, status, headers, config) {
+//                    console.error("error:\n" + status);
+//                })
+                .then(function (response) {
+                	return response.data;
                 });
-    //            .then(function (response) {
-//				books = response.data.results;
-//			});
-            
-           // this.books = books;
-            
-            return {
-                
-                booksList: books,
-                
-                list: function() {
-                    return this.booksList.getResult();
-                },
-                
-                get: function(id){
-                    //TODO
-                    return this.booksList.getResult()[id];
-                },
-                
-                add: function(book){
-                    return this.booksList.getResult().push(book);
-                }
-            };
 	}]);
