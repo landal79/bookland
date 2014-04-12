@@ -30,7 +30,7 @@ public class BookService {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Book> q = cb.createQuery(Book.class);
 		Root<Book> c = q.from(Book.class);
-		CriteriaQuery<Book> select = q.select(c);
+//		CriteriaQuery<Book> select = q.select(c);
 		TypedQuery<Book> query = em.createQuery(q);
 		return query.getResultList();
 	}
@@ -39,6 +39,14 @@ public class BookService {
 		Query deleteQuery = em.createNamedQuery(Book.DELETE);
 		return deleteQuery.executeUpdate();
 
+	}
+
+	public Book save(Book book) {
+		return em.merge(book);
+	}
+
+	public Book findById(long id) {
+		return em.find(Book.class, id);
 	}
 
 }

@@ -8,29 +8,33 @@ booklandModule.controller('NavController', ['$route',
             }
             return $route.current.name == title;
         };
-}]).controller('ListController', ['$scope', 'books',
-    function ($scope, books) {
-	        books.then(function(books) {
-	        	$scope.items = books;
-	        });
-} ])
-.controller('EditController', ['$scope', 'books', '$location',
-    function ($scope, books, $location) {
-
-    $scope.book = {};
-
-    $scope.save = function() {
-        alert('Save pressed!');
-        books.add($scope.book);
-        $location.path("/");
-    };
+}]).controller('ListController', ['$scope', 'bookService',
+    function ($scope, bookService) {
+	   $scope.items = bookService.query();
 }])
-.controller('DetailController', ['$scope', '$routeParams', 'books',
-    function ($scope, $routeParams, books) {
-//        books.then(function (books) {
-//            $scope.detail = books[$routeParams.id];
-//     });
-              $scope.detail = books.get($routeParams.id);
+.controller('NewController', ['$scope', 'bookService', '$location',
+    function ($scope, bookService, $location) {
+	    $scope.book = {};
+	    $scope.save = function() {
+	    	bookService.create($scope.book);
+	        $location.path("/");
+	    };
+}])
+.controller('EditController', ['$scope', 'bookService', '$location', '$routeParams',
+    function ($scope, bookService, $location, $routeParams) {
+	    $scope.book = bookService.get({},{'id': $routeParams.id});;
+	    $scope.save = function() {
+	    	bookService.update($scope.book);
+	        $location.path("/");
+	    };
+}])
+.controller('DetailController', ['$scope', '$routeParams', 'bookService', '$location',
+    function ($scope, $routeParams, bookService, $location) {
+	 $scope.detail = bookService.get({},{'id': $routeParams.id});
+		var id = $routeParams.id;
+		$scope.edit = function() {
+			$location.path("/edit/"+id);
+		};
 }])
 .controller('SettingsController', function () {
     // TODO

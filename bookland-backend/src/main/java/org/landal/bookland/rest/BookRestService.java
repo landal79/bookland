@@ -36,24 +36,22 @@ public class BookRestService {
 	@GET
 	@Path("{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Book getById(@PathParam("id") int id) {
-		// TODO
-		return null;
+	public Book getById(@PathParam("id") long id) {
+		return bookService.findById(id);
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Book create(Book book) {
-		// TODO
-		return null;
+		return bookService.save(book);
 	}
 
 	@PUT
 	@Path("{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Book update(Book user) {
+	public Book update(Book book) {
 		// TODO
 		return null;
 	}

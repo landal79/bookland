@@ -1,6 +1,6 @@
 'use strict';
 
-var booklandModule = angular.module('bookland', ['ngRoute'])
+var booklandModule = angular.module('bookland', ['ngRoute','ngResource'])
 	.config(function ($routeProvider) {
 		$routeProvider
 			.when('/', {
@@ -9,11 +9,17 @@ var booklandModule = angular.module('bookland', ['ngRoute'])
 				controllerAs: 'listCtrl',
 				name: 'list'
 			})
-			.when('/new', {
+			.when('/edit/:id', {
 				templateUrl: 'views/edit.html',
 				controller: 'EditController',
 				controllerAs: 'editCtrl',
 				name: 'edit'
+			})
+			.when('/new', {
+				templateUrl: 'views/edit.html',
+				controller: 'NewController',
+				controllerAs: 'newCtrl',
+				name: 'new'
 			})
 			.when('/book/:id', {
 				templateUrl: 'views/detail.html',
@@ -37,17 +43,9 @@ var booklandModule = angular.module('bookland', ['ngRoute'])
 				redirectTo: '/'
 			});
 	})
-	.factory('books', ['$http',
-		function ($http, $scope) {
-
-			return $http.get('/bookland-backend/rest/books')
-//				.success(function (data, status, headers, config) {
-//					console.info("success:\n" + headers);
-//				})
-//                .error(function (data, status, headers, config) {
-//                    console.error("error:\n" + status);
-//                })
-                .then(function (response) {
-                	return response.data;
-                });
+	.factory('bookService', ['$resource',
+		function ($resource) {
+		return $resource('/bookland-backend/rest/books/:id', {id: '@id'}, {
+			'update': { method: 'PUT'}
+	    });
 	}]);

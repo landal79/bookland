@@ -1,18 +1,19 @@
-<div>
+<div class="table-responsive">
 	<table class="table table-striped table-hover">
 		<thead>
 			<tr>
 				<th>Title</th>
 				<th>Authors</th>
+				<th class="col-md-2"><input type="text" ng-model="search.$"></th>
 			</tr>
 		</thead>
-		<tr ng-repeat="item in items">
+		<tr ng-repeat="item in items | filter:search">
 			<td ng-bind="item.title"></td>
 			<td>
 				<span ng-repeat="author in item.authors">{{author.name}} {{author.surname}}</span>
 			</td>
 			<td>
-				<a href="#/book/{{$index}}">{{item.id}}</a>
+				<a href="#/book/{{item.id}}">{{item.id}}</a>
 			</td>
 		</tr>
 	</table>
