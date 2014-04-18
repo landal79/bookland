@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -22,12 +23,12 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @XmlRootElement(name = "book")
 @Entity
 @Table(name = "BOOKS")
-@NamedQueries({ @NamedQuery(name = Book.DELETE, query = "delete from Book") })
+@NamedQueries({ @NamedQuery(name = Book.DELETE_ALL, query = "delete from Book") })
 public class Book implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public static final String DELETE = "Book.delete";
+	public static final String DELETE_ALL = "Book.delete";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,7 +39,12 @@ public class Book implements Serializable {
 	private String description;
 
 	@OneToMany(fetch = FetchType.EAGER)
-	@JoinColumn(name = "AUTHOR_ID", referencedColumnName = "ID")
+	//@JoinColumn(name = "AUTHOR_ID", referencedColumnName = "ID")
+	@JoinTable(
+	      name="BOOKS_AUTHOR",
+	      joinColumns={ @JoinColumn(name="BOOK_ID", referencedColumnName="ID") },
+	      inverseJoinColumns={ @JoinColumn(name="AUTHOR_ID", referencedColumnName="ID", unique=true) }
+	)
 	private List<Author> authors;
 
 	public Book() {

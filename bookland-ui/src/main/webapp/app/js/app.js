@@ -4,28 +4,34 @@ var booklandModule = angular.module('bookland', ['ngRoute','ngResource'])
 	.config(function ($routeProvider) {
 		$routeProvider
 			.when('/', {
-				templateUrl: 'views/list.html',
+				templateUrl: 'views/books/list.html',
 				controller: 'ListController',
 				controllerAs: 'listCtrl',
 				name: 'list'
 			})
 			.when('/edit/:id', {
-				templateUrl: 'views/edit.html',
+				templateUrl: 'views/books/edit.html',
 				controller: 'EditController',
 				controllerAs: 'editCtrl',
 				name: 'edit'
 			})
 			.when('/new', {
-				templateUrl: 'views/edit.html',
+				templateUrl: 'views/books/edit.html',
 				controller: 'NewController',
 				controllerAs: 'newCtrl',
 				name: 'new'
 			})
 			.when('/book/:id', {
-				templateUrl: 'views/detail.html',
+				templateUrl: 'views/books/detail.html',
 				controller: 'DetailController',
 				controllerAs: 'detailCtrl',
 				name: 'detail'
+			})
+			.when('/newAuthor', {
+				templateUrl: 'views/authors/edit.html',
+				controller: 'NewAuthorController',
+				controllerAs: 'newAuthorCtrl',
+				name: 'newAuthor'
 			})
 			.when('/settings', {
 				templateUrl: 'views/settings.html',
@@ -47,5 +53,11 @@ var booklandModule = angular.module('bookland', ['ngRoute','ngResource'])
 		function ($resource) {
 		return $resource('/bookland-backend/rest/books/:id', {id: '@id'}, {
 			'update': { method: 'PUT'}
+	    });
+	}])
+	.factory('authorService',['$resource',
+		function($resource){
+			return $resource('/bookland-backend/rest/authors/:id', {id: '@id'}, {
+				'update': { method: 'PUT'}
 	    });
 	}]);

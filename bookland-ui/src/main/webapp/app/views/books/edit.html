@@ -13,6 +13,26 @@
 			</div>
 		</div>		
 		<div class="form-group">
+			<label for="authorSelect" class="col-sm-2 control-label">Authors</label>			
+			<div class="col-sm-4">
+				<select id="authorSelect" class="form-control" ng-model="author" 
+					ng-options="author.name + ' ' + author.surname for author in authors">
+					<option value="">-- choose an author --</option>
+				</select>								
+			</div>
+			<div class="col-sm-4">
+				<button type="button" class="btn btn-default col-sm-4" ng-click="addAuthor(author)">Add</button>				
+			</div>									
+		</div>
+		<div class="row col-md-offset-2">	
+			<ul>
+				<li ng-repeat="author in book.authors">
+					{{author.name}} {{author.surname}}  [<a href ng-click="book.authors.splice($index, 1)">X</a>]
+				</li>
+			</ul>
+		</div>
+		<hr />
+		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
 				<button type="submit" class="btn btn-default" ng-click="save()">Save</button>
 			</div>

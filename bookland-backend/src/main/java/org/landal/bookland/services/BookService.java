@@ -30,13 +30,12 @@ public class BookService {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Book> q = cb.createQuery(Book.class);
 		Root<Book> c = q.from(Book.class);
-//		CriteriaQuery<Book> select = q.select(c);
 		TypedQuery<Book> query = em.createQuery(q);
 		return query.getResultList();
 	}
 
 	public int cancelAll() {
-		Query deleteQuery = em.createNamedQuery(Book.DELETE);
+		Query deleteQuery = em.createNamedQuery(Book.DELETE_ALL);
 		return deleteQuery.executeUpdate();
 
 	}

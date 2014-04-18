@@ -52,8 +52,7 @@ public class BookRestService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Book update(Book book) {
-		// TODO
-		return null;
+		return bookService.save(book);
 	}
 
 	@DELETE

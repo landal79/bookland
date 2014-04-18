@@ -12,21 +12,35 @@ booklandModule.controller('NavController', ['$route',
     function ($scope, bookService) {
 	   $scope.items = bookService.query();
 }])
-.controller('NewController', ['$scope', 'bookService', '$location',
-    function ($scope, bookService, $location) {
-	    $scope.book = {};
+.controller('NewController', ['$scope', '$location', 'bookService', 'authorService',
+    function ($scope, $location, bookService, authorService) {
+	    $scope.book = {};		
+		$scope.authors = authorService.query();		
 	    $scope.save = function() {
-	    	bookService.create($scope.book);
+	    	bookService.save($scope.book);
 	        $location.path("/");
-	    };
+	    };		
+		$scope.addAuthor = function(author){
+			if(typeof $scope.book.authors == 'undefined'){
+				$scope.book.authors = [];
+			}
+			$scope.book.authors.push(author);
+		};
 }])
-.controller('EditController', ['$scope', 'bookService', '$location', '$routeParams',
-    function ($scope, bookService, $location, $routeParams) {
-	    $scope.book = bookService.get({},{'id': $routeParams.id});;
+.controller('EditController', ['$scope', 'bookService', '$location', '$routeParams', 'authorService',
+    function ($scope, bookService, $location, $routeParams, authorService) {
+	    $scope.book = bookService.get({},{'id': $routeParams.id});
+		$scope.authors = authorService.query();	
 	    $scope.save = function() {
 	    	bookService.update($scope.book);
 	        $location.path("/");
 	    };
+		$scope.addAuthor = function(author){
+			if(typeof $scope.book.authors == 'undefined'){
+				$scope.book.authors = [];
+			}
+			$scope.book.authors.push(author);
+		};
 }])
 .controller('DetailController', ['$scope', '$routeParams', 'bookService', '$location',
     function ($scope, $routeParams, bookService, $location) {
@@ -35,6 +49,14 @@ booklandModule.controller('NavController', ['$route',
 		$scope.edit = function() {
 			$location.path("/edit/"+id);
 		};
+}])
+.controller('NewAuthorController', ['$scope', '$location', 'authorService',
+    function ($scope, $location, authorService) {		
+		$scope.author = {};		
+	    $scope.save = function() {			
+	    	authorService.save($scope.author);
+	        $location.path("/");
+	    };				
 }])
 .controller('SettingsController', function () {
     // TODO
