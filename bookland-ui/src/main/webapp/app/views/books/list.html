@@ -10,7 +10,7 @@
 		<tr ng-repeat="item in items | filter:search">
 			<td ng-bind="item.title"></td>
 			<td>
-				<span ng-repeat="author in item.authors">{{author.name}} {{author.surname}}</span>
+				<span ng-repeat="author in item.authors">{{author.name}} {{author.surname}}{{$last ? '' : ', '}}</span>				
 			</td>
 			<td>
 				<a href="#/book/{{item.id}}">{{item.id}}</a>

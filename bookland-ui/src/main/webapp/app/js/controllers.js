@@ -14,12 +14,12 @@ booklandModule.controller('NavController', ['$route',
 }])
 .controller('NewController', ['$scope', '$location', 'bookService', 'authorService',
     function ($scope, $location, bookService, authorService) {
-	    $scope.book = {};		
-		$scope.authors = authorService.query();		
+	    $scope.book = {};
+		$scope.authors = authorService.query();
 	    $scope.save = function() {
 	    	bookService.save($scope.book);
 	        $location.path("/");
-	    };		
+	    };
 		$scope.addAuthor = function(author){
 			if(typeof $scope.book.authors == 'undefined'){
 				$scope.book.authors = [];
@@ -27,10 +27,10 @@ booklandModule.controller('NavController', ['$route',
 			$scope.book.authors.push(author);
 		};
 }])
-.controller('EditController', ['$scope', 'bookService', '$location', '$routeParams', 'authorService',
-    function ($scope, bookService, $location, $routeParams, authorService) {
+.controller('EditController', ['$scope', 'bookService', '$location', '$routeParams', 'authorService', '$modal',
+    function ($scope, bookService, $location, $routeParams, authorService, $modal) {
 	    $scope.book = bookService.get({},{'id': $routeParams.id});
-		$scope.authors = authorService.query();	
+		$scope.authors = authorService.query();
 	    $scope.save = function() {
 	    	bookService.update($scope.book);
 	        $location.path("/");
@@ -40,6 +40,19 @@ booklandModule.controller('NavController', ['$route',
 				$scope.book.authors = [];
 			}
 			$scope.book.authors.push(author);
+		};
+
+		$scope.open = function () {
+			var modalInstance = $modal.open({
+			      templateUrl: 'views/authors/authorDialog.html',
+			      controller: 'AuthorModalCtrl',
+			      size: 'lg'
+			    });
+			modalInstance.result.then(function () {
+				$scope.authors = authorService.query();
+		    }, function () {
+
+		    });
 		};
 }])
 .controller('DetailController', ['$scope', '$routeParams', 'bookService', '$location',
@@ -51,12 +64,12 @@ booklandModule.controller('NavController', ['$route',
 		};
 }])
 .controller('NewAuthorController', ['$scope', '$location', 'authorService',
-    function ($scope, $location, authorService) {		
-		$scope.author = {};		
-	    $scope.save = function() {			
+    function ($scope, $location, authorService) {
+		$scope.author = {};
+	    $scope.save = function() {
 	    	authorService.save($scope.author);
 	        $location.path("/");
-	    };				
+	    };
 }])
 .controller('SettingsController', function () {
     // TODO
@@ -64,3 +77,15 @@ booklandModule.controller('NavController', ['$route',
 .controller('AboutController', function () {
     // TODO
 });
+
+function AuthorModalCtrl($scope, authorService, $modalInstance) {
+	$scope.author = {};
+	$scope.save = function() {
+		authorService.save($scope.author);
+		$modalInstance.close();
+	};
+	$scope.cancel = function() {
+		$modalInstance.dismiss('cancel');
+	};
+
+};

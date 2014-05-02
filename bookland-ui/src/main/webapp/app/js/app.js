@@ -1,6 +1,6 @@
 'use strict';
 
-var booklandModule = angular.module('bookland', ['ngRoute','ngResource'])
+var booklandModule = angular.module('bookland', ['ngRoute','ngResource','ui.bootstrap'])
 	.config(function ($routeProvider) {
 		$routeProvider
 			.when('/', {
