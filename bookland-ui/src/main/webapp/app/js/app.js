@@ -55,9 +55,24 @@ var booklandModule = angular.module('bookland', ['ngRoute','ngResource','ui.boot
 			'update': { method: 'PUT'}
 	    });
 	}])
+	.factory('bookImageService',['$resource',
+		function($resource){
+			return $resource('/bookland-backend/rest/books/:id/image', {id: '@id'}, {
+				'save' : { method: 'POST',
+					   headers: { 'Content-Type': undefined },
+					   transformRequest: function (data, headersGetter) {
+				            	if (data === undefined){return data;}
+				            	var fd = new FormData();
+								fd.append('file', data);
+			            	    return fd;
+				            }
+		},
+				'update': { method: 'PUT'}
+	    });
+	}])
 	.factory('authorService',['$resource',
 		function($resource){
 			return $resource('/bookland-backend/rest/authors/:id', {id: '@id'}, {
-				'update': { method: 'PUT'}
+			'update': { method: 'PUT'}
 	    });
 	}]);
