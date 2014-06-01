@@ -2,21 +2,16 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<!--
-	<parent>
-		<artifactId>jee6-parent</artifactId>
-		<groupId>org.landal</groupId>
-		<version>1.0.0-SNAPSHOT</version>
-	</parent>
-	-->
-	
+	<!-- <parent> <artifactId>jee6-parent</artifactId> <groupId>org.landal</groupId>
+		<version>1.0.0-SNAPSHOT</version> </parent> -->
+
 	<parent>
 		<groupId>org.landal.bookland</groupId>
 		<artifactId>bookland-parent</artifactId>
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>bookland-backend</artifactId>	
+	<artifactId>bookland-backend</artifactId>
 	<packaging>war</packaging>
 
 	<name>bookland-backend</name>
@@ -43,6 +38,20 @@
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 			<version>2.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>2.2.1.GA</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-multipart-provider</artifactId>
+			<version>2.2.0.GA</version>
+			<scope>provided</scope>
 		</dependency>
 
 	</dependencies>
