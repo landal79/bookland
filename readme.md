@@ -1,8 +1,6 @@
 Bookland
 ================
 
-this is the front end UI project for Bookland build with AngularJS.
-
 Books model 
 
 id, title, isbn, author+, publisher, numPages, files

@@ -51,7 +51,17 @@ function BookCtrl($scope, bookService, $location, $routeParams, authorService, b
 		$scope.book = {};
 	}
 
+	if($scope.book.id == null){
+		$scope.imageUrl = 'img/nocover.jpg';
+	} else {
+		$scope.imageUrl = '/bookland-backend/rest/books/' + $scope.book.id + '/image';
+	}
+
 	$scope.authors = authorService.query();
+
+	$scope.cancel = function(){
+		$location.path("/");
+	};
 
 	$scope.save = function() {
 		var resultPromise;
@@ -73,10 +83,26 @@ function BookCtrl($scope, bookService, $location, $routeParams, authorService, b
 	};
 
 	$scope.addAuthor = function(author) {
+
+		if(author == undefined){
+			alert('Choose an author!');
+			return;
+		}
+
 		if (typeof $scope.book.authors == 'undefined') {
 			$scope.book.authors = [];
 		}
+
+		if($scope.book.authors.indexOf(author) != -1){
+			alert("Author already added!");
+			return;
+		}
+
 		$scope.book.authors.push(author);
+	};
+
+	$scope.removeAuthor = function(index){
+		$scope.book.authors.splice(index, 1);
 	};
 
 	$scope.open = function() {
