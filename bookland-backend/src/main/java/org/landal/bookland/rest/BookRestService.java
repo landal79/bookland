@@ -1,6 +1,7 @@
 package org.landal.bookland.rest;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
@@ -19,6 +20,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;
 
+import org.apache.commons.io.IOUtils;
 import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
 import org.landal.bookland.model.Book;
 import org.landal.bookland.services.BookService;
@@ -56,8 +58,7 @@ public class BookRestService {
 	@POST
 	@Path("/{id}/image")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	public void uploadBookCover(@PathParam("id") Long id,
-			@MultipartForm ImageUpload image) {
+	public void uploadBookCover(@PathParam("id") Long id, @MultipartForm ImageUpload image) {
 		Book book = bookService.findById(id);
 		if (book == null) {
 			throw new RuntimeException();
@@ -77,14 +78,19 @@ public class BookRestService {
 			throw new RuntimeException();
 		}
 
-		if(book.getImage() == null){
-			return Response.ok().build();
+		if (book.getImage() == null) {
+			return Response.ok().entity(new StreamingOutput() {
+				@Override
+				public void write(OutputStream output) throws IOException, WebApplicationException {
+					InputStream image = BookRestService.class.getClassLoader().getResourceAsStream("images/nocover.jpg");
+					IOUtils.copy(image, output);
+				}
+			}).build();
 		}
 
 		return Response.ok().entity(new StreamingOutput() {
 			@Override
-			public void write(OutputStream output) throws IOException,
-					WebApplicationException {
+			public void write(OutputStream output) throws IOException, WebApplicationException {
 				output.write(book.getImage());
 				output.flush();
 			}
