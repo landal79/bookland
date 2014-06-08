@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,12 +26,14 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @XmlRootElement(name = "book")
 @Entity
 @Table(name = "BOOKS")
-@NamedQueries({ @NamedQuery(name = Book.DELETE_ALL, query = "delete from Book") })
+@NamedQueries({ @NamedQuery(name = Book.DELETE_ALL, query = "delete from Book"),
+		@NamedQuery(name = Book.DELETE, query = "delete from Book b where b.id = :id") })
 public class Book implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	public static final String DELETE_ALL = "Book.delete";
+	public static final String DELETE_ALL = "Book.deleteAll";
+	public static final String DELETE = "Book.delete";
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,22 +44,18 @@ public class Book implements Serializable {
 	private String description;
 
 	@OneToMany(fetch = FetchType.EAGER)
-	//@JoinColumn(name = "AUTHOR_ID", referencedColumnName = "ID")
-	@JoinTable(
-	      name="BOOKS_AUTHOR",
-	      joinColumns={ @JoinColumn(name="BOOK_ID", referencedColumnName="ID") },
-	      inverseJoinColumns={ @JoinColumn(name="AUTHOR_ID", referencedColumnName="ID", unique=true) }
-	)
+	// @JoinColumn(name = "AUTHOR_ID", referencedColumnName = "ID")
+	@JoinTable(name = "BOOKS_AUTHOR", joinColumns = { @JoinColumn(name = "BOOK_ID", referencedColumnName = "ID") }, inverseJoinColumns = { @JoinColumn(name = "AUTHOR_ID", referencedColumnName = "ID", unique = true) })
 	private List<Author> authors;
 
 	@Lob
+	@Basic(fetch = FetchType.LAZY)
 	private byte[] image;
 
 	public Book() {
 	}
 
-	public Book(Long id, String isbn, String title, String description,
-			Author... authors) {
+	public Book(Long id, String isbn, String title, String description, Author... authors) {
 		super();
 		this.id = id;
 		this.isbn = isbn;
@@ -66,8 +65,7 @@ public class Book implements Serializable {
 	}
 
 	public String toString() {
-		return new ToStringBuilder(this).append("id", id).append("isbn", isbn)
-				.toString();
+		return new ToStringBuilder(this).append("id", id).append("isbn", isbn).toString();
 	}
 
 	public Long getId() {
@@ -103,7 +101,7 @@ public class Book implements Serializable {
 	}
 
 	public List<Author> getAuthors() {
-		if(authors == null){
+		if (authors == null) {
 			authors = new ArrayList<Author>();
 		}
 		return Collections.unmodifiableList(authors);
@@ -120,7 +118,5 @@ public class Book implements Serializable {
 	public void setImage(byte[] image) {
 		this.image = image;
 	}
-
-
 
 }

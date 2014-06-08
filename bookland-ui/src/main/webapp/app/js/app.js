@@ -6,44 +6,37 @@ var booklandModule = angular.module('bookland', ['ngRoute','ngResource','ui.boot
 			.when('/', {
 				templateUrl: 'views/books/list.html',
 				controller: 'ListController',
-				controllerAs: 'listCtrl',
-				name: 'list'
+				controllerAs: 'listCtrl'
 			})
 			.when('/edit/:id', {
 				templateUrl: 'views/books/edit.html',
-				controller: 'EditController',
-				controllerAs: 'editCtrl',
-				name: 'edit'
+				controller: 'BookController',
+				controllerAs: 'bookCtrl'
 			})
 			.when('/new', {
 				templateUrl: 'views/books/edit.html',
-				controller: 'NewController',
-				controllerAs: 'newCtrl',
-				name: 'new'
+				controller: 'BookController',
+				controllerAs: 'bookCtrl'
 			})
 			.when('/book/:id', {
 				templateUrl: 'views/books/detail.html',
 				controller: 'DetailController',
-				controllerAs: 'detailCtrl',
-				name: 'detail'
+				controllerAs: 'detailCtrl'
 			})
 			.when('/newAuthor', {
 				templateUrl: 'views/authors/edit.html',
 				controller: 'NewAuthorController',
-				controllerAs: 'newAuthorCtrl',
-				name: 'newAuthor'
+				controllerAs: 'newAuthorCtrl'
 			})
 			.when('/settings', {
 				templateUrl: 'views/settings.html',
 				controller: 'SettingsController',
-				controllerAs: 'settings',
-				name: 'settings'
+				controllerAs: 'settings'
 			})
 			.when('/about', {
 				templateUrl: 'views/about.html',
 				controller: 'AboutController',
-				controllerAs: 'about',
-				name: 'about'
+				controllerAs: 'about'
 			})
 			.otherwise({
 				redirectTo: '/'

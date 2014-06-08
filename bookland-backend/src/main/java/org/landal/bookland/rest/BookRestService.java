@@ -77,6 +77,10 @@ public class BookRestService {
 			throw new RuntimeException();
 		}
 
+		if(book.getImage() == null){
+			return Response.ok().build();
+		}
+
 		return Response.ok().entity(new StreamingOutput() {
 			@Override
 			public void write(OutputStream output) throws IOException,
@@ -91,14 +95,13 @@ public class BookRestService {
 	@Path("{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Book update(Book book) {
+	public Book update(@PathParam("id") Long id, Book book) {
 		return bookService.save(book);
 	}
 
 	@DELETE
 	@Path("{id}")
-	@Produces(MediaType.APPLICATION_JSON)
 	public void remove(@PathParam("id") int id) {
-		// TODO
+		bookService.delete(id);
 	}
 }

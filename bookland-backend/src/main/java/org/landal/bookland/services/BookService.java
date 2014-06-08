@@ -18,7 +18,6 @@ import org.landal.bookland.model.Book;
 @LocalBean
 public class BookService {
 
-
 	@Inject
 	private EntityManager em;
 
@@ -46,6 +45,10 @@ public class BookService {
 
 	public Book findById(long id) {
 		return em.find(Book.class, id);
+	}
+
+	public int delete(long id) {
+		return em.createNamedQuery(Book.DELETE).setParameter("id", id).executeUpdate();
 	}
 
 }

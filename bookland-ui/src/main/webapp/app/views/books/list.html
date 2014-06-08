@@ -13,7 +13,7 @@
 				<span ng-repeat="author in item.authors">{{author.name}} {{author.surname}}{{$last ? '' : ', '}}</span>				
 			</td>
 			<td>
-				<img alt="book cover" ng-src="/bookland-backend/rest/books/{{item.id}}/image">
+				<img alt="book cover" ng-src="/bookland-backend/rest/books/{{item.id}}/image" class="thumb-img">
 			</td>
 			<td>
 				<a href="#/book/{{item.id}}">{{item.id}}</a>

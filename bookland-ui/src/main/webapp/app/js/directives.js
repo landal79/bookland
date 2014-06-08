@@ -15,4 +15,21 @@ booklandModule.directive('fileModel', [ '$parse', function($parse) {
 		}
 
 	};
-}]);
+} ]).directive('uploadBtn', [ function() {
+	return {
+		restrict : 'C',
+		link : function(scope, elem, attrs) {
+			var inputFile = elem.parent().find('input')[0];
+			elem.bind('click', function() {
+				inputFile.click();
+			});
+
+			var inputId = attrs.inputId;
+			angular.element(inputFile).bind('change', function(){
+				var inputText = angular.element(document.getElementById(inputId));
+				inputText.val(angular.element(this).val());
+			});
+
+		}
+	}
+} ]);

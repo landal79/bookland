@@ -12,69 +12,10 @@ booklandModule.controller('NavController', ['$route',
     function ($scope, bookService) {
 	   $scope.items = bookService.query();
 }])
-.controller('NewController', ['$scope', '$location', 'bookService', 'authorService', 'bookImageService',
-    function ($scope, $location, bookService, authorService, bookImageService) {
-	    $scope.book = {};
-		$scope.authors = authorService.query();
-	    $scope.save = function() {
-	    bookService.save($scope.book).$promise.then(
-			function(book){
-				if($scope.coverImage != null){
-					bookImageService.save({'id': book.id},$scope.coverImage);
-				}
-
-				$location.path("/");
-			});
-
-	    };
-		$scope.addAuthor = function(author){
-			if(typeof $scope.book.authors == 'undefined'){
-				$scope.book.authors = [];
-			}
-			$scope.book.authors.push(author);
-		};
-
-		$scope.open = function () {
-			var modalInstance = $modal.open({
-			      templateUrl: 'views/authors/authorDialog.html',
-			      controller: 'AuthorModalCtrl',
-			      size: 'lg'
-			    });
-			modalInstance.result.then(function () {
-				$scope.authors = authorService.query();
-		    }, function () {
-
-		    });
-		};
-}])
-.controller('EditController', ['$scope', 'bookService', '$location', '$routeParams', 'authorService', '$modal',
-    function ($scope, bookService, $location, $routeParams, authorService, $modal) {
-	    $scope.book = bookService.get({},{'id': $routeParams.id});
-		$scope.authors = authorService.query();
-	    $scope.save = function() {
-	    	bookService.update($scope.book);
-	        $location.path("/");
-	    };
-		$scope.addAuthor = function(author){
-			if(typeof $scope.book.authors == 'undefined'){
-				$scope.book.authors = [];
-			}
-			$scope.book.authors.push(author);
-		};
-
-		$scope.open = function () {
-			var modalInstance = $modal.open({
-			      templateUrl: 'views/authors/authorDialog.html',
-			      controller: 'AuthorModalCtrl',
-			      size: 'lg'
-			    });
-			modalInstance.result.then(function () {
-				$scope.authors = authorService.query();
-		    }, function () {
-
-		    });
-		};
-}])
+.controller(
+		'BookController',
+		[ '$scope', 'bookService', '$location', '$routeParams',
+				'authorService', 'bookImageService', '$modal', BookCtrl ])
 .controller('DetailController', ['$scope', '$routeParams', 'bookService', '$location',
     function ($scope, $routeParams, bookService, $location) {
 	 $scope.detail = bookService.get({},{'id': $routeParams.id});
@@ -97,6 +38,60 @@ booklandModule.controller('NavController', ['$route',
 .controller('AboutController', function () {
     // TODO
 });
+
+function BookCtrl($scope, bookService, $location, $routeParams, authorService, bookImageService,
+		$modal) {
+
+	var edit = $routeParams.id != null;
+	if (edit) {
+		$scope.book = bookService.get({}, {
+			'id' : $routeParams.id
+		});
+	} else {
+		$scope.book = {};
+	}
+
+	$scope.authors = authorService.query();
+
+	$scope.save = function() {
+		var resultPromise;
+		if (edit) {
+			resultPromise = bookService.update($scope.book).$promise;
+		} else {
+			resultPromise = bookService.save($scope.book).$promise;
+		}
+
+		resultPromise.then(function(book) {
+			if ($scope.coverImage != null) {
+				bookImageService.save({
+					'id' : book.id
+				}, $scope.coverImage);
+			}
+			$location.path("/");
+		});
+
+	};
+
+	$scope.addAuthor = function(author) {
+		if (typeof $scope.book.authors == 'undefined') {
+			$scope.book.authors = [];
+		}
+		$scope.book.authors.push(author);
+	};
+
+	$scope.open = function() {
+		var modalInstance = $modal.open({
+			templateUrl : 'views/authors/authorDialog.html',
+			controller : 'AuthorModalCtrl',
+			size : 'lg'
+		});
+		modalInstance.result.then(function() {
+			$scope.authors = authorService.query();
+		}, function() {
+
+		});
+	};
+}
 
 function AuthorModalCtrl($scope, authorService, $modalInstance) {
 	$scope.author = {};
