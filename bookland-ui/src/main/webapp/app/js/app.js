@@ -4,6 +4,9 @@ var booklandModule = angular.module('bookland', ['ngRoute','ngResource','ui.boot
 	.config(function ($routeProvider) {
 		$routeProvider
 			.when('/', {
+				templateUrl: 'views/default.html'
+			})
+			.when('/list', {
 				templateUrl: 'views/books/list.html',
 				controller: 'ListController',
 				controllerAs: 'listCtrl'
