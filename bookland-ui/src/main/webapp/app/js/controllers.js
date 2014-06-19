@@ -43,6 +43,9 @@ booklandModule.controller('NavController', [ '$route', function($route) {
 function BookCtrl($scope, bookService, $location, $routeParams, authorService,
 		bookImageService, $modal) {
 
+	/*
+	 * Code executed to initialize controller values
+	 */
 	var edit = $routeParams.id != null;
 	if (edit) {
 		$scope.book = bookService.get({}, {
@@ -60,6 +63,8 @@ function BookCtrl($scope, bookService, $location, $routeParams, authorService,
 	}
 
 	$scope.authors = authorService.query();
+
+	// controller page actions
 
 	$scope.cancel = function() {
 		$location.path("/");
@@ -126,6 +131,7 @@ function AuthorModalCtrl($scope, authorService, $modalInstance) {
 	$scope.save = function(author_form) {
 		if (!author_form.$valid) {
 			console.log('invalid author data!');
+			alert('invalid author data!');
 			return;
 		}
 
