@@ -52,6 +52,10 @@ public class Book implements Serializable {
 	@Basic(fetch = FetchType.LAZY)
 	private byte[] image;
 
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	private String review;
+
 	public Book() {
 	}
 

@@ -6,3 +6,7 @@
 	width: 80px;
 	height: 80px;
 }
+
+.navbar-inner {
+	box-shadow: 0 3px 3px rgba(0,0,0,0.175) !important;
+}
