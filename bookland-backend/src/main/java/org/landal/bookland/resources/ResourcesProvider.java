@@ -32,7 +32,7 @@ import javax.persistence.PersistenceContext;
  *
  *
  */
-public class Resources {
+public class ResourcesProvider {
 
     @Produces
     @PersistenceContext

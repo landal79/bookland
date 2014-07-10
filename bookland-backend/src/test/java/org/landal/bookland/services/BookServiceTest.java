@@ -17,7 +17,7 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.landal.bookland.model.Book;
-import org.landal.bookland.resources.Resources;
+import org.landal.bookland.resources.ResourcesProvider;
 
 @RunWith(Arquillian.class)
 public class BookServiceTest {
@@ -28,8 +28,8 @@ public class BookServiceTest {
 				.create(WebArchive.class, "test.war")
 				.addPackages(true, Book.class.getPackage(),
 						BookService.class.getPackage(),
-						Resources.class.getPackage())
-				.addAsResource("test-persistence.xml",
+						ResourcesProvider.class.getPackage())
+				.addAsResource("META-INF/test-persistence.xml",
 						"META-INF/persistence.xml")
 				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
 	}
