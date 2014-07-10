@@ -26,12 +26,11 @@ public class BookServiceTest {
 	public static Archive<?> createDeployment() {
 		return ShrinkWrap
 				.create(WebArchive.class, "test.war")
-				.addPackages(true, Book.class.getPackage(),
-						BookService.class.getPackage(),
+				.addPackages(true, Book.class.getPackage(), BookService.class.getPackage(),
 						ResourcesProvider.class.getPackage())
-				.addAsResource("META-INF/test-persistence.xml",
-						"META-INF/persistence.xml")
-				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
+				.addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml")
+				.addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml").addAsWebInfResource("test-ds.xml")
+				/*.addAsResource("import.sql")*/;
 	}
 
 	@Inject
@@ -44,10 +43,10 @@ public class BookServiceTest {
 	public void test_get_all() throws Exception {
 
 //		userTransaction.begin();
-
-		bookService.cancelAll();
-
-		userTransaction.commit();
+//
+//		bookService.cancelAll();
+//
+//		userTransaction.commit();
 		userTransaction.begin();
 
 		Book book = new Book();
