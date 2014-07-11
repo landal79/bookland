@@ -28,7 +28,7 @@ public class AuthorService {
 	public List<Author> getAll() {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Author> q = cb.createQuery(Author.class);
-		Root<Author> c = q.from(Author.class);
+//		Root<Author> c = q.from(Author.class);
 		TypedQuery<Author> query = em.createQuery(q);
 		return query.getResultList();
 	}
