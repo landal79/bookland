@@ -1,6 +1,8 @@
 'use strict';
 
-booklandModule.directive('fileModel', [ '$parse', function($parse) {
+var directives = angular.module('bookland.directives', [ 'ngResource' ]);
+
+directives.directive('fileModel', [ '$parse', function($parse) {
 	return {
 		restrict : 'A',
 		link : function(scope, element, attrs) {
@@ -15,7 +17,9 @@ booklandModule.directive('fileModel', [ '$parse', function($parse) {
 		}
 
 	};
-} ]).directive('uploadBtn', [ function() {
+} ]);
+
+directives.directive('uploadBtn', [ function() {
 	return {
 		restrict : 'C',
 		link : function(scope, elem, attrs) {
@@ -25,10 +29,13 @@ booklandModule.directive('fileModel', [ '$parse', function($parse) {
 			});
 
 			var inputId = attrs.inputId;
-			angular.element(inputFile).bind('change', function(){
-				var inputText = angular.element(document.getElementById(inputId));
-				inputText.val(angular.element(this).val());
-			});
+			angular.element(inputFile).bind(
+					'change',
+					function() {
+						var inputText = angular.element(document
+								.getElementById(inputId));
+						inputText.val(angular.element(this).val());
+					});
 
 		}
 	}
