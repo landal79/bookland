@@ -49,11 +49,7 @@ public class BookServiceTest {
 //		userTransaction.commit();
 		userTransaction.begin();
 
-		Book book = new Book();
-		book.setIsbn("1111111111111111");
-		book.setDescription("description");
-		book.setTitle("title");
-
+		Book book = new Book("1111111111111111","title","description");
 		bookService.persist(book);
 
 		userTransaction.commit();

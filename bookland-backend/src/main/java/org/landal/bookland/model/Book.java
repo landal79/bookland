@@ -1,6 +1,5 @@
 package org.landal.bookland.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -9,9 +8,6 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
@@ -28,16 +24,12 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @Table(name = "BOOKS")
 @NamedQueries({ @NamedQuery(name = Book.DELETE_ALL, query = "delete from Book"),
 		@NamedQuery(name = Book.DELETE, query = "delete from Book b where b.id = :id") })
-public class Book implements Serializable {
+public class Book extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 
 	public static final String DELETE_ALL = "Book.deleteAll";
 	public static final String DELETE = "Book.delete";
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
 
 	private String isbn;
 	private String title;
@@ -56,12 +48,17 @@ public class Book implements Serializable {
 	@Basic(fetch = FetchType.LAZY)
 	private String review;
 
-	public Book() {
+	protected Book(){}
+
+	public Book(String isbn, String title, String description, Author... authors) {
+		this.isbn = isbn;
+		this.title = title;
+		this.description = description;
+		this.authors = Arrays.asList(authors);
 	}
 
 	public Book(Long id, String isbn, String title, String description, Author... authors) {
-		super();
-		this.id = id;
+		super(id);
 		this.isbn = isbn;
 		this.title = title;
 		this.description = description;
@@ -69,15 +66,7 @@ public class Book implements Serializable {
 	}
 
 	public String toString() {
-		return new ToStringBuilder(this).append("id", id).append("isbn", isbn).toString();
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
+		return new ToStringBuilder(this).append("id", getId()).append("isbn", getIsbn()).toString();
 	}
 
 	public String getIsbn() {
