@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Version;
 
 @MappedSuperclass
 public abstract class BaseEntity implements Identifiable, Serializable {
@@ -18,19 +19,22 @@ public abstract class BaseEntity implements Identifiable, Serializable {
 	@Column(name = "ID")
 	private Long id;
 
+//	@Version
+//	@Column(name = "version")
+//	private int version = 0;
+
 	// JPA default constructor
-    protected BaseEntity() {
-    }
+	protected BaseEntity() {
+	}
 
-    public BaseEntity(Long id) {
-        this.id = id;
-    }
+	public BaseEntity(Long id) {
+		this.id = id;
+	}
 
-    @Override
-    public Long getId() {
-        return id;
-    }
-
+	@Override
+	public Long getId() {
+		return id;
+	}
 
 	@Override
 	public String toString() {

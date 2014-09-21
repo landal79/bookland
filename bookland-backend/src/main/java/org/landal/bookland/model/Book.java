@@ -2,6 +2,7 @@ package org.landal.bookland.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -36,9 +38,12 @@ public class Book extends BaseEntity {
 	private String description;
 
 	@OneToMany(fetch = FetchType.EAGER)
-	// @JoinColumn(name = "AUTHOR_ID", referencedColumnName = "ID")
 	@JoinTable(name = "BOOKS_AUTHOR", joinColumns = { @JoinColumn(name = "BOOK_ID", referencedColumnName = "ID") }, inverseJoinColumns = { @JoinColumn(name = "AUTHOR_ID", referencedColumnName = "ID", unique = true) })
 	private List<Author> authors;
+
+	@OneToMany
+	@JoinTable(name = "BOOK_TAG", joinColumns = { @JoinColumn(name = "ID_BOOK", referencedColumnName = "ID") }, inverseJoinColumns = { @JoinColumn(name = "ID_TAG", referencedColumnName = "ID") })
+	private List<Tag> tags;
 
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
@@ -48,7 +53,8 @@ public class Book extends BaseEntity {
 	@Basic(fetch = FetchType.LAZY)
 	private String review;
 
-	protected Book(){}
+	protected Book() {
+	}
 
 	public Book(String isbn, String title, String description, Author... authors) {
 		this.isbn = isbn;
@@ -68,6 +74,22 @@ public class Book extends BaseEntity {
 	public String toString() {
 		return new ToStringBuilder(this).append("id", getId()).append("isbn", getIsbn()).toString();
 	}
+
+	public void addAuthor(@NotNull Author author) {
+		if (authors == null) {
+			authors = new ArrayList<>();
+		}
+		authors.add(author);
+	}
+
+	public void addTag(@NotNull Tag tag) {
+		if (tags == null) {
+			tags = new ArrayList<>();
+		}
+		tags.add(tag);
+	}
+
+	// ///////////////////////////////77
 
 	public String getIsbn() {
 		return isbn;
@@ -110,6 +132,17 @@ public class Book extends BaseEntity {
 
 	public void setImage(byte[] image) {
 		this.image = image;
+	}
+
+	public Collection<Tag> getTags() {
+		if (tags == null) {
+			tags = new ArrayList<Tag>();
+		}
+		return Collections.unmodifiableList(tags);
+	}
+
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
 	}
 
 }
