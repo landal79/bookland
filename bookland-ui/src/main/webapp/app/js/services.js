@@ -31,3 +31,8 @@ services.factory('authorService',['$resource',
 		'update': { method: 'PUT'}
     });
 }]);
+
+services.factory('tagService',['$resource',
+  function($resource){
+	   return $resource('/bookland-backend/rest/tags/:id', {id: '@id'});
+}]);

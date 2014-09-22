@@ -1,9 +1,16 @@
 package org.landal.bookland.repositories;
 
-import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
+import java.util.List;
+
 import javax.inject.Inject;
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
+import javax.transaction.RollbackException;
+import javax.transaction.SystemException;
+import javax.transaction.UserTransaction;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -35,7 +42,10 @@ public class TagRepositoryTest {
 	}
 
 	@Inject
-	private Repository<Tag> tagRepository;
+	private TagRepository tagRepository;
+
+	@Inject
+	private UserTransaction transaction;
 
 	@Test
 	@ShouldMatchDataSet(value = { "tags.yml" }, excludeColumns = { "*id" })
@@ -48,4 +58,19 @@ public class TagRepositoryTest {
 
 	}
 
+
+	@Test
+	public void test_getAll() throws Exception {
+
+		tagRepository.persist(new Tag("popular"));
+		tagRepository.persist(new Tag("scifi"));
+
+		transaction.commit();
+		transaction.begin();
+
+		List<Tag> list = tagRepository.getAll();
+
+		assertThat(list.size(), equalTo(2));
+
+	}
 }

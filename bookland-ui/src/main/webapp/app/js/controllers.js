@@ -84,6 +84,44 @@ controllers.controller('AuthorBookDetailCtrl', [ '$scope', 'authorService', '$mo
 
 		} ]);
 
+controllers.controller('TagBookDetailCtrl', [ '$scope', 'tagService', '$modal',
+ 		function($scope, tagService, $modal) {
+
+ 			$scope.tags = tagService.query();
+
+ 			$scope.add = function(tag) {
+
+ 				if (tag == undefined) {
+ 					alert('Choose a tag!');
+ 					return;
+ 				}
+
+ 				if (typeof $scope.book.tags == 'undefined') {
+ 					$scope.book.tags = [];
+ 				}
+
+ 				if ($scope.book.tags.indexOf(tag) != -1) {
+ 					alert("tag already added!");
+ 					return;
+ 				}
+
+ 				$scope.book.tags.push(tag);
+ 			};
+
+ 			$scope.addNew = function(tagName){
+ 				tagService.save({'name': tagName}).$promise.then(function(){
+ 					$scope.tags = tagService.query();
+ 					$scope.tagName = '';
+ 				});
+ 			};
+
+ 			$scope.remove = function(index) {
+ 				$scope.book.tags.splice(index, 1);
+ 			};
+
+ 		} ]);
+
+
 controllers.controller('SettingsController', function() {
 	// TODO
 });
