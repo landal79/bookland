@@ -1,22 +1,19 @@
 package org.landal.bookland.repositories;
 
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.junit.Assert.assertThat;
 
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.transaction.HeuristicMixedException;
-import javax.transaction.HeuristicRollbackException;
-import javax.transaction.RollbackException;
-import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.persistence.ShouldMatchDataSet;
-import org.jboss.arquillian.transaction.api.annotation.TransactionMode;
-import org.jboss.arquillian.transaction.api.annotation.Transactional;
+import org.jboss.arquillian.persistence.TransactionMode;
+import org.jboss.arquillian.persistence.Transactional;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
@@ -31,46 +28,46 @@ import org.landal.bookland.utils.PersistenceDeployments;
 @RunWith(Arquillian.class)
 public class TagRepositoryTest {
 
-	@Deployment
-	public static WebArchive deploy() {
-		return ShrinkWrap
-				.create(WebArchive.class)
-				.addAsLibraries(
-						CoreDeployments.persistenceRepository().addAsManifestResource(
-								new StringAsset(PersistenceDeployments.descriptor().exportAsString()),
-								"persistence.xml")).addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
-	}
+    @Deployment
+    public static WebArchive deploy() {
+        return ShrinkWrap
+                .create(WebArchive.class)
+                .addAsLibraries(
+                        CoreDeployments.persistenceRepository().addAsManifestResource(
+                                new StringAsset(PersistenceDeployments.descriptor().exportAsString()),
+                                "persistence.xml")).addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml");
+    }
 
-	@Inject
-	private TagRepository tagRepository;
+    @Inject
+    private TagRepository tagRepository;
 
-	@Inject
-	private UserTransaction transaction;
+    @Inject
+    private UserTransaction transaction;
 
-	@Test
-	@ShouldMatchDataSet(value = { "tags.yml" }, excludeColumns = { "*id" })
-	public void test_persist() {
+    @Test
+    @ShouldMatchDataSet(value = { "tags.yml" }, excludeColumns = { "*id" })
+    public void test_persist() {
 
-		Tag tag = new Tag("popular");
-		tag = tagRepository.persist(tag);
+        Tag tag = new Tag("popular");
+        tag = tagRepository.persist(tag);
 
-		assertThat(tag.getId(), notNullValue());
+        assertThat(tag.getId(), notNullValue());
 
-	}
+    }
 
 
-	@Test
-	public void test_getAll() throws Exception {
+    @Test
+    public void test_getAll() throws Exception {
 
-		tagRepository.persist(new Tag("popular"));
-		tagRepository.persist(new Tag("scifi"));
+        tagRepository.persist(new Tag("popular"));
+        tagRepository.persist(new Tag("scifi"));
 
-		transaction.commit();
-		transaction.begin();
+        transaction.commit();
+        transaction.begin();
 
-		List<Tag> list = tagRepository.getAll();
+        List<Tag> list = tagRepository.getAll();
 
-		assertThat(list.size(), equalTo(2));
+        assertThat(list.size(), equalTo(2));
 
-	}
+    }
 }
