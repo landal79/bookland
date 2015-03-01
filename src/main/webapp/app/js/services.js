@@ -1,6 +1,7 @@
 'use strict';
 
-var booklandBaseUrl = '/bookland/rest';
+/*var booklandBaseUrl = '/bookland/rest';*/
+var booklandBaseUrl = '${baseurl}/rest';
 
 var services = angular.module('bookland.services', ['ngResource']);
 

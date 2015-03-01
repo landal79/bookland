@@ -15,6 +15,9 @@
     <version.arquillian.core>1.1.5.Final</version.arquillian.core>
     <version.arquillian.persistence>1.0.0.Alpha5</version.arquillian.persistence>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    
+    <baseurl>/bookland</baseurl>
+    
   </properties>
 
   <dependencyManagement>
@@ -187,6 +190,15 @@
         <version>2.6</version>
         <extensions>false</extensions>
         <configuration>
+            <webResources>
+            <resource>
+              <directory>src/main/webapp</directory>
+              <filtering>true</filtering>
+              <includes>
+                <include>app/**/*.js</include>
+              </includes>
+            </resource>
+          </webResources>
           <failOnMissingWebXml>false</failOnMissingWebXml>
         </configuration>
       </plugin>
@@ -256,6 +268,9 @@
       <!-- By default that is to put the resulting archive into the deployments folder. -->
       <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
       <id>openshift</id>
+      <properties>
+        <baseurl></baseurl>
+      </properties>
       <build>
         <finalName>bookland</finalName>
         <plugins>
