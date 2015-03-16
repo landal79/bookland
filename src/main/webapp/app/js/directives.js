@@ -49,13 +49,13 @@ directives.directive('tagSelection', [ 'tagService', function(tagService) {
     scope : {
       book : '='
     },
-    link : function(scope, elem, attrs) {
+    controller : function($scope) {
 
-      var book = scope.book;
+      var book = $scope.book;
 
-      scope.tags = tagService.query();
+      $scope.tags = tagService.query();
 
-      scope.add = function(tag) {
+      $scope.add = function(tag) {
 
         if (tag == undefined || tag == '') {
           alert('Choose a tag!');
@@ -74,9 +74,9 @@ directives.directive('tagSelection', [ 'tagService', function(tagService) {
         book.tags.push(tag);
       };
 
-      scope.addNew = function() {
+      $scope.addNew = function() {
 
-        var tag = scope.newTag;
+        var tag = $scope.newTag;
 
         if (tag == undefined || tag == '') {
           alert('tag must be not blank!');
@@ -86,14 +86,14 @@ directives.directive('tagSelection', [ 'tagService', function(tagService) {
         tagService.save({
           'name' : tag
         }).$promise.then(function() {
-          scope.tags = tagService.query();
-          scope.add({name: tag});
-          scope.newTag = '';
+          $scope.tags = tagService.query();
+          $scope.add({name: tag});
+          $scope.newTag = '';
         });
 
       };
 
-      scope.remove = function(index) {
+      $scope.remove = function(index) {
         book.tags.splice(index, 1);
       };
 
