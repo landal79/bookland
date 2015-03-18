@@ -40,23 +40,32 @@
 			</div>
 		</div>
 		</tab> <tab heading="Authors">
-		<div class="tab-content panel panel-info form-group" ng-controller="AuthorBookDetailCtrl" style="margin: 5px; margin-left: 25px;">			
+		<div class="tab-content panel panel-info form-group" ng-controller="AuthorBookDetailCtrl"
+			style="margin: 5px; margin-left: 25px;">
 			<div class="panel-body">
-				<div class="form-group">
+				<div class="row form-group">
 					<label for="authorSelect" class="col-sm-2 control-label">Authors</label>
 					<div class="col-sm-4">
-						<select id="authorSelect" class="form-control" ng-model="author"
-							ng-options="author.name + ' ' + author.surname for author in authors">
-							<option value="">-- choose an author --</option>
-						</select>
+						<div class="input-group">
+							<span class="input-group-btn">
+								<button type="button" class="btn btn-default btn-primary" ng-click="addAuthor(author)">
+									<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+								</button>
+							</span>
+							<select id="authorSelect" class="form-control" ng-model="author"
+								ng-options="author.name + ' ' + author.surname for author in authors">
+								<option value="">-- choose an author --</option>
+							</select>
+						</div>
 					</div>
-					<div class="col-sm-4">
-						<button type="button" class="btn btn-default col-sm-4" ng-click="addAuthor(author)">Add</button>
-						<div class="col-sm-1"></div>
-						<button type="button" class="btn btn-default btn-primary col-sm-4" ng-click="open()">New Author</button>
+					<div class="col-sm-3">
+						<button type="button" class="btn btn-default btn-primary col-sm-4" ng-click="open()" title="Insert new author">
+							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+							<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+						</button>
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="row form-group">
 					<div class="col-md-offset-2 col-md-4">
 						<ul class="list-group">
 							<li ng-repeat="author in book.authors" class="list-group-item">

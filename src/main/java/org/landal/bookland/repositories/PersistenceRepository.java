@@ -1,13 +1,13 @@
 package org.landal.bookland.repositories;
 
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import org.landal.bookland.model.Identifiable;
 
 public abstract class PersistenceRepository<T extends Identifiable> implements Repository<T> {
 
-    @PersistenceContext
+    @Inject
     private EntityManager manager;
 
     private Class<T> type;

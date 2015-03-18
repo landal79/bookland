@@ -84,6 +84,9 @@ controllers.controller('AuthorBookDetailCtrl', [ '$scope', 'authorService',
 
     } ]);
 
+controllers.controller('AuthorModalCtrl', [ '$scope', 'authorService',
+    '$modalInstance', AuthorModalCtrl ]);
+
 controllers.controller('SettingsController', function() {
   // TODO
 });
@@ -139,7 +142,7 @@ function BookCtrl($scope, bookService, $location, $routeParams,
 
   };
 
-}
+};
 
 function AuthorModalCtrl($scope, authorService, $modalInstance) {
   $scope.author = {};
