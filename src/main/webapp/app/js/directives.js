@@ -112,6 +112,14 @@ directives.directive("blDatepicker", [ function() {
       scope.clear = function() {
         scope.ngModel = null;
       };
+      
+      scope.opened = false;
+
+      scope.dateOptions = {
+        'year-format' : "'yy'",
+        'show-weeks' : false
+      };
+      
     },
     templateUrl : 'templates/datepicker.html'
   };

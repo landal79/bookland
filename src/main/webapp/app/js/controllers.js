@@ -146,13 +146,6 @@ function BookCtrl($scope, bookService, $location, $routeParams, bookImageService
 
   };
 
-  $scope.opened = false;
-
-  $scope.dateOptions = {
-    'year-format' : "'yy'",
-    'show-weeks' : false
-  };
-
   /**
    * file selection call back
    */

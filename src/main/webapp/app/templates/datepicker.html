@@ -6,10 +6,11 @@
 		is-open="opened" 
 	    datepicker-options="dateOptions" 
 	    ng-required="false"
-		close-text="Close" />
+		close-text="Close"
+		ng-click="open($event)" />
 	<span class="input-group-btn">
 		<button class="btn btn-default" ng-click="open($event)">
-			<i class="glyphicon glyphicon-calendar"></i>
+			<span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>
 		</button>
 	</span>
 </div>
