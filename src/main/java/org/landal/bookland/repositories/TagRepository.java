@@ -14,17 +14,21 @@ import org.landal.bookland.model.Tag;
 @TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class TagRepository extends PersistenceRepository<Tag> {
 
-	public TagRepository() {
-		super(Tag.class);
-	}
+    public TagRepository() {
+        super(Tag.class);
+    }
 
-	/**
-	 * FIXME: to many rows for select all query
-	 *
-	 * @return
-	 */
-	public List<Tag> getAll() {
-		return getManager().createQuery("FROM Tag", Tag.class).getResultList();
-	}
+    /**
+     * FIXME: to many rows for select all query
+     *
+     * @return
+     */
+    public List<Tag> getAll() {
+        return getManager().createQuery("FROM Tag", Tag.class).getResultList();
+    }
+
+    public Tag findByName(String name) {
+        return getManager().createNamedQuery(Tag.FIND_BY_NAME, Tag.class).setParameter("name", name).getSingleResult();
+    }
 
 }

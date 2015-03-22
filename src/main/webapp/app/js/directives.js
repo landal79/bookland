@@ -51,14 +51,16 @@ directives.directive('blTagSelection', [ 'tagService', function(tagService) {
 
         if (typeof book.tags == 'undefined') {
           book.tags = [];
-        }
-
-        if (book.tags.indexOf(tag) != -1) {
+        } else if (typeof book.tags.find(function(elem) {
+          return elem.id == tag.id;
+        }) != 'undefined') {
           alert("tag already added!");
           return;
         }
 
         book.tags.push(tag);
+
+        $scope.tag = '';
       };
 
       $scope.addNew = function() {
@@ -72,11 +74,9 @@ directives.directive('blTagSelection', [ 'tagService', function(tagService) {
 
         tagService.save({
           'name' : tag
-        }).$promise.then(function() {
+        }, function(tag) {
+          $scope.add(tag);
           $scope.tags = tagService.query();
-          $scope.add({
-            name : tag
-          });
           $scope.newTag = '';
         });
 

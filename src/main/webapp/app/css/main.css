@@ -5,10 +5,18 @@
 .thumb-img {
   width: 80px;
   height: 80px;
+  border: solid 1px black;
+  border-radius: 5px;
+  padding: 1px;
+  transition: all .2s ease-in-out;
+}
+
+.thumb-img:hover {
+  transform: scale(2);
 }
 
 .navbar-inner {
-  box-shadow: 0 3px 3px rgba(0,0,0,0.175) !important;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.175) !important;
 }
 
 .navbar a.btn {
@@ -32,4 +40,12 @@ a {
 
 .tab-content {
   padding: 5px;
+}
+
+.tags {
+  line-height: 2.2;
+}
+
+.tag {
+  margin-right: 5px !important;
 }

@@ -21,7 +21,7 @@
 
     <angular.version>1.3.14</angular.version>
     <jquery.version>2.1.3</jquery.version>
-    <bootstrap.version>3.3.2</bootstrap.version>
+    <bootstrap.version>3.3.4</bootstrap.version>
     <angular-bootstrap.version>0.12.1</angular-bootstrap.version>
     <baseurl>/bookland</baseurl>
 

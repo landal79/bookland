@@ -1,7 +1,6 @@
 'use strict';
 
-var controllers = angular.module('bookland.controllers', [ 'bookland.services',
-    'ngResource' ]);
+var controllers = angular.module('bookland.controllers', [ 'bookland.services', 'bookland.filters', 'ngResource' ]);
 
 controllers.controller('NavController', [ '$route', function($route) {
   this.is = function(title) {
@@ -12,17 +11,15 @@ controllers.controller('NavController', [ '$route', function($route) {
   };
 } ]);
 
-controllers.controller('ListController', [ '$scope', 'bookService', 'baseUrl',
-    function($scope, bookService,baseUrl) {
-      $scope.items = bookService.query();
-      $scope.baseUrl = baseUrl;
-    } ]);
+controllers.controller('ListController', [ '$scope', 'bookService', 'baseUrl', function($scope, bookService, baseUrl) {
+  $scope.items = bookService.query();
+  $scope.baseUrl = baseUrl;
+} ]);
 
-controllers.controller('BookController', [ '$scope', 'bookService',
-    '$location', '$routeParams', 'bookImageService','baseUrl', BookCtrl ]);
+controllers.controller('BookController', [ '$scope', 'bookService', '$location', '$routeParams', 'bookImageService',
+    'baseUrl', BookCtrl ]);
 
-controllers.controller('DetailController', [ '$scope', '$routeParams',
-    'bookService', '$location',
+controllers.controller('DetailController', [ '$scope', '$routeParams', 'bookService', '$location',
     function($scope, $routeParams, bookService, $location) {
       $scope.detail = bookService.get({}, {
         'id' : $routeParams.id
@@ -33,8 +30,8 @@ controllers.controller('DetailController', [ '$scope', '$routeParams',
       };
     } ]);
 
-controllers.controller('NewAuthorController', [ '$scope', '$location',
-    'authorService', function($scope, $location, authorService) {
+controllers.controller('NewAuthorController', [ '$scope', '$location', 'authorService',
+    function($scope, $location, authorService) {
       $scope.author = {};
       $scope.save = function() {
         authorService.save($scope.author);
@@ -42,8 +39,8 @@ controllers.controller('NewAuthorController', [ '$scope', '$location',
       };
     } ]);
 
-controllers.controller('AuthorBookDetailCtrl', [ '$scope', 'authorService',
-    '$modal', function($scope, authorService, $modal) {
+controllers.controller('AuthorBookDetailCtrl', [ '$scope', 'authorService', '$modal',
+    function($scope, authorService, $modal) {
 
       $scope.authors = authorService.query();
 
@@ -56,14 +53,16 @@ controllers.controller('AuthorBookDetailCtrl', [ '$scope', 'authorService',
 
         if (typeof $scope.book.authors == 'undefined') {
           $scope.book.authors = [];
-        }
-
-        if ($scope.book.authors.indexOf(author) != -1) {
-          alert("Author already added!");
+        } else if (typeof $scope.book.authors.find(function(elem) {
+          return elem.id == author.id;
+        }) != 'undefined') {
+          alert("author already added!");
           return;
         }
 
         $scope.book.authors.push(author);
+
+        $scope.author = '';
       };
 
       $scope.removeAuthor = function(index) {
@@ -76,7 +75,8 @@ controllers.controller('AuthorBookDetailCtrl', [ '$scope', 'authorService',
           controller : 'AuthorModalCtrl',
           size : 'md'
         });
-        modalInstance.result.then(function() {
+        modalInstance.result.then(function(author) {
+          $scope.addAuthor(author);
           $scope.authors = authorService.query();
         }, function() {
 
@@ -85,8 +85,7 @@ controllers.controller('AuthorBookDetailCtrl', [ '$scope', 'authorService',
 
     } ]);
 
-controllers.controller('AuthorModalCtrl', [ '$scope', 'authorService',
-    '$modalInstance', AuthorModalCtrl ]);
+controllers.controller('AuthorModalCtrl', [ '$scope', 'authorService', '$modalInstance', AuthorModalCtrl ]);
 
 controllers.controller('SettingsController', function() {
   // TODO
@@ -96,11 +95,10 @@ controllers.controller('AboutController', function() {
   // TODO
 });
 
-function BookCtrl($scope, bookService, $location, $routeParams,
-    bookImageService, baseUrl) {
+function BookCtrl($scope, bookService, $location, $routeParams, bookImageService, baseUrl) {
 
   $scope.coverImage = null;
-  
+
   /*
    * Code executed to initialize controller values
    */
@@ -116,8 +114,7 @@ function BookCtrl($scope, bookService, $location, $routeParams,
   if ($scope.book.id == null) {
     $scope.imageUrl = 'img/nocover.jpg';
   } else {
-    $scope.imageUrl = baseUrl + '/books/' + $scope.book.id
-        + '/image';
+    $scope.imageUrl = baseUrl + '/books/' + $scope.book.id + '/image';
   }
 
   // controller page actions
@@ -127,21 +124,25 @@ function BookCtrl($scope, bookService, $location, $routeParams,
   };
 
   $scope.save = function() {
-    var resultPromise;
     if (edit) {
-      resultPromise = bookService.update($scope.book).$promise;
+      bookService.update($scope.book, function(book) {
+        if ($scope.coverImage != null) {
+          bookImageService.save({
+            'id' : book.id
+          }, $scope.coverImage);
+        }
+        $location.path("/list");
+      });
     } else {
-      resultPromise = bookService.save($scope.book).$promise;
+      bookService.save($scope.book, function(book) {
+        if ($scope.coverImage != null) {
+          bookImageService.save({
+            'id' : book.id
+          }, $scope.coverImage);
+        }
+        $location.path("/list");
+      });
     }
-
-    resultPromise.then(function(book) {
-      if ($scope.coverImage != null) {
-        bookImageService.save({
-          'id' : book.id
-        }, $scope.coverImage);
-      }
-      $location.path("/");
-    });
 
   };
 
@@ -151,11 +152,11 @@ function BookCtrl($scope, bookService, $location, $routeParams,
     'year-format' : "'yy'",
     'show-weeks' : false
   };
-  
+
   /**
    * file selection call back
    */
-  $scope.onFileSelected = function(event){
+  $scope.onFileSelected = function(event) {
     $scope.coverImage = event.target.files[0];
   };
 
@@ -170,8 +171,7 @@ function AuthorModalCtrl($scope, authorService, $modalInstance) {
       return;
     }
 
-    authorService.save($scope.author);
-    $modalInstance.close();
+    $modalInstance.close(authorService.save($scope.author));
   };
   $scope.cancel = function() {
     $modalInstance.dismiss('cancel');

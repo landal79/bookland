@@ -22,31 +22,39 @@ import org.landal.bookland.repositories.TagRepository;
 @RequestScoped
 public class TagRestService {
 
-	@Inject
-	private TagRepository tagRepository;
+    @Inject
+    private TagRepository tagRepository;
 
-	public TagRestService() {
-	}
+    public TagRestService() {
+    }
 
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<Tag> getAll() {
-		return tagRepository.getAll();
-	}
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Tag> getAll() {
+        return tagRepository.getAll();
+    }
 
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Tag create(Tag tag) {
-		return tagRepository.persist(tag);
-	}
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Tag create(Tag tag) {
+        return tagRepository.persist(tag);
+    }
 
-	@DELETE
-	@Path("{id}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public void remove(@PathParam("id") int id) {
-		// TODO
-	}
+    @DELETE
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public void remove(@PathParam("id") int id) {
+        // TODO
+    }
+    
+    @GET
+    @Path("{name}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Tag findByName(@PathParam("name") String name){
+        return tagRepository.findByName(name);
+    }
 
 
 }

@@ -62,7 +62,8 @@
 								<button type="button" class="btn btn-default btn-primary" ng-click="addAuthor(author)">
 									<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 								</button>
-							</span> <select id="authorSelect" class="form-control" ng-model="author"
+							</span>
+							<select id="authorSelect" class="form-control" ng-model="author"
 								ng-options="author.name + ' ' + author.surname for author in authors">
 								<option value="">-- choose an author --</option>
 							</select>
@@ -70,18 +71,20 @@
 					</div>
 					<div class="col-sm-3">
 						<button type="button" class="btn btn-default btn-primary col-sm-4" ng-click="open()" title="Insert new author">
-							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> <span class="glyphicon glyphicon-user"
-								aria-hidden="true"></span>
+							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+							<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
 						</button>
 					</div>
 				</div>
 				<div class="row form-group">
 					<div class="col-md-offset-2 col-md-4">
 						<ul class="list-group">
-							<li ng-repeat="author in book.authors" class="list-group-item"><span class=""> {{author.name}}
-									{{author.surname}} </span> <span class="pull-right"> <a href class="btn btn-danger btn-xs"
-									ng-click="removeAuthor($index)">X</a>
-							</span></li>
+							<li ng-repeat="author in book.authors" class="list-group-item">
+								<span class=""> {{author.name}} {{author.surname}} </span>
+								<span class="pull-right">
+									<a href class="btn btn-danger btn-xs" ng-click="removeAuthor($index)">X</a>
+								</span>
+							</li>
 						</ul>
 					</div>
 				</div>
