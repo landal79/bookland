@@ -2,44 +2,40 @@
 <html ng-app="bookland">
 
 <head>
-	<meta charset="UTF-8">
-	<title>Bookland</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Bookland</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link href="https://netdna.bootstrapcdn.com/bootstrap/${bootstrap.version}/css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/main.css" rel="stylesheet">
+<link href="https://netdna.bootstrapcdn.com/bootstrap/${bootstrap.version}/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/main.css" rel="stylesheet">
 </head>
 
-<body>        
-    <div ng-include src="'views/header.html'"></div>
+<body>
+	<div ng-include src="'views/header.html'"></div>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-1" >
-                 <div ng-include src="'views/menu.html'"></div>				
-			</div>
-			<div class="col-md-11">
+			<div class="col-md-12">
 				<ng-view></ng-view>
 			</div>
 		</div>
-		<hr>
 		<footer>
 			<p>&copy; Company 2014</p>
 		</footer>
 	</div>
-	
-	<!--    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js" /></script>-->
-	<script src="https://code.jquery.com/jquery-${jquery.version}.min.js" ></script>
+
+	<script src="https://code.jquery.com/jquery-${jquery.version}.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/${angular.version}/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/${angular.version}/angular-route.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/${angular.version}/angular-resource.min.js"></script>
+	<script src="https://netdna.bootstrapcdn.com/bootstrap/${bootstrap.version}/js/bootstrap.min.js"></script>
 	<script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-${angular-bootstrap.version}.js"></script>
 
-    <script src="js/app.js"></script>  
-    <script src="js/services.js"></script>
-    <script src="js/directives.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/services.js"></script>
+	<script src="js/directives.js"></script>
 	<script src="js/controllers.js"></script>
-	
-    
+
+
 </body>
 
 </html>

@@ -29,85 +29,85 @@ import org.landal.bookland.services.BookService;
 @RequestScoped
 public class BookRestService {
 
-	@Inject
-	private BookService bookService;
+    @Inject
+    private BookService bookService;
 
-	public BookRestService() {
-	}
+    public BookRestService() {
+    }
 
-	@GET
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<Book> getAll() {
-		return bookService.getAll();
-	}
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Book> getAll() {
+        return bookService.getAll();
+    }
 
-	@GET
-	@Path("{id}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Book getById(@PathParam("id") long id) {
-		return bookService.findById(id);
-	}
+    @GET
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Book getById(@PathParam("id") long id) {
+        return bookService.findById(id);
+    }
 
-	@POST
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Book create(Book book) {
-		return bookService.save(book);
-	}
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Book create(Book book) {
+        return bookService.save(book);
+    }
 
-	@POST
-	@Path("/{id}/image")
-	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	public void uploadBookCover(@PathParam("id") Long id, @MultipartForm ImageUpload image) {
-		Book book = bookService.findById(id);
-		if (book == null) {
-			throw new RuntimeException();
-		}
+    @POST
+    @Path("/{id}/image")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    public void uploadBookCover(@PathParam("id") Long id, @MultipartForm ImageUpload image) {
+        Book book = bookService.findById(id);
+        if (book == null) {
+            throw new RuntimeException();
+        }
 
-		book.setImage(image.getData());
-		bookService.save(book);
-	}
+        book.setImage(image.getData());
+        bookService.save(book);
+    }
 
-	@GET
-	@Path("/{id}/image")
-	@Produces({ "image/*" })
-	public Response getCoverImage(@PathParam("id") Long id) {
+    @GET
+    @Path("/{id}/image")
+    @Produces({ "image/*" })
+    public Response getCoverImage(@PathParam("id") Long id) {
 
-		final Book book = bookService.findById(id);
-		if (book == null) {
-			throw new RuntimeException();
-		}
+        final Book book = bookService.findById(id);
+        if (book == null) {
+            throw new RuntimeException();
+        }
 
-		if (book.getImage() == null) {
-			return Response.ok().entity(new StreamingOutput() {
-				@Override
-				public void write(OutputStream output) throws IOException, WebApplicationException {
-					InputStream image = BookRestService.class.getClassLoader().getResourceAsStream("images/nocover.jpg");
-					IOUtils.copy(image, output);
-				}
-			}).build();
-		}
+        if (book.getImage() == null) {
+            return Response.ok().entity(new StreamingOutput() {
+                @Override
+                public void write(OutputStream output) throws IOException, WebApplicationException {
+                    InputStream image = BookRestService.class.getClassLoader().getResourceAsStream("images/nocover.jpg");
+                    IOUtils.copy(image, output);
+                }
+            }).build();
+        }
 
-		return Response.ok().entity(new StreamingOutput() {
-			@Override
-			public void write(OutputStream output) throws IOException, WebApplicationException {
-				output.write(book.getImage());
-				output.flush();
-			}
-		}).build();
-	}
+        return Response.ok().entity(new StreamingOutput() {
+            @Override
+            public void write(OutputStream output) throws IOException, WebApplicationException {
+                output.write(book.getImage());
+                output.flush();
+            }
+        }).build();
+    }
 
-	@PUT
-	@Path("{id}")
-	@Consumes(MediaType.APPLICATION_JSON)
-	@Produces(MediaType.APPLICATION_JSON)
-	public Book update(@PathParam("id") Long id, Book book) {
-		return bookService.save(book);
-	}
+    @PUT
+    @Path("{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Book update(@PathParam("id") Long id, Book book) {
+        return bookService.save(book);
+    }
 
-	@DELETE
-	@Path("{id}")
-	public void remove(@PathParam("id") int id) {
-		bookService.delete(id);
-	}
+    @DELETE
+    @Path("{id}")
+    public void remove(@PathParam("id") int id) {
+        bookService.delete(id);
+    }
 }

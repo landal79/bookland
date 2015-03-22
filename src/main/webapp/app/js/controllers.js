@@ -12,13 +12,14 @@ controllers.controller('NavController', [ '$route', function($route) {
   };
 } ]);
 
-controllers.controller('ListController', [ '$scope', 'bookService',
-    function($scope, bookService) {
+controllers.controller('ListController', [ '$scope', 'bookService', 'baseUrl',
+    function($scope, bookService,baseUrl) {
       $scope.items = bookService.query();
+      $scope.baseUrl = baseUrl;
     } ]);
 
 controllers.controller('BookController', [ '$scope', 'bookService',
-    '$location', '$routeParams', 'bookImageService', BookCtrl ]);
+    '$location', '$routeParams', 'bookImageService','baseUrl', BookCtrl ]);
 
 controllers.controller('DetailController', [ '$scope', '$routeParams',
     'bookService', '$location',
@@ -96,8 +97,10 @@ controllers.controller('AboutController', function() {
 });
 
 function BookCtrl($scope, bookService, $location, $routeParams,
-    bookImageService) {
+    bookImageService, baseUrl) {
 
+  $scope.coverImage = null;
+  
   /*
    * Code executed to initialize controller values
    */
@@ -113,7 +116,7 @@ function BookCtrl($scope, bookService, $location, $routeParams,
   if ($scope.book.id == null) {
     $scope.imageUrl = 'img/nocover.jpg';
   } else {
-    $scope.imageUrl = '/bookland-backend/rest/books/' + $scope.book.id
+    $scope.imageUrl = baseUrl + '/books/' + $scope.book.id
         + '/image';
   }
 
@@ -131,6 +134,8 @@ function BookCtrl($scope, bookService, $location, $routeParams,
       resultPromise = bookService.save($scope.book).$promise;
     }
 
+    alert($scope.coverImage);
+    
     resultPromise.then(function(book) {
       if ($scope.coverImage != null) {
         bookImageService.save({
@@ -140,6 +145,20 @@ function BookCtrl($scope, bookService, $location, $routeParams,
       $location.path("/");
     });
 
+  };
+
+  $scope.opened = false;
+
+  $scope.dateOptions = {
+    'year-format' : "'yy'",
+    'show-weeks' : false
+  };
+  
+  /**
+   * file selection call back
+   */
+  $scope.onFileSelected = function(event){
+    $scope.coverImage = event.target.files[0];
   };
 
 };

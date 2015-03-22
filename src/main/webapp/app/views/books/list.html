@@ -1,23 +1,36 @@
-<div class="table-responsive">
+<div ng-show="!items.length" class="jumbotron">
+	<div class="row">
+		<div class="col-md-8">
+			<h1 class="header">Bookland</h1>
+			<p>There are no books</p>
+			<p>
+				<a class="btn btn-default btn-lg" href="#new" role="button" ng-class="{active: nav.is('new')}">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+					New Book	
+				</a>
+			</p>
+		</div>
+		<div class="col-md-4">
+			<img src="img/header.png" class="img-responsive">
+		</div>
+	</div>
+</div>
+<div ng-show="items.length" class="table-responsive">
 	<table class="table table-striped table-hover">
 		<thead>
 			<tr>
 				<th>Title</th>
 				<th>Authors</th>
+				<th>Pub. Date</th>
 				<th class="col-md-2"><input type="text" ng-model="search.$"></th>
 			</tr>
 		</thead>
 		<tr ng-repeat="item in items | filter:search">
 			<td ng-bind="item.title"></td>
-			<td>
-				<span ng-repeat="author in item.authors">{{author.name}} {{author.surname}}{{$last ? '' : ', '}}</span>				
-			</td>
-			<td>
-				<img alt="book cover" ng-src="/bookland-backend/rest/books/{{item.id}}/image" class="thumb-img">
-			</td>
-			<td>
-				<a href="#/book/{{item.id}}">{{item.id}}</a>
-			</td>
+			<td><span ng-repeat="author in item.authors">{{author.name}} {{author.surname}}{{$last ? '' : ', '}}</span></td>
+			<td>{{item.publishingDate | date: 'dd-MM-yyyy'}}</td>
+			<td><img alt="book cover" ng-src="{{baseUrl}}/books/{{item.id}}/image" class="thumb-img"></td>
+			<td><a href="#/book/{{item.id}}">{{item.id}}</a></td>
 		</tr>
 	</table>
 </div>

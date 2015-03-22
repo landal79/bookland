@@ -9,3 +9,4 @@ target
 .classpath
 /.openshift
 /.tern-project
+/bin

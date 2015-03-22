@@ -1,48 +1,35 @@
 'use strict';
 
-var directives = angular.module('bookland.directives', [ 'ngResource',
-    'bookland.services' ]);
+var directives = angular.module('bookland.directives', [ 'ngResource', 'bookland.services', 'ui.bootstrap' ]);
 
-directives.directive('fileModel', [ '$parse', function($parse) {
+directives.directive('blFileUpload', [ '$parse', function($parse) {
   return {
-    restrict : 'A',
+    restrict : 'E',
+    templateUrl : 'templates/fileUpload.html',
+    scope : {
+      onfileselected : '&'
+    },
     link : function(scope, element, attrs) {
-      var model = $parse(attrs.fileModel);
-      var modelSetter = model.assign;
-
-      element.bind('change', function() {
-        scope.$apply(function() {
-          modelSetter(scope, element[0].files[0]);
-        });
-      });
-    }
-
-  };
-} ]);
-
-directives.directive('uploadBtn', [ function() {
-  return {
-    restrict : 'C',
-    link : function(scope, elem, attrs) {
-      var inputFile = elem.parent().find('input')[0];
-      elem.bind('click', function() {
+      var inputFile = angular.element(element.find('input[type=file]')[0]);
+      var btnUpload = angular.element(element.find('button')[0]);
+      var inputText = angular.element(element.find('input[type=text]')[0]);
+      btnUpload.bind('click', function() {
         inputFile.click();
       });
 
-      var inputId = attrs.inputId;
-      angular.element(inputFile).bind(
-          'change',
-          function() {
-            var inputText = angular.element(document
-                .getElementById(inputId));
-            inputText.val(angular.element(this).val());
-          });
+      inputFile.bind('change', function(event) {
+        inputText.val(inputFile.val());
+        scope.onfileselected({
+          'event' : event
+        });
+      });
 
     }
   };
+
 } ]);
 
-directives.directive('tagSelection', [ 'tagService', function(tagService) {
+directives.directive('blTagSelection', [ 'tagService', function(tagService) {
   return {
     restrict : 'E',
     templateUrl : 'templates/tags/tagSelection.html',
@@ -87,7 +74,9 @@ directives.directive('tagSelection', [ 'tagService', function(tagService) {
           'name' : tag
         }).$promise.then(function() {
           $scope.tags = tagService.query();
-          $scope.add({name: tag});
+          $scope.add({
+            name : tag
+          });
           $scope.newTag = '';
         });
 
@@ -99,5 +88,28 @@ directives.directive('tagSelection', [ 'tagService', function(tagService) {
 
     },
     controllerAs : 'tagCtrl'
+  };
+} ]);
+
+directives.directive("blDatepicker", [ function() {
+  return {
+    restrict : "E",
+    scope : {
+      dateModel : "=",
+      dateOptions : "=",
+      opened : "=",
+    },
+    link : function(scope, element, attrs) {
+      scope.open = function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        scope.opened = true;
+      };
+
+      scope.clear = function() {
+        scope.ngModel = null;
+      };
+    },
+    templateUrl : 'templates/datepicker.html'
   };
 } ]);
