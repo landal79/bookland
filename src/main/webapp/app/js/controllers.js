@@ -17,7 +17,7 @@ controllers.controller('ListController', [ '$scope', 'bookService', 'baseUrl', f
 } ]);
 
 controllers.controller('BookController', [ '$scope', 'bookService', '$location', '$routeParams', 'bookImageService',
-    'baseUrl', BookCtrl ]);
+    'baseUrl', 'fileReader', BookCtrl ]);
 
 controllers.controller('DetailController', [ '$scope', '$routeParams', 'bookService', '$location',
     function($scope, $routeParams, bookService, $location) {
@@ -95,7 +95,7 @@ controllers.controller('AboutController', function() {
   // TODO
 });
 
-function BookCtrl($scope, bookService, $location, $routeParams, bookImageService, baseUrl) {
+function BookCtrl($scope, bookService, $location, $routeParams, bookImageService, baseUrl, fileReader) {
 
   $scope.coverImage = null;
 
@@ -158,6 +158,9 @@ function BookCtrl($scope, bookService, $location, $routeParams, bookImageService
    */
   $scope.onFileSelected = function(event) {
     $scope.coverImage = event.target.files[0];
+    fileReader.readAsDataURL($scope.coverImage, $scope).then(function(result) {
+      $scope.imageUrl = result;
+    });
   };
 
 };

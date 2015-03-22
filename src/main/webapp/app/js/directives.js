@@ -16,6 +16,9 @@ directives.directive('blFileUpload', [ '$parse', function($parse) {
       btnUpload.bind('click', function() {
         inputFile.click();
       });
+      inputText.bind('click', function() {
+          inputFile.click();
+        });
 
       inputFile.bind('change', function(event) {
         inputText.val(inputFile.val());
