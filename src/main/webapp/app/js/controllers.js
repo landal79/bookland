@@ -134,8 +134,6 @@ function BookCtrl($scope, bookService, $location, $routeParams,
       resultPromise = bookService.save($scope.book).$promise;
     }
 
-    alert($scope.coverImage);
-    
     resultPromise.then(function(book) {
       if ($scope.coverImage != null) {
         bookImageService.save({
