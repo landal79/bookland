@@ -1,7 +1,8 @@
 Bookland
 ================
 
-This is book management app developed with AngularJS and JavaEE
+This is book management app developed with AngularJS and JavaEE.
+The scope is to collect free ebooks, magazines.
 
 Books model 
 

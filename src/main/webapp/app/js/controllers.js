@@ -95,6 +95,9 @@ controllers.controller('AboutController', function() {
   // TODO
 });
 
+/**
+ * Book controller function. 
+ */
 function BookCtrl($scope, bookService, $location, $routeParams, bookImageService, baseUrl, fileReader) {
 
   $scope.coverImage = null;
