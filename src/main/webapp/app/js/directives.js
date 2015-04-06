@@ -17,8 +17,8 @@ directives.directive('blFileUpload', [ '$parse', function($parse) {
         inputFile.click();
       });
       inputText.bind('click', function() {
-          inputFile.click();
-        });
+        inputFile.click();
+      });
 
       inputFile.bind('change', function(event) {
         inputText.val(inputFile.val());
@@ -112,15 +112,88 @@ directives.directive("blDatepicker", [ function() {
       scope.clear = function() {
         scope.ngModel = null;
       };
-      
+
       scope.opened = false;
 
       scope.dateOptions = {
         'year-format' : "'yy'",
         'show-weeks' : false
       };
-      
+
     },
     templateUrl : 'templates/datepicker.html'
+  };
+} ]);
+
+directives.directive('blStars', [ function() {
+  return {
+    restrict : "E",
+    templateUrl : 'templates/stars.html',
+    require : 'ngModel',
+    scope : true,
+    link : function(scope, element, attrs, ngModelCtrl) {
+
+      scope.items = new Array(+attrs.max);
+
+      var emptyIcon = attrs.iconEmpty || 'fa-star-o';
+      var fullIcon = attrs.iconFull || 'fa-star';
+      var iconBase = attrs.iconBase || 'fa fa-fw';
+      scope.listClass = attrs.listClass || 'angular-input-stars';
+      scope.readonly = !(attrs.readonly === undefined);
+
+      ngModelCtrl.$render = function() {
+        scope.last_value = ngModelCtrl.$viewValue;
+      };
+
+      scope.getClass = function(index) {
+        return index >= scope.last_value ? iconBase + ' ' + emptyIcon : iconBase + ' ' + fullIcon + ' active ';
+      };
+
+      scope.unpaintStars = function() {
+        scope.paintStars(scope.last_value - 1);
+      };
+
+      scope.paintStars = function($index) {
+        //ignore painting, if readonly
+        if (scope.readonly) {
+          return;
+        }
+        var items = element.find('li').find('i');
+
+        for (var index = 0; index < items.length; index++) {
+
+          var $star = angular.element(items[index]);
+
+          if ($index >= index) {
+            $star.addClass(fullIcon);
+            $star.addClass('active');
+            $star.removeClass(emptyIcon);
+          } else {
+            $star.removeClass(fullIcon);
+            $star.removeClass('active');
+            $star.addClass(emptyIcon);
+          }
+        }
+
+      };
+
+      scope.setValue = function(index, e) {
+        //ignore painting
+        if (scope.readonly) {
+          return;
+        }
+        var star = e.target;
+
+        if (e.pageX < star.getBoundingClientRect().left + star.offsetWidth / 2) {
+          scope.last_value = index + 1;
+        } else {
+          scope.last_value = index + 1;
+        }
+
+        ngModelCtrl.$setViewValue(scope.last_value);
+
+      };
+
+    }
   };
 } ]);

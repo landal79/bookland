@@ -42,7 +42,8 @@ public class Book extends BaseEntity {
     private String isbn;
     private String title;
     private String description;
-    
+    private Integer stars;
+
     @Temporal(TemporalType.DATE)
     private Date publishingDate;
 
@@ -168,6 +169,14 @@ public class Book extends BaseEntity {
 
     public void setReview(String review) {
         this.review = review;
+    }
+
+    public Integer getStars() {
+        return stars;
+    }
+
+    public void setStars(Integer stars) {
+        this.stars = stars;
     }
 
 }
