@@ -1,5 +1,7 @@
 'use strict';
 
+//bookland main file
+
 var bookland = angular.module('bookland', [ 'bookland.services',
 		'bookland.directives', 'bookland.controllers', 'ngRoute', 'ngResource',
 		'ui.bootstrap' ]);
