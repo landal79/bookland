@@ -1,6 +1,8 @@
 Bookland
 ================
 
+This is book management app developed with AngularJS and JavaEE
+
 Books model 
 
 id, title, isbn, author+, publisher, numPages, files
