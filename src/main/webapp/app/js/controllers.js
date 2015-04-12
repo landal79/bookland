@@ -14,6 +14,7 @@ controllers.controller('NavController', [ '$route', function($route) {
 controllers.controller('ListController', [ '$scope', 'bookService', 'baseUrl', function($scope, bookService, baseUrl) {
   $scope.items = bookService.query();
   $scope.baseUrl = baseUrl;
+  $scope.orderProp = 'title';
 } ]);
 
 controllers.controller('BookController', [ '$scope', 'bookService', '$location', '$routeParams', 'bookImageService',
@@ -96,7 +97,7 @@ controllers.controller('AboutController', function() {
 });
 
 /**
- * Book controller function. 
+ * Book controller function.
  */
 function BookCtrl($scope, bookService, $location, $routeParams, bookImageService, baseUrl, fileReader) {
 
