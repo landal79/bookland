@@ -14,9 +14,7 @@
 	<div ng-include src="'views/header.html'"></div>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12">
-				<ng-view></ng-view>
-			</div>
+			 <div ng-view class="col-md-12"></div>
 		</div>
 		<footer>
 			<p>&copy; Company 2014</p>
@@ -27,6 +25,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/${angular.version}/angular.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/${angular.version}/angular-route.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/${angular.version}/angular-resource.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/${angular.version}/angular-animate.min.js"></script>
 	<script src="https://netdna.bootstrapcdn.com/bootstrap/${bootstrap.version}/js/bootstrap.min.js"></script>
 	<script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-${angular-bootstrap.version}.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/es6-shim/0.27.1/es6-shim.min.js"></script>
@@ -36,7 +35,8 @@
 	<script src="js/directives.js"></script>
 	<script src="js/controllers.js"></script>
 	<script src="js/filters.js"></script>
-
+	<script src="js/animations.js"></script>
+	
 </body>
 
 </html>
