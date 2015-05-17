@@ -55,10 +55,15 @@
 					</div>
 					<div class="row" ng-show="item.dedescription">{{item.description}}</div>
 					<div class="row" style="padding-top: 5px;">
-						<span ng-repeat="tag in item.tags" class="btn btn-info tag">
-							<span class="glyphicon glyphicon-tag" aria-hidden="true" />
-							{{tag.name}}
-						</span>
+						<div class="col-sm-9">
+							<span ng-repeat="tag in item.tags" class="btn btn-info tag">
+								<span class="glyphicon glyphicon-tag" aria-hidden="true" />
+								{{tag.name}}
+							</span>
+						</div>
+						<div class="col-sm-3">
+							<rating id="rating" ng-model="item.rating" max="5" readonly="true"></rating>
+						</div>
 					</div>
 				</div>
 				<div class="col-md-2">
