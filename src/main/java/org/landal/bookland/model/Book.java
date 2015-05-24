@@ -42,7 +42,7 @@ public class Book extends BaseEntity {
     private String isbn;
     private String title;
     private String description;
-    private Integer rating;
+    private Integer rating = 0;
 
     @Temporal(TemporalType.DATE)
     private Date publishingDate;
