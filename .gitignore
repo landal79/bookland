@@ -11,3 +11,7 @@ target
 /.openshift
 /.tern-project
 /bin
+
+.idea
+bower_components
+bookland.iml
