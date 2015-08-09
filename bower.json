@@ -1,0 +1,29 @@
+{
+  "name": "bookland",
+  "version": "0.0.1",
+  "authors": [
+    "landal79 <alex.landini@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "src/main/webapp/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.3",
+    "angular-mocks": "1.4.3",
+    "jquery": "~2.1.1",
+    "bootstrap": "~3.3.1",
+    "angular-route": "1.4.3",
+    "angular-resource": "1.4.3"
+  },
+  "main": "src/main/webapp/index.html",
+  "keywords": [
+    "java",
+    "maven"
+  ]
+}

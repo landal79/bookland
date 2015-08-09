@@ -6,7 +6,8 @@ var bookland = angular.module('bookland', [ 'bookland.services',
     'bookland.directives', 'bookland.controllers', 'bookland.animations', 'ngRoute', 'ngResource',
     'ui.bootstrap' ]);
 
-bookland.config(function($routeProvider) {
+bookland.config(function($routeProvider,$httpProvider) {
+
   $routeProvider.when('/', {
     templateUrl : 'views/default.html'
   }).when('/list', {
@@ -40,4 +41,34 @@ bookland.config(function($routeProvider) {
   }).otherwise({
     redirectTo : '/'
   });
+
+  $httpProvider.interceptors.push(['$q','$rootScope', function ($q, $rootScope) {
+    return {
+      'responseError': function (rejection) {
+        $rootScope.$broadcast("event:httpError", rejection.data.error);
+        return $q.reject(rejection);
+      }
+    };
+  }]);
 });
+
+bookland.run(['$modal','$rootScope', function($modal, scope){
+  scope.$on('event:httpError', function(event,error) {
+    $modal.open({
+      templateUrl : 'views/errors/errorModal.html',
+      controller: function($scope, $modalInstance, message){
+        $scope.message = message;
+
+        $scope.close = function () {
+          $modalInstance.close();
+        };
+      },
+      resolve: {
+        message: function () {
+          return error;
+        }
+      },
+      size : 'md'
+    });
+  });
+}]);
