@@ -15,3 +15,5 @@ target
 .idea
 bower_components
 bookland.iml
+node
+node_modules
