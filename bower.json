@@ -14,17 +14,25 @@
     "tests"
   ],
   "dependencies": {
+    "jquery": "~2.1.4",
     "angular": "1.4.3",
     "angular-mocks": "1.4.3",
     "angular-route": "1.4.3",
     "angular-resource": "1.4.3",
     "angular-animate": "1.4.3",
-    "jquery": "~2.1.1",
-    "bootstrap": "^3.3.0",
-    "angular-ui-bootstrap" : "^0.13.3",
-    "es6-shim" : "0.33.0"
+    "bootstrap": "3.3.4",
+    "angular-bootstrap": "~0.13.3",
+    "es6-shim" : "^0.33.0"
   },
-  "main": "src/main/webapp/index.html",
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/js/bootstrap.min.js",
+        "dist/css/bootstrap.min.css",
+        "less/bootstrap.less"
+      ]
+    }
+  },
   "keywords": [
     "java",
     "maven"
