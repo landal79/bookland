@@ -3,9 +3,11 @@ module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
 
     var srcFolder = 'src/main/javascript';
+    var webappFolder = 'src/main/webapp';
     var targetFolder = grunt.option('target');
-    var destSrcFolder = targetFolder + '/app/js';
-    var bowerLib = targetFolder + '/app/lib';
+    var appFolder = targetFolder + '/app';
+    var destSrcFolder = appFolder +'/js';
+    var bowerLib = appFolder +'/lib';
 
 
     grunt.initConfig({
@@ -33,6 +35,14 @@ module.exports = function(grunt) {
             all: ['Gruntfile.js', bowerLib+'/**/ *.js', srcFolder+'/**/*.js']
         },
 
+        copy: {
+            main: {
+                files: [
+                    {expand: true, src: [srcFolder+'/**/*.js'], dest: destSrcFolder, filter: 'isFile', flatten: true}
+                ]
+            }
+        },
+
         concat: {
             options: {
                 separator: ';',
@@ -53,7 +63,17 @@ module.exports = function(grunt) {
         uglify: {
             build: {
                 src: destSrcFolder+ '/<%= pkg.name %>.js',
-                dest: destSrcFolder+ '/<%= pkg.name %>.min.js'
+                dest: destSrcFolder+ '/<%= pkg.name %>.js'
+            }
+        },
+
+        includeSource: {
+            options: {
+                basePath: appFolder,
+                baseUrl: ''
+            },
+            myTarget: {
+                files: [{src : webappFolder + '/app/index.tpl.html', dest: appFolder + '/index.html'}]
             }
         },
 
@@ -69,14 +89,6 @@ module.exports = function(grunt) {
             }
         },
 
-        copy: {
-            main: {
-                files: [
-                    {expand: true, src: [srcFolder+'/**/*.js'], dest: destSrcFolder, filter: 'isFile', flatten: true}
-                ]
-            }
-        },
-
         watch: {
             files: [srcFolder+'/**/*.js'],
             tasks: ['concat']
@@ -84,7 +96,7 @@ module.exports = function(grunt) {
 
     });
 
-    grunt.registerTask('dev', ['bower-install-simple','concat','wiredep']);
-    grunt.registerTask('default', ['bower-install-simple','jshint','concat','uglify','wiredep']);
+    grunt.registerTask('dev', ['bower-install-simple:dev','copy','includeSource','wiredep']);
+    grunt.registerTask('default', ['bower-install-simple:prod',/*'jshint',*/'concat',/*'uglify',*/'includeSource','wiredep']);
 
 };

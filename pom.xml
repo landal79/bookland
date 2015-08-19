@@ -211,6 +211,9 @@
                 <version>2.6</version>
                 <extensions>false</extensions>
                 <configuration>
+                    <warSourceExcludes>
+                        **/*.tpl.html
+                    </warSourceExcludes>
                     <!--<webResources>-->
                         <!--<resource>-->
                             <!--<directory>src/main/webapp</directory>-->
