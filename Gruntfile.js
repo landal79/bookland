@@ -1,23 +1,35 @@
+'use strict';
+
 module.exports = function(grunt) {
 
+    require('time-grunt')(grunt);
     require('load-grunt-tasks')(grunt);
-
-    var srcFolder = 'src/main/javascript';
-    var webappFolder = 'src/main/webapp';
-    var targetFolder = grunt.option('target');
-    var appFolder = targetFolder + '/app';
-    var destSrcFolder = appFolder +'/js';
-    var bowerLib = appFolder +'/lib';
-
 
     grunt.initConfig({
 
         pkg: grunt.file.readJSON('package.json'),
 
+        mavenEffectivePom : {
+            main : {
+                options : {
+                    file : "target/effective-pom.xml",
+                    varName : 'pom'
+                }
+            }
+        },
+
+        config : {
+            srcFolder : 'src/main/javascript',
+            webappFolder : 'src/main/webapp',
+            appFolder : '<%= pom.project.build.directory %>/<%= pom.project.build.finalName %>/app',
+            destSrcFolder : '<%= config.appFolder %>/js',
+            bowlerLib : 'target/<%= pom.project.build.finalName %>/app/lib'
+        },
+
         "bower-install-simple": {
             options: {
                 color: true,
-                directory: bowerLib
+                directory: '<%= config.bowlerLib %>'
             },
             "prod": {
                 options: {
@@ -32,13 +44,13 @@ module.exports = function(grunt) {
         },
 
         jshint: {
-            all: ['Gruntfile.js', bowerLib+'/**/ *.js', srcFolder+'/**/*.js']
+            all: ['Gruntfile.js', '<%= config.bowlerLib %>/**/*.js', '<%= config.srcFolder %>/**/*.js']
         },
 
         copy: {
             main: {
                 files: [
-                    {expand: true, src: [srcFolder+'/**/*.js'], dest: destSrcFolder, filter: 'isFile', flatten: true}
+                    {expand: true, src: ['<%= config.srcFolder %>/**/*.js'], dest: '<%= config.destSrcFolder %>', filter: 'isFile', flatten: true}
                 ]
             }
         },
@@ -51,29 +63,29 @@ module.exports = function(grunt) {
                     var res = '// Source: ' + filepath + '\n' +
                         src.replace(/(^|\n)[ \t]*('use strict'|"use strict");?\s*/g, '$1');
 
-                    return res.replace(/\$\{baseurl\}/g, grunt.option('baseurl'));
+                    return res.replace(/\$\{baseurl\}/g, grunt.config('pom.properties.baseurl'));
                 }
             },
             dist: {
-                src: [srcFolder+'/**/*.js'],
-                dest: destSrcFolder+ '/<%= pkg.name %>.js'
+                src: ['<%= config.srcFolder %>/**/*.js'],
+                dest: '<%= config.destSrcFolder %>/<%= pkg.name %>.js'
             }
         },
 
         uglify: {
             build: {
-                src: destSrcFolder+ '/<%= pkg.name %>.js',
-                dest: destSrcFolder+ '/<%= pkg.name %>.js'
+                src: '<%= config.destSrcFolder %>/<%= pkg.name %>.js',
+                dest: '<%= config.destSrcFolder %>/<%= pkg.name %>.js'
             }
         },
 
         includeSource: {
             options: {
-                basePath: appFolder,
+                basePath: '<%= config.appFolder %>',
                 baseUrl: ''
             },
             myTarget: {
-                files: [{src : webappFolder + '/app/index.tpl.html', dest: appFolder + '/index.html'}]
+                files: [{src : '<%= config.webappFolder %>/app/index.tpl.html', dest: '<%= config.appFolder %>/index.html'}]
             }
         },
 
@@ -81,22 +93,22 @@ module.exports = function(grunt) {
 
             task: {
                 src: [
-                    targetFolder +'/app/index.html'
+                   '<%= config.appFolder %>/index.html'
                 ],
                 options: {
-                    directory : bowerLib
+                    directory : '<%= config.bowlerLib %>'
                 }
             }
         },
 
         watch: {
-            files: [srcFolder+'/**/*.js'],
+            files: ['<%= config.srcFolder %>/**/*.js'],
             tasks: ['concat']
         }
 
     });
 
-    grunt.registerTask('dev', ['bower-install-simple:dev','copy','includeSource','wiredep']);
-    grunt.registerTask('default', ['bower-install-simple:prod',/*'jshint',*/'concat',/*'uglify',*/'includeSource','wiredep']);
+    grunt.registerTask('dev', ['mavenEffectivePom','bower-install-simple:dev', 'copy','includeSource','wiredep']);
+    grunt.registerTask('default', ['mavenEffectivePom','bower-install-simple:prod',/*'jshint',*/'concat',/*'uglify',*/'includeSource','wiredep']);
 
 };
