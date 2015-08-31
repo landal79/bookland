@@ -20,6 +20,7 @@ module.exports = function(grunt) {
 
         config : {
             srcFolder : 'src/main/javascript',
+            testFolder : 'src/test/javascript',
             webappFolder : 'src/main/webapp',
             appFolder : '<%= pom.project.build.directory %>/<%= pom.project.build.finalName %>/app',
             destSrcFolder : '<%= config.appFolder %>/js',
@@ -98,6 +99,36 @@ module.exports = function(grunt) {
                 options: {
                     directory : '<%= config.bowlerLib %>'
                 }
+            }
+        },
+
+        karma: {
+            options: {
+                files:[
+                    '<%= config.bowlerLib %>/**/*.min.js',
+                    '<%= config.srcFolder %>/**/*.js'
+                ],
+                browsers: ['Chrome'],
+                port: 9876
+            },
+            unit: {
+                basePath: '',
+                files: [
+                    { src: ['<%= config.testFolder %>/**/*.js'] }
+                ],
+                frameworks: ['jasmine'],
+                exclude: [ ],
+                preprocessors: { },
+                reporters: ['progress'],
+                colors: true,
+                // level of logging
+                // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
+                logLevel: config.LOG_INFO,
+                // enable / disable watching file and executing tests whenever any file changes
+                autoWatch: true,
+                // Continuous Integration mode
+                // if true, Karma captures browsers, runs the tests and exits
+                singleRun: true
             }
         },
 
