@@ -104,31 +104,38 @@ module.exports = function(grunt) {
 
         karma: {
             options: {
-                files:[
-                    '<%= config.bowlerLib %>/**/*.min.js',
-                    '<%= config.srcFolder %>/**/*.js'
-                ],
-                browsers: ['Chrome'],
-                port: 9876
+                basePath: '',
+                files:['<%= config.bowlerLib %>/jquery/dist/jquery.js',
+                    '<%= config.bowlerLib %>/angular/angular.js',
+                    '<%= config.bowlerLib %>/angular-mocks/angular-mocks.js',
+                    '<%= config.bowlerLib %>/angular-route/angular-route.js',
+                    '<%= config.bowlerLib %>/angular-resource/angular-resource.js',
+                    '<%= config.bowlerLib %>/angular-animate/angular-animate.js',
+                    '<%= config.bowlerLib %>/bootstrap/dist/js/bootstrap.min.js',
+                    '<%= config.bowlerLib %>/angular-bootstrap/ui-bootstrap-tpls.js',
+                    '<%= config.bowlerLib %>/es6-shim/es6-shim.js',
+                    '<%= config.destSrcFolder %>/**/*.js'],
+                port: 9876,
+                logLevel: 'DEBUG',
+                colors: true
             },
             unit: {
-                basePath: '',
                 files: [
-                    { src: ['<%= config.testFolder %>/**/*.js'] }
+                    { src: ['<%= config.testFolder %>/**/*.js'] , served: true }
+                ],
+                frameworks: ['jasmine','es6-shim'],
+                browsers: ['PhantomJS'],
+                reporters: ['progress'],
+                autoWatch: false,
+                singleRun: true
+            },
+            autoUnit: {
+                files: [
+                    { src: ['<%= config.testFolder %>/**/*.js'] , served: true }
                 ],
                 frameworks: ['jasmine'],
-                exclude: [ ],
-                preprocessors: { },
-                reporters: ['progress'],
-                colors: true,
-                // level of logging
-                // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
-                logLevel: config.LOG_INFO,
-                // enable / disable watching file and executing tests whenever any file changes
-                autoWatch: true,
-                // Continuous Integration mode
-                // if true, Karma captures browsers, runs the tests and exits
-                singleRun: true
+                browsers: ['Chrome'],
+                autoWatch: true
             }
         },
 
@@ -139,7 +146,8 @@ module.exports = function(grunt) {
 
     });
 
-    grunt.registerTask('dev', ['mavenEffectivePom','bower-install-simple:dev', 'copy','includeSource','wiredep']);
+    grunt.registerTask('karmaAuto', ['mavenEffectivePom','karma:autoUnit']);
+    grunt.registerTask('dev', ['mavenEffectivePom','bower-install-simple:dev', 'copy','includeSource','wiredep','karma:unit']);
     grunt.registerTask('default', ['mavenEffectivePom','bower-install-simple:prod',/*'jshint',*/'concat',/*'uglify',*/'includeSource','wiredep']);
 
 };
