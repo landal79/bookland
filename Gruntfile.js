@@ -116,7 +116,7 @@ module.exports = function(grunt) {
                     '<%= config.bowlerLib %>/es6-shim/es6-shim.js',
                     '<%= config.destSrcFolder %>/**/*.js'],
                 port: 9876,
-                logLevel: 'DEBUG',
+                logLevel: 'INFO',
                 colors: true
             },
             unit: {
@@ -148,6 +148,6 @@ module.exports = function(grunt) {
 
     grunt.registerTask('karmaAuto', ['mavenEffectivePom','karma:autoUnit']);
     grunt.registerTask('dev', ['mavenEffectivePom','bower-install-simple:dev', 'copy','includeSource','wiredep','karma:unit']);
-    grunt.registerTask('default', ['mavenEffectivePom','bower-install-simple:prod',/*'jshint',*/'concat',/*'uglify',*/'includeSource','wiredep']);
+    grunt.registerTask('default', ['mavenEffectivePom','bower-install-simple:prod',/*'jshint',*/'concat',/*'uglify',*/'includeSource','wiredep','karma:unit']);
 
 };
