@@ -3,10 +3,10 @@
 //bookland main file
 
 var bookland = angular.module('bookland', [ 'bookland.services',
-    'bookland.directives', 'bookland.controllers', 'bookland.animations', 'ngRoute', 'ngResource',
+    'bookland.directives', 'bookland.controllers', 'bookland.animations','bookland.growls', 'ngRoute', 'ngResource',
     'ui.bootstrap' ]);
 
-bookland.config(function($routeProvider,$httpProvider) {
+bookland.config(['$routeProvider','$httpProvider','growlProvider' ,function($routeProvider,$httpProvider,growlProvider) {
 
   $routeProvider.when('/', {
     templateUrl : 'views/default.html'
@@ -49,8 +49,12 @@ bookland.config(function($routeProvider,$httpProvider) {
         return $q.reject(rejection);
       }
     };
+
+    growlProvider.globalTimeToLive(-1);
+    growlProvider.onlyUniqueMessages(true);
+
   }]);
-});
+}]);
 
 bookland.run(['$modal','$rootScope', function($modal, scope){
   scope.$on('event:httpError', function(event,error) {

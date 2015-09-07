@@ -17,7 +17,7 @@ controllers.controller('ListController', [ '$scope', 'bookService', 'baseUrl', f
   $scope.orderProp = 'title';
 } ]);
 
-controllers.controller('BookController', [ '$scope', 'bookService', '$location', '$routeParams', 'bookImageService',
+controllers.controller('BookController', [ '$scope', '$rootScope', 'bookService', '$location', '$routeParams', 'bookImageService',
     'baseUrl', 'fileReader', BookCtrl ]);
 
 controllers.controller('DetailController', [ '$scope', '$routeParams', 'bookService', '$location',
@@ -99,7 +99,7 @@ controllers.controller('AboutController', function() {
 /**
  * Book controller function.
  */
-function BookCtrl($scope, bookService, $location, $routeParams, bookImageService, baseUrl, fileReader) {
+function BookCtrl($scope, $rootScope, bookService, $location, $routeParams, bookImageService, baseUrl, fileReader) {
 
   $scope.coverImage = null;
 
@@ -136,6 +136,7 @@ function BookCtrl($scope, bookService, $location, $routeParams, bookImageService
           }, $scope.coverImage);
         }
         $location.path("/list");
+        $rootScope.$broadcast("book:saved", book);
       });
     } else {
       bookService.save($scope.book, function(book) {
@@ -145,6 +146,7 @@ function BookCtrl($scope, bookService, $location, $routeParams, bookImageService
           }, $scope.coverImage);
         }
         $location.path("/list");
+        $rootScope.$broadcast("book:saved", book);
       });
     }
 
