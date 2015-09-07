@@ -49,10 +49,22 @@ module.exports = function(grunt) {
         },
 
         copy: {
+
             main: {
                 files: [
-                    {expand: true, src: ['<%= config.srcFolder %>/**/*.js'], dest: '<%= config.destSrcFolder %>', filter: 'isFile', flatten: true}
-                ]
+                    {
+                        expand: true,
+                        src: ['<%= config.srcFolder %>/**/*.js'],
+                        dest: '<%= config.destSrcFolder %>',
+                        filter: 'isFile',
+                        flatten: true
+                    }
+                ],
+                options: {
+                    process: function (content, srcpath) {
+                        return content.replace(/\$\{baseurl\}/g, grunt.config('pom.properties.baseurl'));
+                    }
+                }
             }
         },
 
