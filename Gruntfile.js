@@ -62,7 +62,7 @@ module.exports = function(grunt) {
                 ],
                 options: {
                     process: function (content, srcpath) {
-                        return content.replace(/\$\{baseurl\}/g, grunt.config('pom.properties.baseurl'));
+                        return content.replace(/\$\{baseurl\}/g, grunt.config('pom.project.properties.baseurl'));
                     }
                 }
             }
@@ -76,7 +76,7 @@ module.exports = function(grunt) {
                     var res = '// Source: ' + filepath + '\n' +
                         src.replace(/(^|\n)[ \t]*('use strict'|"use strict");?\s*/g, '$1');
 
-                    return res.replace(/\$\{baseurl\}/g, grunt.config('pom.properties.baseurl'));
+                    return res.replace(/\$\{baseurl\}/g, grunt.config('pom.project.properties.baseurl'));
                 }
             },
             dist: {
