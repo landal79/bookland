@@ -85,6 +85,20 @@ module.exports = function(grunt) {
             }
         },
 
+        ngAnnotate: {
+            options: {
+                singleQuotes: true,
+            },
+            app1: {
+                files: [
+                    {
+                        expand: true,
+                        src: ['<%= config.destSrcFolder %>/**/*.js']
+                    }
+                ],
+            }
+        },
+
         uglify: {
             build: {
                 src: '<%= config.destSrcFolder %>/<%= pkg.name %>.js',
@@ -159,7 +173,7 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('karmaAuto', ['mavenEffectivePom','karma:autoUnit']);
-    grunt.registerTask('dev', ['mavenEffectivePom','bower-install-simple:dev', 'copy','includeSource','wiredep','karma:unit']);
-    grunt.registerTask('default', ['mavenEffectivePom','bower-install-simple:prod',/*'jshint',*/'concat',/*'uglify',*/'includeSource','wiredep','karma:unit']);
+    grunt.registerTask('dev', ['mavenEffectivePom','bower-install-simple:dev', 'copy','ngAnnotate','includeSource','wiredep','karma:unit']);
+    grunt.registerTask('default', ['mavenEffectivePom','bower-install-simple:prod',/*'jshint',*/'concat','ngAnnotate','uglify','includeSource','wiredep','karma:unit']);
 
 };

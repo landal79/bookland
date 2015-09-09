@@ -191,6 +191,19 @@
 
     <build>
         <finalName>bookland</finalName>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>2.6</version>
+                </plugin>
+                <plugin>
+                    <groupId>com.github.eirslett</groupId>
+                    <artifactId>frontend-maven-plugin</artifactId>
+                    <version>0.0.24</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -203,22 +216,11 @@
             </plugin>
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
-                <version>2.6</version>
                 <extensions>false</extensions>
                 <configuration>
                     <warSourceExcludes>
                         **/*.tpl.html
                     </warSourceExcludes>
-                    <!--<webResources>-->
-                        <!--<resource>-->
-                            <!--<directory>src/main/webapp</directory>-->
-                            <!--<filtering>true</filtering>-->
-                            <!--<includes>-->
-                                <!--<include>app/**/*.js</include>-->
-                                <!--<include>app/index.html</include>-->
-                            <!--</includes>-->
-                        <!--</resource>-->
-                    <!--</webResources>-->
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
                 <executions>
@@ -306,7 +308,7 @@
                         </goals>
                         <phase>prepare-package</phase>
                         <configuration>
-                            <arguments>dev --target=target/${project.build.finalName} --baseurl=${baseurl}</arguments>
+                            <arguments>dev</arguments>
                         </configuration>
                     </execution>
                 </executions>
@@ -345,11 +347,28 @@
                 <plugins>
                     <plugin>
                         <artifactId>maven-war-plugin</artifactId>
-                        <version>2.2</version>
                         <configuration>
                             <outputDirectory>deployments</outputDirectory>
                             <warName>ROOT</warName>
                         </configuration>
+                    </plugin>
+                    <plugin>
+                        <groupId>com.github.eirslett</groupId>
+                        <artifactId>frontend-maven-plugin</artifactId>
+                        <configuration>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>grunt build</id>
+                                <goals>
+                                    <goal>grunt</goal>
+                                </goals>
+                                <phase>prepare-package</phase>
+                                <configuration>
+                                    <arguments></arguments>
+                                </configuration>
+                            </execution>
+                        </executions>
                     </plugin>
                 </plugins>
             </build>

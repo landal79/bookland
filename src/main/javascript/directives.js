@@ -2,7 +2,7 @@
 
 var directives = angular.module('bookland.directives', [ 'ngResource', 'bookland.services', 'ui.bootstrap' ]);
 
-directives.directive('blFileUpload', [ '$parse', function($parse) {
+function blFileUpload($parse) {
   return {
     restrict : 'E',
     templateUrl : 'templates/fileUpload.html',
@@ -29,10 +29,11 @@ directives.directive('blFileUpload', [ '$parse', function($parse) {
 
     }
   };
+}
 
-} ]);
+directives.directive('blFileUpload', blFileUpload);
 
-directives.directive('blTagSelection', [ 'tagService', function(tagService) {
+function blTagSelection(tagService) {
   return {
     restrict : 'E',
     templateUrl : 'templates/tags/tagSelection.html',
@@ -55,8 +56,8 @@ directives.directive('blTagSelection', [ 'tagService', function(tagService) {
         if (typeof book.tags == 'undefined') {
           book.tags = [];
         } else if (typeof book.tags.find(function(elem) {
-          return elem.id == tag.id;
-        }) != 'undefined') {
+              return elem.id == tag.id;
+            }) != 'undefined') {
           alert("tag already added!");
           return;
         }
@@ -92,9 +93,11 @@ directives.directive('blTagSelection', [ 'tagService', function(tagService) {
     },
     controllerAs : 'tagCtrl'
   };
-} ]);
+}
 
-directives.directive("blDatepicker", [ function() {
+directives.directive('blTagSelection', blTagSelection);
+
+function blDatepicker() {
   return {
     restrict : "E",
     scope : {
@@ -123,4 +126,6 @@ directives.directive("blDatepicker", [ function() {
     },
     templateUrl : 'templates/datepicker.html'
   };
-} ]);
+}
+
+directives.directive("blDatepicker", blDatepicker);

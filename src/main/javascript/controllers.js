@@ -2,104 +2,98 @@
 
 var controllers = angular.module('bookland.controllers', [ 'bookland.services', 'bookland.filters', 'ngResource' ]);
 
-controllers.controller('NavController', [ '$route', function($route) {
-  this.is = function(title) {
-    if (!$route.current) {
-      return false;
-    }
-    return $route.current.name == title;
-  };
-} ]);
+function NavController($route) {
+    this.is = function(title) {
+        if (!$route.current) {
+            return false;
+        }
+        return $route.current.name == title;
+    };
+}
 
-controllers.controller('ListController', [ '$scope', 'bookService', 'baseUrl', function($scope, bookService, baseUrl) {
+controllers.controller('NavController', NavController);
+
+function ListController($scope, bookService, baseUrl) {
   $scope.items = bookService.query();
   $scope.baseUrl = baseUrl;
   $scope.orderProp = 'title';
-} ]);
+}
 
-controllers.controller('BookController', [ '$scope', '$rootScope', 'bookService', '$location', '$routeParams', 'bookImageService',
-    'baseUrl', 'fileReader', BookCtrl ]);
+controllers.controller('ListController', ListController);
 
-controllers.controller('DetailController', [ '$scope', '$routeParams', 'bookService', '$location',
-    function($scope, $routeParams, bookService, $location) {
-      $scope.detail = bookService.get({}, {
+function DetailController($scope, $routeParams, bookService, $location) {
+    $scope.detail = bookService.get({}, {
         'id' : $routeParams.id
-      });
-      var id = $routeParams.id;
-      $scope.edit = function() {
+    });
+    var id = $routeParams.id;
+    $scope.edit = function() {
         $location.path("/edit/" + id);
-      };
-    } ]);
+    };
+}
 
-controllers.controller('NewAuthorController', [ '$scope', '$location', 'authorService',
-    function($scope, $location, authorService) {
-      $scope.author = {};
-      $scope.save = function() {
+controllers.controller('DetailController', DetailController);
+
+function NewAuthorController($scope, $location, authorService) {
+    $scope.author = {};
+    $scope.save = function() {
         authorService.save($scope.author);
         $location.path("/");
-      };
-    } ]);
+    };
+}
 
-controllers.controller('AuthorBookDetailCtrl', [ '$scope', 'authorService', '$modal',
-    function($scope, authorService, $modal) {
+controllers.controller('NewAuthorController', NewAuthorController);
 
-      $scope.authors = authorService.query();
+function AuthorBookDetailCtrl ($scope, authorService, $modal) {
 
-      $scope.addAuthor = function(author) {
+    $scope.authors = authorService.query();
+
+    $scope.addAuthor = function(author) {
 
         if (author == undefined) {
-          alert('Choose an author!');
-          return;
+            alert('Choose an author!');
+            return;
         }
 
         if (typeof $scope.book.authors == 'undefined') {
-          $scope.book.authors = [];
+            $scope.book.authors = [];
         } else if (typeof $scope.book.authors.find(function(elem) {
-          return elem.id == author.id;
-        }) != 'undefined') {
-          alert("author already added!");
-          return;
+                return elem.id == author.id;
+            }) != 'undefined') {
+            alert("author already added!");
+            return;
         }
 
         $scope.book.authors.push(author);
 
         $scope.author = '';
-      };
+    };
 
-      $scope.removeAuthor = function(index) {
+    $scope.removeAuthor = function(index) {
         $scope.book.authors.splice(index, 1);
-      };
+    };
 
-      $scope.open = function() {
+    $scope.open = function() {
         var modalInstance = $modal.open({
-          templateUrl : 'views/authors/authorDialog.html',
-          controller : 'AuthorModalCtrl',
-          size : 'md'
+            templateUrl : 'views/authors/authorDialog.html',
+            controller : 'AuthorModalCtrl',
+            size : 'md'
         });
         modalInstance.result.then(function(author) {
-          $scope.addAuthor(author);
-          $scope.authors = authorService.query();
+            $scope.addAuthor(author);
+            $scope.authors = authorService.query();
         }, function() {
 
         });
-      };
+    };
 
-    } ]);
+}
 
-controllers.controller('AuthorModalCtrl', [ '$scope', 'authorService', '$modalInstance', AuthorModalCtrl ]);
-
-controllers.controller('SettingsController', function() {
-  // TODO
-});
-
-controllers.controller('AboutController', function() {
-  // TODO
-});
+controllers.controller('AuthorBookDetailCtrl', AuthorBookDetailCtrl);
 
 /**
  * Book controller function.
  */
-function BookCtrl($scope, $rootScope, bookService, $location, $routeParams, bookImageService, baseUrl, fileReader) {
+function BookController($scope, $rootScope, bookService, $location, $routeParams, bookImageService, baseUrl, fileReader) {
 
   $scope.coverImage = null;
 
@@ -164,6 +158,8 @@ function BookCtrl($scope, $rootScope, bookService, $location, $routeParams, book
 
 };
 
+controllers.controller('BookController', BookController);
+
 function AuthorModalCtrl($scope, authorService, $modalInstance) {
   $scope.author = {};
   $scope.save = function(author_form) {
@@ -180,3 +176,13 @@ function AuthorModalCtrl($scope, authorService, $modalInstance) {
   };
 
 };
+
+controllers.controller('AuthorModalCtrl', AuthorModalCtrl);
+
+controllers.controller('SettingsController', function() {
+    // TODO
+});
+
+controllers.controller('AboutController', function() {
+    // TODO
+});

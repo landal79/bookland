@@ -22,6 +22,7 @@
     "grunt-include-source": "^0.6.1",
     "grunt-karma": "^0.12.0",
     "grunt-maven-effective-pom": "~0.0.1",
+    "grunt-ng-annotate": "^1.0.1",
     "grunt-wiredep": "~2.0.0",
     "jasmine-core": "^2.3.4",
     "karma": "^0.13.9",
