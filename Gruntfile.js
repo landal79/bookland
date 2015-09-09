@@ -105,7 +105,7 @@ module.exports = function(grunt) {
                 dest: '<%= config.destSrcFolder %>/<%= pkg.name %>.js'
             }
         },
-
+        
         includeSource: {
             options: {
                 basePath: '<%= config.appFolder %>',
