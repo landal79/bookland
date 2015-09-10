@@ -1,2 +1,4 @@
 sudo: false
 language: java
+node_js:
+  - "0.12"

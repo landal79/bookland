@@ -279,17 +279,7 @@
                 <artifactId>frontend-maven-plugin</artifactId>
                 <configuration>
                 </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>install-node-and-npm</goal>
-                        </goals>
-                        <phase>generate-resources</phase>
-                        <configuration>
-                            <nodeVersion>v0.12.7</nodeVersion>
-                            <npmVersion>2.13.4</npmVersion>
-                        </configuration>
-                    </execution>
+                <executions>                    
                     <execution>
                         <id>npm install</id>
                         <goals>
@@ -331,7 +321,31 @@
                 </dependency>
             </dependencies>
         </profile>
-
+		<profile>
+			<id>local</id>
+			<build>
+			<plugins>
+				 <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <configuration>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>install-node-and-npm</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                        <configuration>
+                            <nodeVersion>v0.12.7</nodeVersion>
+                            <npmVersion>2.13.4</npmVersion>
+                        </configuration>
+                    </execution>                   
+                </executions>
+            </plugin>
+			</plugins>
+			</build>
+		</profile>
         <profile>
             <!-- When built in OpenShift the openshift profile will be used when invoking mvn. -->
             <!-- Use this profile for any OpenShift specific customization your app will need. -->
