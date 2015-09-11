@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/landal79/bookland.png)](https://travis-ci.org/landal79/bookland)
+
 Bookland
 ================
 
