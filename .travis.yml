@@ -1,2 +1,16 @@
 sudo: false
 language: java
+script: mvn package -Popenshift
+jdk:
+- oraclejdk7
+- openjdk7
+- openjdk6
+deploy:
+  provider: openshift
+  user: alex.landini
+  password:
+    secure: OkI3XrEBt+ifV6+jAZ+SKKCsk8wfs3ZMaMHwHF/hIBf4l9SyDSdj9yTl4Q83xhvupDgJkYJqU5IhkfX0HNb/N0kLiUelHJ+qdijlx2hqrRv9tXBqxbbGBg42Mi+iZUGBMkxIkuArN4DqetkERGM34d5vQzg6pONU74J/th1+pHc=
+  app: bookland
+  domain: landal
+  on:
+    repo: landal79/bookland
