@@ -352,24 +352,6 @@
                             <warName>ROOT</warName>
                         </configuration>
                     </plugin>
-                    <plugin>
-                        <groupId>com.github.eirslett</groupId>
-                        <artifactId>frontend-maven-plugin</artifactId>
-                        <configuration>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>grunt build</id>
-                                <goals>
-                                    <goal>grunt</goal>
-                                </goals>
-                                <phase>prepare-package</phase>
-                                <configuration>
-                                    <arguments></arguments>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
                 </plugins>
             </build>
         </profile>
@@ -380,6 +362,28 @@
             <id>JBOSS_NEXUS</id>
             <url>http://repository.jboss.org/nexus/content/groups/public</url>
         </repository>
+        <repository>
+            <id>eap</id>
+            <url>http://maven.repository.redhat.com/techpreview/all</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
     </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>eap</id>
+            <url>http://maven.repository.redhat.com/techpreview/all</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 
 </project>
