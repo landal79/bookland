@@ -6,7 +6,7 @@ var services = angular.module('bookland.services', [ 'ngResource' ]);
  * Application base url, is parametrized to make it work both on localhost and
  * openshift.
  */
-services.value('baseUrl', '/bookland/rest');
+services.value('baseUrl', '${baseurl}/rest');
 
 function bookService(baseUrl, $resource) {
   return $resource(baseUrl + '/books/:id', {

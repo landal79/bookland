@@ -62,7 +62,8 @@ module.exports = function(grunt) {
                 ],
                 options: {
                     process: function (content, srcpath) {
-                        return content.replace(/\$\{baseurl\}/g, grunt.config('pom.project.properties.baseurl'));
+                        var baseUrl = grunt.option('baseurl') != 0 ? grunt.option('baseurl') : '';
+                        return content.replace(/\$\{baseurl\}/g, baseUrl);
                     }
                 }
             }
@@ -76,7 +77,9 @@ module.exports = function(grunt) {
                     var res = '// Source: ' + filepath + '\n' +
                         src.replace(/(^|\n)[ \t]*('use strict'|"use strict");?\s*/g, '$1');
 
-                    return res.replace(/\$\{baseurl\}/g, grunt.config('pom.project.properties.baseurl'));
+                    var baseUrl = grunt.option('baseurl') != 0 ? grunt.option('baseurl') : '';
+
+                    return res.replace(/\$\{baseurl\}/g, baseUrl);
                 }
             },
             dist: {
@@ -174,6 +177,6 @@ module.exports = function(grunt) {
 
     grunt.registerTask('karmaAuto', ['mavenEffectivePom','karma:autoUnit']);
     grunt.registerTask('dev', ['mavenEffectivePom','bower-install-simple:dev', 'copy','ngAnnotate','includeSource','wiredep','karma:unit']);
-    grunt.registerTask('default', ['mavenEffectivePom','bower-install-simple:prod',/*'jshint',*/'concat','ngAnnotate','uglify','includeSource','wiredep','karma:unit']);
+    grunt.registerTask('default', ['mavenEffectivePom','bower-install-simple:prod',/*'jshint',*/'concat','ngAnnotate',/*'uglify',*/'includeSource','wiredep','karma:unit']);
 
 };

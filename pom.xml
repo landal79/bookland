@@ -309,7 +309,7 @@
                         </goals>
                         <phase>prepare-package</phase>
                         <configuration>
-                            <arguments>dev</arguments>
+                            <arguments>dev --baseurl=${baseurl}</arguments>
                         </configuration>
                     </execution>
                 </executions>
@@ -340,7 +340,7 @@
             <!-- http://maven.apache.org/guides/mini/guide-building-for-different-environments.html -->
             <id>openshift</id>
             <properties>
-                <baseurl></baseurl>
+                <baseurl />
             </properties>
             <build>
                 <finalName>bookland</finalName>
@@ -365,7 +365,7 @@
                                 </goals>
                                 <phase>prepare-package</phase>
                                 <configuration>
-                                    <arguments>default</arguments>
+                                    <arguments>--baseurl=${baseurl}</arguments>
                                 </configuration>
                             </execution>
                         </executions>
