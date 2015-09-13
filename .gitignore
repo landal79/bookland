@@ -9,7 +9,6 @@ target
 !.settings/.jsdtscope
 .project
 .classpath
-/.openshift
 /.tern-project
 /bin
 
