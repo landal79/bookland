@@ -3,7 +3,7 @@
 //bookland main file
 
 var bookland = angular.module('bookland', [ 'bookland.services',
-    'bookland.directives', 'bookland.controllers', 'bookland.animations','bookland.growls', 'ngRoute', 'ngResource',
+    'bookland.directives', 'bookland.controllers', 'bookland.animations','bookland.alerts', 'ngRoute', 'ngResource',
     'ui.bootstrap' ]);
 
 function HttpErrorInterceptor($q, $rootScope) {
@@ -15,7 +15,7 @@ function HttpErrorInterceptor($q, $rootScope) {
     };
 }
 
-function blConfig($routeProvider,$httpProvider,growlProvider) {
+function blConfig($routeProvider,$httpProvider) {
     $routeProvider.when('/', {
         templateUrl : 'views/default.html'
     }).when('/list', {
@@ -51,9 +51,6 @@ function blConfig($routeProvider,$httpProvider,growlProvider) {
     });
 
     $httpProvider.interceptors.push(HttpErrorInterceptor);
-
-    growlProvider.globalTimeToLive(-1);
-    growlProvider.onlyUniqueMessages(true);
 
 }
 

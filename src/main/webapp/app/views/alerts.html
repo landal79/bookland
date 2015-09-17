@@ -1,0 +1,3 @@
+<div ng-controller="AlertsController">
+    <alert ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)" dismiss-on-timeout="15">{{alert.msg}}</alert>
+</div>
