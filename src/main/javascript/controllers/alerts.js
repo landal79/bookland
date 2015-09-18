@@ -25,9 +25,13 @@ function AlertsController($scope, $rootScope) {
         $scope.alerts.splice(index, 1);
     };
 
+    var currentScope = $scope;
+
     var bookSaveListener =  $rootScope.$on('book:saved',function(event,error){
-        addSuccess('Book successfully saved!');
+        currentScope.addSuccess('Book successfully saved!');
     });
+
+    $scope.$on('$destroy', bookSaveListener);
 }
 
 blAlters.controller('AlertsController',AlertsController);

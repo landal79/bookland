@@ -3,8 +3,8 @@
 //bookland main file
 
 var bookland = angular.module('bookland', [ 'bookland.services',
-    'bookland.directives', 'bookland.controllers', 'bookland.animations','bookland.alerts', 'ngRoute', 'ngResource',
-    'ui.bootstrap' ]);
+    'bookland.directives', 'bookland.controllers', 'bookland.animations','bookland.alerts','bookland.book.directives',
+    'ngRoute', 'ngResource', 'ui.bootstrap' ]);
 
 function HttpErrorInterceptor($q, $rootScope) {
     return {
