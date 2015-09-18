@@ -21,9 +21,8 @@
     "angular-resource": "1.4.3",
     "angular-animate": "1.4.3",
     "bootstrap": "3.3.4",
-    "angular-bootstrap": "~0.13.3",
-    "es6-shim": "^0.33.0",
-    "angular-growl-v2": "~0.7.5"
+    "angular-bootstrap": "~0.13.4",
+    "es6-shim": "^0.33.0"
   },
   "overrides": {
     "bootstrap": {
