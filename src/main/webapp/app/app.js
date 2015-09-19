@@ -3,8 +3,15 @@
 //bookland main file
 
 var bookland = angular.module('bookland', [ 'bookland.services',
-    'bookland.directives', 'bookland.controllers', 'bookland.animations','bookland.alerts','bookland.book.directives',
+    'bookland.directives', 'bookland.controllers', 'bookland.animations',
+    'bookland.alerts','bookland.book.directives',
     'ngRoute', 'ngResource', 'ui.bootstrap' ]);
+
+/**
+ * Application base url, is parametrized to make it work both on localhost and
+ * openshift.
+ */
+bookland.value('baseUrl', '${baseurl}/rest');
 
 function HttpErrorInterceptor($q, $rootScope) {
     return {

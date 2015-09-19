@@ -1,11 +1,9 @@
 'use strict';
 
-var bookDirectives = angular.module('bookland.book.directives', [ ]);
-
 function blListItem($scope) {
     return {
         restrict: 'E',
-        templateUrl: 'views/books/list-item.html',
+        templateUrl: 'app/books/list-item.html',
         scope: {
             item: '='
         },
@@ -15,4 +13,4 @@ function blListItem($scope) {
     };
 }
 
-bookDirectives.directive('blListItem',blListItem);
+angular.module('bookland').directive('blListItem',blListItem);

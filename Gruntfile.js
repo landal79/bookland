@@ -22,9 +22,9 @@ module.exports = function(grunt) {
             srcFolder : 'src/main/javascript',
             testFolder : 'src/test/javascript',
             webappFolder : 'src/main/webapp',
-            appFolder : '<%= pom.project.build.directory %>/<%= pom.project.build.finalName %>/app',
-            destSrcFolder : '<%= config.appFolder %>/js',
-            bowlerLib : 'target/<%= pom.project.build.finalName %>/app/lib'
+            appFolder : '<%= pom.project.build.directory %>/<%= pom.project.build.finalName %>',
+            destSrcFolder : '<%= config.appFolder %>',
+            bowlerLib : 'target/<%= pom.project.build.finalName %>/lib'
         },
 
         "bower-install-simple": {
@@ -115,7 +115,7 @@ module.exports = function(grunt) {
                 baseUrl: ''
             },
             myTarget: {
-                files: [{src : '<%= config.webappFolder %>/app/index.tpl.html', dest: '<%= config.appFolder %>/index.html'}]
+                files: [{src : '<%= config.webappFolder %>/index.tpl.html', dest: '<%= config.appFolder %>/index.html'}]
             }
         },
 

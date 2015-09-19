@@ -40,7 +40,9 @@
 	</div>
 	<div class="row book-list">
 		<div class="well book-listing" ng-repeat="item in items | filter:search | orderBy:orderProp">
-			<bl-list-item item="item" />
+			<div class="row">
+				<bl-list-item item="item" />
+			</div>
 		</div>
 	</div>
 </div>
