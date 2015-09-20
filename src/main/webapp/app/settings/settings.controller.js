@@ -1,7 +1,10 @@
-'use strict';
+(function () {
+    'use strict';
 
-var controllers = angular.module('bookland.controllers', [ 'bookland.services', 'bookland.filters', 'ngResource' ]);
+    var controllers = angular.module('bookland.settings');
 
-controllers.controller('SettingsController', function() {
-    // TODO
-});
+    controllers.controller('SettingsController', function () {
+        // TODO
+    });
+
+})();

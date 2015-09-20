@@ -1,6 +1,7 @@
-'use strict';
+(function () {
+    'use strict';
 
-var bookland = angular.module('bookland');
+    var blComponents = angular.module('bookland.components');
 
 function blFileUpload() {
     return {
@@ -31,4 +32,6 @@ function blFileUpload() {
     };
 }
 
-bookland.directive('blFileUpload', blFileUpload);
+    blComponents.directive('blFileUpload', blFileUpload);
+
+})();

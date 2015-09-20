@@ -1,4 +1,5 @@
-'use strict';
+(function () {
+  'use strict';
 
 var blAnimations = angular.module('bookland.animations', ['ngAnimate']);
 
@@ -52,3 +53,5 @@ blAnimations.animation('.book-list', function() {
     removeClass: animateDown
   };
 });
+
+})();

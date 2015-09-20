@@ -1,89 +1,58 @@
-'use strict';
+(function () {
+    'use strict';
 
-//bookland main file
+    var bookland = angular.module('bookland', ['bookland.about', 'bookland.author', 'bookland.book', 'bookland.tags',
+        'bookland.settings', 'bookland.filters', 'bookland.animations','bookland.components',
+        'ngResource', 'ui.router', 'ui.bootstrap']);
 
-var bookland = angular.module('bookland', [ 'bookland.services',
-    'bookland.directives', 'bookland.controllers', 'bookland.animations',
-    'bookland.alerts','bookland.book.directives',
-    'ngRoute', 'ngResource', 'ui.bootstrap' ]);
+    /**
+     * Application base url, is parametrized to make it work both on localhost and
+     * openshift.
+     */
+    bookland.value('baseUrl', '${baseurl}/rest');
 
-/**
- * Application base url, is parametrized to make it work both on localhost and
- * openshift.
- */
-bookland.value('baseUrl', '${baseurl}/rest');
+    function HttpErrorInterceptor($q, $rootScope) {
+        return {
+            'responseError': function (rejection) {
+                $rootScope.$broadcast("event:httpError", rejection.data.error);
+                return $q.reject(rejection);
+            }
+        };
+    }
 
-function HttpErrorInterceptor($q, $rootScope) {
-    return {
-        'responseError': function (rejection) {
-            $rootScope.$broadcast("event:httpError", rejection.data.error);
-            return $q.reject(rejection);
-        }
-    };
-}
+    function blConfig($urlRouterProvider, $httpProvider) {
 
-function blConfig($routeProvider,$httpProvider) {
-    $routeProvider.when('/', {
-        templateUrl : 'views/default.html'
-    }).when('/list', {
-        templateUrl : 'views/books/list.html',
-        controller : 'ListController',
-        controllerAs : 'listCtrl'
-    }).when('/edit/:id', {
-        templateUrl : 'views/books/edit.html',
-        controller : 'BookController',
-        controllerAs : 'bookCtrl'
-    }).when('/new', {
-        templateUrl : 'views/books/edit.html',
-        controller : 'BookController',
-        controllerAs : 'bookCtrl'
-    }).when('/book/:id', {
-        templateUrl : 'views/books/detail.html',
-        controller : 'DetailController',
-        controllerAs : 'detailCtrl'
-    }).when('/newAuthor', {
-        templateUrl : 'views/authors/edit.html',
-        controller : 'NewAuthorController',
-        controllerAs : 'newAuthorCtrl'
-    }).when('/settings', {
-        templateUrl : 'views/settings.html',
-        controller : 'SettingsController',
-        controllerAs : 'settings'
-    }).when('/about', {
-        templateUrl : 'views/about.html',
-        controller : 'AboutController',
-        controllerAs : 'about'
-    }).otherwise({
-        redirectTo : '/'
-    });
+        $urlRouterProvider.otherwise('/');
 
-    $httpProvider.interceptors.push(HttpErrorInterceptor);
+        $httpProvider.interceptors.push(HttpErrorInterceptor);
 
-}
+    }
 
-bookland.config(blConfig);
+    bookland.config(blConfig);
 
-function ErrorModal($scope, $modalInstance, message){
-    $scope.message = message;
+    function ErrorModal($scope, $modalInstance, message) {
+        $scope.message = message;
 
-    $scope.close = function () {
-        $modalInstance.close();
-    };
-}
+        $scope.close = function () {
+            $modalInstance.close();
+        };
+    }
 
-function blRun($modal, $rootScope){
-    $rootScope.$on('event:httpError', function(event,error) {
-        $modal.open({
-            templateUrl : 'views/errors/errorModal.html',
-            controller: ErrorModal,
-            resolve: {
-                message: function () {
-                    return error;
-                }
-            },
-            size : 'md'
+    function blRun($modal, $rootScope) {
+        $rootScope.$on('event:httpError', function (event, error) {
+            $modal.open({
+                templateUrl: 'views/errors/errorModal.html',
+                controller: ErrorModal,
+                resolve: {
+                    message: function () {
+                        return error;
+                    }
+                },
+                size: 'md'
+            });
         });
-    });
-};
+    };
 
-bookland.run(blRun);
+    bookland.run(blRun);
+
+})();

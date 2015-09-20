@@ -23,7 +23,7 @@ module.exports = function(grunt) {
             testFolder : 'src/test/javascript',
             webappFolder : 'src/main/webapp',
             appFolder : '<%= pom.project.build.directory %>/<%= pom.project.build.finalName %>',
-            destSrcFolder : '<%= config.appFolder %>',
+            destSrcFolder : '<%= config.appFolder %>/app',
             bowlerLib : 'target/<%= pom.project.build.finalName %>/lib'
         },
 
@@ -176,7 +176,7 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('karmaAuto', ['mavenEffectivePom','karma:autoUnit']);
-    grunt.registerTask('dev', ['mavenEffectivePom','bower-install-simple:dev', 'copy','ngAnnotate','includeSource','wiredep','karma:unit']);
+    grunt.registerTask('dev', ['mavenEffectivePom','bower-install-simple:dev', 'copy','ngAnnotate','includeSource','wiredep',/*'karma:unit'*/]);
     grunt.registerTask('default', ['mavenEffectivePom','bower-install-simple:prod',/*'jshint',*/'concat','ngAnnotate',/*'uglify',*/'includeSource','wiredep','karma:unit']);
 
 };

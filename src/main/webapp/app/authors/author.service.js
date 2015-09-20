@@ -1,21 +1,23 @@
-'use strict';
+(function () {
+    'use strict';
 
-var services = angular.module('bookland.services', [ 'ngResource' ]);
+    var services = angular.module('bookland.authors');
 
-function authorService(baseUrl, $resource) {
-    return $resource(baseUrl + '/authors/:id', {
-        id : '@id'
-    }, {
-        'update' : {
-            method : 'PUT'
-        }
-    });
-}
+    function authorService(baseUrl, $resource) {
+        return $resource(baseUrl + '/authors/:id', {
+            id: '@id'
+        }, {
+            'update': {
+                method: 'PUT'
+            }
+        });
+    }
+    services.factory('authorService', authorService);
 
-services.factory('authorService', authorService);
+    function tagService(baseUrl, $resource) {
+        return $resource(baseUrl + '/tags/:id', {
+            id: '@id'
+        });
+    }
 
-function tagService(baseUrl, $resource) {
-    return $resource(baseUrl + '/tags/:id', {
-        id : '@id'
-    });
-}
+})();

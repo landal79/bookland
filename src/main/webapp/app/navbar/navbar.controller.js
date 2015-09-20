@@ -1,12 +1,15 @@
-'use strict';
+(function () {
+    'use strict';
 
-function NavController($route) {
-    this.is = function(title) {
-        if (!$route.current) {
-            return false;
-        }
-        return $route.current.name == title;
-    };
-}
+    function NavController($state) {
+        this.is = function (title) {
+            if (!$state.current) {
+                return false;
+            }
+            return $state.current.name == title;
+        };
+    }
 
-angular.module('bookland').controller('NavController', NavController);
+    angular.module('bookland').controller('NavController', NavController);
+
+})();
