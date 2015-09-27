@@ -1,8 +1,8 @@
 (function () {
     'use strict';
 
-    var bookland = angular.module('bookland', ['bookland.about', 'bookland.author', 'bookland.book', 'bookland.tags',
-        'bookland.settings', 'bookland.filters', 'bookland.animations','bookland.components',
+    var bookland = angular.module('bookland', ['bookland.about', /*'bookland.author', 'bookland.book', 'bookland.tags',
+        'bookland.settings', 'bookland.filters', 'bookland.animations','bookland.components',*/
         'ngResource', 'ui.router', 'ui.bootstrap']);
 
     /**
@@ -20,9 +20,14 @@
         };
     }
 
-    function blConfig($urlRouterProvider, $httpProvider) {
+    function blConfig($urlRouterProvider, $httpProvider,$stateProvider) {
 
         $urlRouterProvider.otherwise('/');
+
+        $stateProvider.state('default',{
+            url: '/',
+            templateUrl: 'app/default.html'
+        });
 
         $httpProvider.interceptors.push(HttpErrorInterceptor);
 

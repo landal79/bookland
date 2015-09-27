@@ -1,10 +1,12 @@
 (function () {
     'use strict';
 
+   var about = angular.module('bookland.about');
+
     function AboutController() {
         // TODO
     }
 
-    angular.module('bookland.about').controller('AboutController', AboutController);
+    about.controller('AboutController', AboutController);
 
 })();
