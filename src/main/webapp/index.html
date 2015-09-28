@@ -10,7 +10,7 @@
 	<!-- bower:css -->
 	<!-- endbower -->
 
-	<link rel="stylesheet" href="assets/css/main.css" rel="stylesheet">
+	<!-- include: "type": "css", "files": "assets/css/**/*.css" -->
 
 </head>
 
@@ -31,9 +31,7 @@
 	<!-- bower:js -->
 	<!-- endbower -->
 
-	<script src="app/about/about.js"></script>
-	<script src="app/about/about.module.js"></script>
-	<script src="app/app.js"></script>
+	<!-- include: "type": "js", "files": "<%= app.scripts %>" ordering: "top-down" -->
 
 </body>
 

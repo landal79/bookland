@@ -27,6 +27,17 @@ module.exports = function(grunt) {
             bowlerLib : 'target/<%= pom.project.build.finalName %>/lib'
         },
 
+        app: {
+            configScripts: [
+                '<%= config.appFolder %>/**/config.module.js',
+            ],
+            scripts: [
+                '<%= config.destSrcFolder %>/**/config.module.js',
+                '<%= config.destSrcFolder %>/**/*.js',
+                '<%= config.destSrcFolder %>/app.js'
+            ]
+        },
+
         "bower-install-simple": {
             options: {
                 color: true,
@@ -112,10 +123,11 @@ module.exports = function(grunt) {
         includeSource: {
             options: {
                 basePath: '<%= config.appFolder %>',
-                baseUrl: ''
+                baseUrl: '',
+                ordering: 'top-down'
             },
-            myTarget: {
-                files: [{src : '<%= config.webappFolder %>/index.tpl.html', dest: '<%= config.appFolder %>/index.html'}]
+            app: {
+                files: [{src : '<%= config.webappFolder %>/index.html', dest: '<%= config.appFolder %>/index.html'}]
             }
         },
 

@@ -11,7 +11,7 @@
             });
     }
 
-    angular.module('bookland.settings', [])
+    angular.module('bookland.settings', ['ui.router'])
         .config(blConfig);
 
 })();
