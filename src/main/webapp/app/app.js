@@ -1,5 +1,8 @@
-(function () {
-    'use strict';
+'use strict';
+
+require(['angular'], function (angular) {
+
+
 
     var bookland = angular.module('bookland', ['bookland.about', /*'bookland.author', 'bookland.book', 'bookland.tags',
         'bookland.settings', 'bookland.filters', 'bookland.animations','bookland.components',*/
@@ -60,4 +63,4 @@
 
     bookland.run(blRun);
 
-})();
+})(angular);

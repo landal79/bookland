@@ -60,7 +60,6 @@ module.exports = function(grunt) {
         },
 
         copy: {
-
             main: {
                 files: [
                     {
@@ -131,6 +130,12 @@ module.exports = function(grunt) {
             }
         },
 
+        bowerRequirejs: {
+            target: {
+                rjsConfig: '<%= config.destSrcFolder %>/config.js'
+            }
+        },
+
         wiredep: {
 
             task: {
@@ -188,7 +193,7 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('karmaAuto', ['mavenEffectivePom','karma:autoUnit']);
-    grunt.registerTask('dev', ['mavenEffectivePom','bower-install-simple:dev', 'copy','ngAnnotate','includeSource','wiredep',/*'karma:unit'*/]);
+    grunt.registerTask('dev', ['mavenEffectivePom','bower-install-simple:dev', 'copy','ngAnnotate','bowerRequirejs',/*'karma:unit'*/]);
     grunt.registerTask('default', ['mavenEffectivePom','bower-install-simple:prod',/*'jshint',*/'concat','ngAnnotate',/*'uglify',*/'includeSource','wiredep','karma:unit']);
 
 };

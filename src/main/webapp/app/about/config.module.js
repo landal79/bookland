@@ -1,5 +1,4 @@
-(function() {
-    'use strict';
+require(['angular','./about.controller'], function (angular) {
 
     var about = angular.module('bookland.about', ['ui.router']);
 
@@ -13,5 +12,7 @@
     }
 
     about.config(blAboutConfig);
+
+    return about;
 
 })();
