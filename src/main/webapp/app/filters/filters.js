@@ -1,5 +1,4 @@
-(function () {
-    'use strict';
+define('filters', ['angular'], function (angular) {
 
     var filters = angular.module('bookland.filters', []);
 
@@ -8,5 +7,7 @@
             return input ? input.charAt(0).toUpperCase() + input.slice(1) : input;
         };
     });
+
+    return filters;
 
 })();

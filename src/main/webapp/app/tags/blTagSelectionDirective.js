@@ -1,25 +1,7 @@
-(function () {
-    'use strict';
+define('blTagSelectionDirective',[], function(){
 
-    var tags = angular.module('bookland.tags');
-
-    function blTagList() {
-        return {
-            restrict: 'E',
-            templateUrl: 'app/tags/tags.html',
-            scope: {
-                tagsList: '='
-            },
-            controller: function ($scope) {
-
-            },
-            controllerAs: 'TagListController'
-        };
-    }
-
-    tags.directive('blTagList', blTagList);
-
-    function blTagSelection(tagService) {
+    // @ngInject
+   function blTagSelection(tagService) {
         return {
             restrict: 'E',
             templateUrl: 'app/tags/tagSelection.html',
@@ -81,6 +63,6 @@
         };
     }
 
-    tags.directive('blTagSelection', blTagSelection);
+    return blTagSelection;
 
 })();

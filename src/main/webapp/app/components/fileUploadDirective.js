@@ -1,7 +1,4 @@
-(function () {
-    'use strict';
-
-    var blComponents = angular.module('bookland.components');
+define('fileUploadDirective', [], function () {
 
     function blFileUpload() {
         return {
@@ -32,6 +29,6 @@
         };
     }
 
-    blComponents.directive('blFileUpload', blFileUpload);
+    return blFileUpload;
 
 })();

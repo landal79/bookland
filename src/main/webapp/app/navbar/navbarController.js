@@ -1,6 +1,6 @@
-(function () {
-    'use strict';
+define('navController', [], function () {
 
+    // @ngInject
     function NavController($state) {
         this.is = function (title) {
             if (!$state.current) {
@@ -10,6 +10,6 @@
         };
     }
 
-    angular.module('bookland').controller('NavController', NavController);
+    return NavController;
 
 })();

@@ -1,6 +1,6 @@
-(function () {
-    'use strict';
+define('blListItemDirective',[], function(){
 
+    // @ngInject
     function blListItem($scope) {
         return {
             restrict: 'E',
@@ -14,6 +14,6 @@
         };
     }
 
-    angular.module('bookland.book').directive('blListItem', blListItem);
+    return blListItem;
 
 })();

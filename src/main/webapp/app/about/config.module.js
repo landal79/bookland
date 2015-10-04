@@ -1,4 +1,5 @@
-require(['angular','./about.controller'], function (angular) {
+define('about',['angular','ui.router'
+    ,'./aboutController'], function (angular) {
 
     var about = angular.module('bookland.about', ['ui.router']);
 
@@ -13,6 +14,8 @@ require(['angular','./about.controller'], function (angular) {
 
     about.config(blAboutConfig);
 
-    return about;
+    about.controller('AboutController', require('./aboutController'));
+
+   return about;
 
 })();

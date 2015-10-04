@@ -102,7 +102,7 @@ module.exports = function(grunt) {
             options: {
                 singleQuotes: true,
             },
-            app1: {
+            default: {
                 files: [
                     {
                         expand: true,
@@ -193,7 +193,7 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('karmaAuto', ['mavenEffectivePom','karma:autoUnit']);
-    grunt.registerTask('dev', ['mavenEffectivePom','bower-install-simple:dev', 'copy','ngAnnotate','bowerRequirejs',/*'karma:unit'*/]);
+    grunt.registerTask('dev', ['mavenEffectivePom','bower-install-simple:dev','includeSource','wiredep','ngAnnotate','bowerRequirejs']);
     grunt.registerTask('default', ['mavenEffectivePom','bower-install-simple:prod',/*'jshint',*/'concat','ngAnnotate',/*'uglify',*/'includeSource','wiredep','karma:unit']);
 
 };

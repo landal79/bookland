@@ -1,9 +1,6 @@
-(function () {
-    'use strict';
+define('fileReaderService', [], function () {
 
-    var blComponents = angular.module('bookland.components');
-
-
+    // @ngInject
     function fileReader($q, $window) {
 
         // Wrap the onLoad event in the promise
@@ -70,6 +67,6 @@
 
     }
 
-    blComponents.factory('fileReader', fileReader);
+    return fileReader;
 
 })();

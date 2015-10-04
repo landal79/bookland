@@ -1,31 +1,6 @@
-(function () {
-    'use strict';
+define('bookController', [], function () {
 
-    var blControllers = angular.module('bookland.book');
-
-    function ListController($scope, bookService, baseUrl) {
-        $scope.items = bookService.query();
-        $scope.baseUrl = baseUrl;
-        $scope.orderProp = 'title';
-    }
-
-    blControllers.controller('ListController', ListController);
-
-    function DetailController($scope, $routeParams, bookService, $location) {
-        $scope.detail = bookService.get({}, {
-            'id': $routeParams.id
-        });
-        var id = $routeParams.id;
-        $scope.edit = function () {
-            $location.path("/edit/" + id);
-        };
-    }
-
-    blControllers.controller('DetailController', DetailController);
-
-    /**
-     * Book controller function.
-     */
+    // @ngInject
     function BookController($scope, $rootScope, bookService, $location, $routeParams, bookImageService, baseUrl, fileReader) {
 
         $scope.coverImage = null;
@@ -91,6 +66,6 @@
 
     };
 
-    blControllers.controller('BookController', BookController);
+    return BookController;
 
 })();

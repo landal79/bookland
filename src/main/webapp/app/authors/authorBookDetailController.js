@@ -1,19 +1,6 @@
-(function () {
-    'use strict';
+define('authorBookDetailCtrl',[], function () {
 
-    var controllers = angular.module('bookland.authors');
-
-    function NewAuthorController($scope, $location, authorService) {
-        $scope.author = {};
-        $scope.save = function () {
-            authorService.save($scope.author);
-            $location.path("/");
-        };
-    }
-
-    controllers.controller('NewAuthorController', NewAuthorController);
-
-
+    // @ngInject
     function AuthorBookDetailCtrl($scope, authorService, $modal) {
 
         $scope.authors = authorService.query();
@@ -58,24 +45,6 @@
         };
     }
 
-    controllers.controller('AuthorBookDetailCtrl', AuthorBookDetailCtrl);
-
-    function AuthorModalCtrl($scope, authorService, $modalInstance) {
-        $scope.author = {};
-        $scope.save = function (author_form) {
-            if (!author_form.$valid) {
-                console.log('invalid author data!');
-                alert('invalid author data!');
-                return;
-            }
-
-            $modalInstance.close(authorService.save($scope.author));
-        };
-        $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
-        };
-    };
-
-    controllers.controller('AuthorModalCtrl', AuthorModalCtrl);
+    return AuthorBookDetailCtrl;
 
 })();

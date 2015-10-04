@@ -1,20 +1,6 @@
-(function () {
-    'use strict';
+define('bookImageService',[], function(){
 
-    var services = angular.module('bookland.book');
-
-    function bookService(baseUrl, $resource) {
-        return $resource(baseUrl + '/books/:id', {
-            id: '@id'
-        }, {
-            'update': {
-                method: 'PUT'
-            }
-        });
-    }
-
-    services.factory('bookService', bookService);
-
+    // @ngInject
     function bookImageService(baseUrl, $resource) {
         return $resource(baseUrl + '/books/:id/image', {
             id: '@id'
@@ -39,6 +25,6 @@
         });
     }
 
-    services.factory('bookImageService', bookImageService);
+    return bookImageService;
 
 })();

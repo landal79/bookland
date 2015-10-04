@@ -1,8 +1,6 @@
-(function () {
-    'use strict';
+define('alerts.controller', [], function () {
 
-    var blAlters = angular.module('bookland.alerts');
-
+    // @ngInject
     function AlertsController($scope, $rootScope) {
         $scope.alerts = [];
 
@@ -35,6 +33,6 @@
         $scope.$on('$destroy', bookSaveListener);
     }
 
-    blAlters.controller('AlertsController', AlertsController);
+    return AlertsController;
 
 })();

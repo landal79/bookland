@@ -1,4 +1,9 @@
 requirejs.config({
-    shim: {},
-    paths: {}
+    paths: {},
+    shim: {
+        angular: {
+            exports: 'angular'
+        }
+    },
+    deps: ['app']
 });

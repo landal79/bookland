@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="bookland">
+<html ng-app="bookland" ng-strict-di>
 
 <head>
 	<meta charset="UTF-8">
@@ -28,10 +28,7 @@
 		</footer>
 	</div>
 
-	<!-- bower:js -->
-	<!-- endbower -->
-
-	<!-- include: "type": "js", "files": "<%= app.scripts %>" ordering: "top-down" -->
+	<script data-main="app/config" src="lib/requirejs/require.js"></script>
 
 </body>
 

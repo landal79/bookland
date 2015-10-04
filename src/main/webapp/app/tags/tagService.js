@@ -1,14 +1,12 @@
-(function () {
-    'use strict';
+define('tagService', [], function () {
 
-    var tags = angular.module('bookland.tags');
-
+    // @ngInject
     function tagService(baseUrl, $resource) {
         return $resource(baseUrl + '/tags/:id', {
             id: '@id'
         });
     }
 
-    tags.factory('tagService', tagService);
+    return tagService;
 
 })();

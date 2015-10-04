@@ -1,7 +1,4 @@
-(function () {
-    'use strict';
-
-    var components = angular.module('bookland.components');
+define('datepickerDirective', [], function () {
 
     function blDatepicker() {
         return {
@@ -35,6 +32,8 @@
         };
     }
 
-    components.directive("blDatepicker", blDatepicker);
+    return blDatepicker;
+
+
 
 })();

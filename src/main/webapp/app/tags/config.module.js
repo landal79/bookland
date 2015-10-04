@@ -1,6 +1,17 @@
-(function () {
-    'use strict';
+define('tags',
+    ['angular', 'ui.router'
+        , './tagsService'
+        , './blTagListDirective'
+        , './blTagSelectionDirective'],
+    function (angular) {
 
-    angular.module('bookland.tags',['ngResource']);
+        var blTags = angular.module('bookland.tags', ['ngResource']);
 
-})();
+        blTags.factory('tagService', require('./tagService'));
+
+        blTags.directive('blTagList', require('./blTagListDirective'));
+        blTags.directive('blTagSelection', require('./blTagSelectionDirective.js'));
+
+        return blTags;
+
+    })();
