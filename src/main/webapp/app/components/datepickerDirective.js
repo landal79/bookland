@@ -28,7 +28,7 @@ define([], function () {
 
             },
 
-            templateUrl: 'components/datepicker/datepicker.html'
+            templateUrl: 'app/components/datepicker.html'
         };
     }
 

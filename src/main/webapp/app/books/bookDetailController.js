@@ -1,11 +1,11 @@
 define([], function(){
 
     // @ngInject
-    function DetailController($scope, $routeParams, bookService, $location) {
+    function DetailController($scope, $stateParams, bookService, $location) {
         $scope.detail = bookService.get({}, {
-            'id': $routeParams.id
+            'id': $stateParams.id
         });
-        var id = $routeParams.id;
+        var id = $stateParams.id;
         $scope.edit = function () {
             $location.path("/edit/" + id);
         };

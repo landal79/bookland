@@ -1,24 +1,24 @@
 define([], function () {
 
     // @ngInject
-    function BookController($scope, $rootScope, bookService, $location, $routeParams, bookImageService, baseUrl, fileReader) {
+    function BookController($scope, $rootScope, bookService, $location, $stateParams, bookImageService, baseUrl, fileReader) {
 
         $scope.coverImage = null;
 
         /*
          * Code executed to initialize controller values
          */
-        var edit = $routeParams.id != null;
+        var edit = $stateParams.id != null;
         if (edit) {
             $scope.book = bookService.get({}, {
-                'id': $routeParams.id
+                'id': $stateParams.id
             });
         } else {
             $scope.book = {};
         }
 
         if ($scope.book.id == null) {
-            $scope.imageUrl = 'img/nocover.jpg';
+            $scope.imageUrl = 'assets/img/nocover.jpg';
         } else {
             $scope.imageUrl = baseUrl + '/books/' + $scope.book.id + '/image';
         }

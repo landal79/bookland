@@ -73,7 +73,7 @@ requirejs(['require'
         function blRun($modal, $rootScope) {
             $rootScope.$on('event:httpError', function (event, error) {
                 $modal.open({
-                    templateUrl: 'views/errors/errorModal.html',
+                    templateUrl: 'app/components/errorModal.html',
                     controller: ErrorModal,
                     resolve: {
                         message: function () {

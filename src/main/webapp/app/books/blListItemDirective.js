@@ -1,7 +1,7 @@
 define([], function(){
 
     // @ngInject
-    function blListItem($scope) {
+    function blListItem() {
         return {
             restrict: 'E',
             templateUrl: 'app/books/list-item.html',

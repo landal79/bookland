@@ -3,7 +3,7 @@ define([], function () {
     function blFileUpload() {
         return {
             restrict: 'E',
-            templateUrl: 'components/fileUpload/fileUpload.html',
+            templateUrl: 'app/components/fileUpload.html',
             scope: {
                 onfileselected: '&'
             },

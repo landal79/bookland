@@ -220,10 +220,16 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <extensions>false</extensions>
                 <configuration>
-                    <warSourceExcludes>
-                        **/*.tpl.html
-                    </warSourceExcludes>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/webapp</directory>
+                            <filtering>true</filtering>
+                            <includes>
+                                <include>**/*.js</include>
+                            </includes>
+                        </resource>
+                    </webResources>
                 </configuration>
                 <executions>
                     <execution>

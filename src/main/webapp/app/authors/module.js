@@ -22,7 +22,7 @@ define(['require','angular','angular-ui-router','angular-resource','es6-shim'
         authors.config(blAuthorConfig);
 
         authors.controller('NewAuthorController', require('./authorNewController'));
-        authors.controller('AuthorBookDetailController', require('./authorBookDetailController'));
+        authors.controller('AuthorBookDetailCtrl', require('./authorBookDetailController'));
         authors.controller('AuthorModalCtrl', require('./authorModalController'));
 
         authors.factory('authorService', require('./authorService'));

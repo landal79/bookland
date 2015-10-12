@@ -15,7 +15,7 @@ define(['require','angular', 'angular-ui-router', 'angular-resource','es6-shim'
         function blConfig($stateProvider) {
             $stateProvider
                 .state('list', {
-                    url: 'list',
+                    url: '/list',
                     templateUrl: 'app/books/list.html',
                     controller: 'BookListController',
                     controllerAs: 'listCtrl'
