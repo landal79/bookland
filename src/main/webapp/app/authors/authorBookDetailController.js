@@ -1,7 +1,7 @@
 define([], function () {
 
     // @ngInject
-    function AuthorBookDetailCtrl($scope, authorService, $modal) {
+    function AuthorBookDetailCtrl($scope, authorService, AuthorModalCtrl, $modal) {
 
         $scope.authors = authorService.query();
 

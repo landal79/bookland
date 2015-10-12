@@ -227,6 +227,7 @@
                             <filtering>true</filtering>
                             <includes>
                                 <include>**/*.js</include>
+                                <include>**/*.html</include>
                             </includes>
                         </resource>
                     </webResources>
