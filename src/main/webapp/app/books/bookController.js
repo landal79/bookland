@@ -1,4 +1,4 @@
-define('bookController', [], function () {
+define([], function () {
 
     // @ngInject
     function BookController($scope, $rootScope, bookService, $location, $routeParams, bookImageService, baseUrl, fileReader) {
@@ -64,8 +64,8 @@ define('bookController', [], function () {
             });
         };
 
-    };
+    }
 
     return BookController;
 
-})();
+});

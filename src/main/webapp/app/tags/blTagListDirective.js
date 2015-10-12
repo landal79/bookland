@@ -1,4 +1,4 @@
-define('blTagListDirective',[], function(){
+define([], function(){
 
     return function blTagList() {
         return {
@@ -14,4 +14,4 @@ define('blTagListDirective',[], function(){
         };
     }
 
-})();
+});

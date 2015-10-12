@@ -1,4 +1,4 @@
-define('blTagSelectionDirective',[], function(){
+define([], function(){
 
     // @ngInject
    function blTagSelection(tagService) {
@@ -65,4 +65,4 @@ define('blTagSelectionDirective',[], function(){
 
     return blTagSelection;
 
-})();
+});

@@ -1,4 +1,4 @@
-define('bookImageService',[], function(){
+define([], function(){
 
     // @ngInject
     function bookImageService(baseUrl, $resource) {
@@ -27,4 +27,4 @@ define('bookImageService',[], function(){
 
     return bookImageService;
 
-})();
+});

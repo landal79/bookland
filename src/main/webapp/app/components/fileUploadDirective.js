@@ -1,4 +1,4 @@
-define('fileUploadDirective', [], function () {
+define([], function () {
 
     function blFileUpload() {
         return {
@@ -31,4 +31,4 @@ define('fileUploadDirective', [], function () {
 
     return blFileUpload;
 
-})();
+});

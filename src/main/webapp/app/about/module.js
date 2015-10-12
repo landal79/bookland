@@ -1,7 +1,10 @@
-define('about',['angular','ui.router'
-    ,'./aboutController'], function (angular) {
+define(['require','angular','angular-ui-router'
+    ,'./aboutController'],
+    function (require, angular) {
 
-    var about = angular.module('bookland.about', ['ui.router']);
+    var moduleName = 'bookland.about';
+
+    var about = angular.module(moduleName, ['ui.router']);
 
     function blAboutConfig($stateProvider){
         $stateProvider
@@ -13,9 +16,7 @@ define('about',['angular','ui.router'
     }
 
     about.config(blAboutConfig);
-
     about.controller('AboutController', require('./aboutController'));
 
-   return about;
-
-})();
+   return moduleName;
+});

@@ -1,4 +1,4 @@
-define('AuthorModalController',[], function () {
+define([], function () {
 
     // @ngInject
     function AuthorModalController($scope, authorService, $modalInstance) {
@@ -19,4 +19,4 @@ define('AuthorModalController',[], function () {
 
     return AuthorModalController;
 
-})();
+});

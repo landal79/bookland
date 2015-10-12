@@ -1,4 +1,4 @@
-define('fileReaderService', [], function () {
+define([], function () {
 
     // @ngInject
     function fileReader($q, $window) {
@@ -69,4 +69,4 @@ define('fileReaderService', [], function () {
 
     return fileReader;
 
-})();
+});

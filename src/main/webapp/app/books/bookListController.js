@@ -1,4 +1,4 @@
-define('bookListController', [], function () {
+define([], function () {
 
     // @ngInject
     function ListController($scope, bookService, baseUrl) {
@@ -9,4 +9,4 @@ define('bookListController', [], function () {
 
     return ListController;
 
-})();
+});

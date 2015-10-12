@@ -1,4 +1,4 @@
-define('authorBookDetailCtrl',[], function () {
+define([], function () {
 
     // @ngInject
     function AuthorBookDetailCtrl($scope, authorService, $modal) {
@@ -47,4 +47,4 @@ define('authorBookDetailCtrl',[], function () {
 
     return AuthorBookDetailCtrl;
 
-})();
+});

@@ -1,4 +1,4 @@
-define('datepickerDirective', [], function () {
+define([], function () {
 
     function blDatepicker() {
         return {
@@ -34,6 +34,4 @@ define('datepickerDirective', [], function () {
 
     return blDatepicker;
 
-
-
-})();
+});

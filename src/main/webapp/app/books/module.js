@@ -1,5 +1,4 @@
-define('books',
-    ['angular', 'ui.router', 'ngResource'
+define(['require','angular', 'angular-ui-router', 'angular-resource','es6-shim'
         , './bookService'
         , './bookImageService'
         , './blListItemDirective'
@@ -7,9 +6,11 @@ define('books',
         , './bookController'
         , './bookDetailController'],
 
-    function (angular) {
+    function (require, angular) {
 
-        var blBooks = angular.module('bookland.book', ['ngResource']);
+        var moduleName = 'bookland.book';
+
+        var blBooks = angular.module(moduleName, ['ngResource']);
 
         function blConfig($stateProvider) {
             $stateProvider
@@ -47,4 +48,6 @@ define('books',
         blBooks.controller('BookDetailController', require('./bookDetailController'));
         blBooks.controller('BookController', require('./bookController'));
 
-    })();
+        return moduleName;
+
+});

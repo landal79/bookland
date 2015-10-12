@@ -1,8 +1,9 @@
-define('authors',
-    ['angular', 'ngAnimate'],
-    function (angular) {
+define(['require','angular', 'angular-animate'],
+    function (require, angular) {
 
-        var blAnimations = angular.module('bookland.animations', ['ngAnimate']);
+        var moduleName = 'bookland.animations';
+
+        var blAnimations = angular.module(moduleName, ['ngAnimate']);
 
         blAnimations.animation('.book-list', function () {
 
@@ -55,6 +56,5 @@ define('authors',
             };
         });
 
-        return blAnimations;
-
-    })();
+        return moduleName;
+});

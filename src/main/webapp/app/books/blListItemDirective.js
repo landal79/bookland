@@ -1,4 +1,4 @@
-define('blListItemDirective',[], function(){
+define([], function(){
 
     // @ngInject
     function blListItem($scope) {
@@ -16,4 +16,4 @@ define('blListItemDirective',[], function(){
 
     return blListItem;
 
-})();
+});

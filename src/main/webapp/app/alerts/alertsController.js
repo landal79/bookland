@@ -1,4 +1,4 @@
-define('alerts.controller', [], function () {
+define([], function () {
 
     // @ngInject
     function AlertsController($scope, $rootScope) {
@@ -35,4 +35,4 @@ define('alerts.controller', [], function () {
 
     return AlertsController;
 
-})();
+});

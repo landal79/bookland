@@ -1,4 +1,4 @@
-define('tagService', [], function () {
+define([], function () {
 
     // @ngInject
     function tagService(baseUrl, $resource) {
@@ -9,4 +9,4 @@ define('tagService', [], function () {
 
     return tagService;
 
-})();
+});

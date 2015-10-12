@@ -1,4 +1,4 @@
-define('authorService',[], function () {
+define([], function () {
 
     // @ngInject
     function authorService(baseUrl, $resource) {
@@ -13,4 +13,4 @@ define('authorService',[], function () {
 
     return authorService;
 
-})();
+});

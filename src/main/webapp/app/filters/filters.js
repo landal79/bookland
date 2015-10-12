@@ -1,6 +1,8 @@
-define('filters', ['angular'], function (angular) {
+define(['require','angular'], function (require, angular) {
 
-    var filters = angular.module('bookland.filters', []);
+    var moduleName = 'bookland.filters';
+
+    var filters = angular.module(moduleName, []);
 
     filters.filter('capitalize', function () {
         return function (input) {
@@ -8,6 +10,6 @@ define('filters', ['angular'], function (angular) {
         };
     });
 
-    return filters;
+    return moduleName;
 
-})();
+});

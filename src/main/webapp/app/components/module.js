@@ -1,18 +1,19 @@
-define('blComponents',
-    ['angular', 'ui.bootstrap'
+define(['require','angular', 'angular-bootstrap'
         , './fileReaderService'
         , './datepickerDirective'
         , './fileUploadDirective'],
 
-    function (angular) {
+    function (require, angular) {
 
-        var blComponents = angular.module('bookland.components', ['ui.bootstrap']);
+        var moduleName = 'bookland.components';
+
+        var blComponents = angular.module(moduleName, ['ui.bootstrap']);
 
         blComponents.factory('fileReader', require('./fileReaderService'));
 
         blComponents.directive("blDatepicker", require('./datepickerDirective'));
         blComponents.directive('blFileUpload', require('./fileUploadDirective'));
 
-        return blComponents;
+        return moduleName;
 
-    })();
+});

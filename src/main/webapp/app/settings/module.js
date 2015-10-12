@@ -1,9 +1,10 @@
-define('settings',
-    ['angular', 'ui.router'
+define(['require', 'angular', 'angular-ui-router'
         , './settingsController'],
-    function (angular) {
+    function (require, angular) {
 
-        var blSettings = angular.module('bookland.settings', ['ui.router']);
+        var moduleName = 'bookland.settings';
+
+        var blSettings = angular.module(moduleName, ['ui.router']);
 
         function blConfig($stateProvider) {
             $stateProvider
@@ -19,6 +20,6 @@ define('settings',
 
         blSettings.controller('SettingsController', require('./settingsController'));
 
-        return blSettings;
+        return moduleName;
 
-    })();
+});

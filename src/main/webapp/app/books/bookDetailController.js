@@ -1,4 +1,4 @@
-define('bookDetailController',[], function(){
+define([], function(){
 
     // @ngInject
     function DetailController($scope, $routeParams, bookService, $location) {
@@ -13,4 +13,4 @@ define('bookDetailController',[], function(){
 
     return DetailController;
 
-})();
+});

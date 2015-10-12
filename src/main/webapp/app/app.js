@@ -1,34 +1,33 @@
-'use strict';
-
-requirejs(['angular'
-        ,'jquery'
+requirejs(['require'
+        , 'angular'
+        , './about/module'
+        , './authors/module'
+        , './alerts/module'
+        , './animations/animations'
+        , './books/module'
+        , './components/module'
+        , './filters/filters'
+        , './navbar/module'
+        , './settings/module'
+        , './tags/module'
         , 'angular-resource'
         , 'angular-ui-router'
         , 'angular-bootstrap'
         , 'es6-shim'
-        ,'bootstrap'
-        , './navbar/config.module'
-        , './about/config.module'
-        , './authors/config.module'
-        , './alerts/config.module'
-        , './books/config.module'
-        , './tags/config.module'
-        , './components/config.module'
-        , './animations/animations'
-        , './filters/filters'],
-    function (angular) {
+        , 'bootstrap'],
+    function (require, angular, about) {
 
         var bookland = angular.module('bookland',
-            ['bookland.about'
-                , 'bookland.alerts'
-                , 'bookland.author'
-                , 'bookland.book'
-                , 'bookland.tags'
-                , 'bookland.settings'
-                , 'bookland.filters'
-                , 'bookland.animations'
-                , 'bookland.components'
-                , 'bookland.navbar'
+            [require('./about/module')
+                , require('./authors/module')
+                , require('./alerts/module')
+                , require('./animations/animations')
+                , require('./books/module')
+                , require('./components/module')
+                , require('./filters/filters')
+                , require('./navbar/module')
+                , require('./settings/module')
+                , require('./tags/module')
                 , 'ngResource'
                 , 'ui.router'
                 , 'ui.bootstrap']);
@@ -90,4 +89,4 @@ requirejs(['angular'
 
         angular.bootstrap(document, ['bookland']);
 
-    })();
+});

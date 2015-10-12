@@ -1,4 +1,4 @@
-define('authorNewController',[], function () {
+define([], function () {
 
     // @ngInject
     function NewAuthorController($scope, $location, authorService) {
@@ -11,4 +11,4 @@ define('authorNewController',[], function () {
 
     return NewAuthorController;
 
-})();
+});

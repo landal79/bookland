@@ -1,4 +1,4 @@
-define('navController', [], function () {
+define([], function () {
 
     // @ngInject
     function NavController($state) {
@@ -12,4 +12,4 @@ define('navController', [], function () {
 
     return NavController;
 
-})();
+});

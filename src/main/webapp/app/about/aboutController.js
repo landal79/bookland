@@ -1,4 +1,4 @@
-define('about.controller', [], function () {
+define([], function () {
 
     /*@ngInject*/
     function AboutController() {
@@ -7,4 +7,4 @@ define('about.controller', [], function () {
 
     return AboutController;
 
-})();
+});

@@ -1,12 +1,13 @@
-define('authors',
-    ['angular','ui.router'
+define(['require','angular','angular-ui-router','angular-resource','es6-shim'
         ,'./authorBookDetailController'
+        ,'./authorModalController'
         ,'./authorNewController'
-        ,'./authorModalCtrl'
         ,'./authorService'
-    ], function (angular) {
+    ], function (require, angular) {
 
-        var authors = angular.module('bookland.author', ['ngResource']);
+        var moduleName = 'bookland.author';
+
+        var authors = angular.module(moduleName, ['ngResource']);
 
         function blAuthorConfig($stateProvider) {
             $stateProvider
@@ -26,4 +27,5 @@ define('authors',
 
         authors.factory('authorService', require('./authorService'));
 
-    })();
+        return moduleName;
+});
