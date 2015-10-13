@@ -36,7 +36,7 @@
 						<div class="form-group">
 							<label for="pubDate" class="col-sm-2 control-label">Pub. date</label>
 							<div class="col-sm-10">
-								<bl-datepicker date-model="book.publishingDate" date-options="dateOptions" opened="opened"></bl-datepicker>
+								<bl-datepicker date-model="book.publishingDate" date-options="dateOptions" opened="opened" />
 							</div>
 						</div>
 						<div class="form-group">
@@ -58,7 +58,7 @@
 			</div>
 		</div>
 		</tab> <tab heading="Authors">
-		<div class="tab-content panel panel-info form-group" ng-controller="AuthorBookDetailCtrl"
+		<div class="tab-content panel panel-info form-group" ng-controller="BookAuthorTabController"
 			style="margin: 5px; margin-left: 25px;">
 			<div class="panel-body">
 				<div class="row form-group">
@@ -70,10 +70,7 @@
 									<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 								</button>
 							</span>
-							<select id="authorSelect" class="form-control" ng-model="author"
-								ng-options="author.name + ' ' + author.surname for author in authors">
-								<option value="">-- choose an author --</option>
-							</select>
+							<bl-author-select author="author" />
 						</div>
 					</div>
 					<div class="col-sm-3">

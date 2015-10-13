@@ -1,9 +1,7 @@
 define([], function () {
 
     // @ngInject
-    function AuthorBookDetailCtrl($scope, authorService, AuthorModalCtrl, $modal) {
-
-        $scope.authors = authorService.query();
+    function BookAuthorTabController($scope, $modal) {
 
         $scope.addAuthor = function (author) {
 
@@ -31,20 +29,21 @@ define([], function () {
         };
 
         $scope.open = function () {
+
             var modalInstance = $modal.open({
                 templateUrl: 'app/authors/authorDialog.html',
-                controller: AuthorModalCtrl,
+                controller: 'AuthorModalCtrl',
                 size: 'md'
             });
+
             modalInstance.result.then(function (author) {
                 $scope.addAuthor(author);
-                $scope.authors = authorService.query();
             }, function () {
 
             });
         };
     }
 
-    return AuthorBookDetailCtrl;
+    return BookAuthorTabController;
 
 });

@@ -1,12 +1,11 @@
 define(['require','angular','angular-ui-router','angular-resource','es6-shim'
-        ,'./authorBookDetailController'
         ,'./authorModalController'
         ,'./authorNewController'
         ,'./authorService'
+        ,'./authorSelectDirective'
     ], function (require, angular) {
 
         var moduleName = 'bookland.author';
-
         var authors = angular.module(moduleName, ['ngResource']);
 
         function blAuthorConfig($stateProvider) {
@@ -21,8 +20,9 @@ define(['require','angular','angular-ui-router','angular-resource','es6-shim'
 
         authors.config(blAuthorConfig);
 
+        authors.directive('blAuthorSelect',require('./authorSelectDirective'));
+
         authors.controller('NewAuthorController', require('./authorNewController'));
-        authors.controller('AuthorBookDetailCtrl', require('./authorBookDetailController'));
         authors.controller('AuthorModalCtrl', require('./authorModalController'));
 
         authors.factory('authorService', require('./authorService'));
