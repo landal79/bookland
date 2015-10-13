@@ -1,1 +1,35 @@
-<meta HTTP-EQUIV="REFRESH" content="0; url=app/index.html">
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Bookland</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- bower:css -->
+	<!-- endbower -->
+
+	<!-- include: "type": "css", "files": "assets/css/**/*.css" -->
+
+</head>
+
+<body>
+	<div ng-include src="'app/navbar/navbar.html'"></div>
+
+	<div ng-include src="'app/alerts/alerts.html'"></div>
+
+	<div class="container">
+		<div class="row">
+			 <div ui-view class="col-md-12"></div>
+		</div>
+		<footer>
+			<p>&copy; Landal 2015</p>
+		</footer>
+	</div>
+
+	<script data-main="app/config" src="lib/requirejs/require.js"></script>
+
+</body>
+
+</html>

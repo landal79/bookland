@@ -1,10 +1,8 @@
 {
   "name": "bookland",
   "version": "0.0.1",
-  "authors": [
-    "landal79 <alex.landini@gmail.com>"
-  ],
-  "license": "MIT",
+  "appPath": "src/main/webapp/app",
+  "testPath": "src/test/javascript",
   "ignore": [
     "**/.*",
     "node_modules",
@@ -14,15 +12,21 @@
     "tests"
   ],
   "dependencies": {
+    "angular": "1.4.7",
+    "angular-animate": "1.4.7",
+    "angular-aria": "1.4.7",
+    "angular-bootstrap": "~0.14.1",
+    "angular-i18n": "1.4.7",
+    "angular-resource": "1.4.7",
+    "angular-ui-router": "0.2.15",
+    "bootstrap": "3.3.5",
+    "es6-shim": "^0.33.0",
     "jquery": "~2.1.4",
-    "angular": "1.4.3",
-    "angular-mocks": "1.4.3",
-    "angular-route": "1.4.3",
-    "angular-resource": "1.4.3",
-    "angular-animate": "1.4.3",
-    "bootstrap": "3.3.4",
-    "angular-bootstrap": "~0.13.4",
-    "es6-shim": "^0.33.0"
+    "requirejs": "~2.1.20"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.4.7",
+    "angular-scenario": "1.4.7"
   },
   "overrides": {
     "bootstrap": {

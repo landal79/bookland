@@ -22,9 +22,20 @@ module.exports = function(grunt) {
             srcFolder : 'src/main/javascript',
             testFolder : 'src/test/javascript',
             webappFolder : 'src/main/webapp',
-            appFolder : '<%= pom.project.build.directory %>/<%= pom.project.build.finalName %>/app',
-            destSrcFolder : '<%= config.appFolder %>/js',
-            bowlerLib : 'target/<%= pom.project.build.finalName %>/app/lib'
+            appFolder : '<%= pom.project.build.directory %>/<%= pom.project.build.finalName %>',
+            destSrcFolder : '<%= config.appFolder %>/app',
+            bowlerLib : 'target/<%= pom.project.build.finalName %>/lib'
+        },
+
+        app: {
+            configScripts: [
+                '<%= config.appFolder %>/**/config.module.js',
+            ],
+            scripts: [
+                '<%= config.destSrcFolder %>/**/config.module.js',
+                '<%= config.destSrcFolder %>/**/*.js',
+                '<%= config.destSrcFolder %>/app.js'
+            ]
         },
 
         "bower-install-simple": {
@@ -49,7 +60,6 @@ module.exports = function(grunt) {
         },
 
         copy: {
-
             main: {
                 files: [
                     {
@@ -92,7 +102,7 @@ module.exports = function(grunt) {
             options: {
                 singleQuotes: true,
             },
-            app1: {
+            default: {
                 files: [
                     {
                         expand: true,
@@ -112,10 +122,17 @@ module.exports = function(grunt) {
         includeSource: {
             options: {
                 basePath: '<%= config.appFolder %>',
-                baseUrl: ''
+                baseUrl: '',
+                ordering: 'top-down'
             },
-            myTarget: {
-                files: [{src : '<%= config.webappFolder %>/app/index.tpl.html', dest: '<%= config.appFolder %>/index.html'}]
+            app: {
+                files: [{src : '<%= config.webappFolder %>/index.html', dest: '<%= config.appFolder %>/index.html'}]
+            }
+        },
+
+        bowerRequirejs: {
+            target: {
+                rjsConfig: '<%= config.destSrcFolder %>/config.js'
             }
         },
 
@@ -176,7 +193,7 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('karmaAuto', ['mavenEffectivePom','karma:autoUnit']);
-    grunt.registerTask('dev', ['mavenEffectivePom','bower-install-simple:dev', 'copy','ngAnnotate','includeSource','wiredep','karma:unit']);
+    grunt.registerTask('dev', ['mavenEffectivePom','bower-install-simple:dev','includeSource','wiredep','ngAnnotate','bowerRequirejs']);
     grunt.registerTask('default', ['mavenEffectivePom','bower-install-simple:prod',/*'jshint',*/'concat','ngAnnotate',/*'uglify',*/'includeSource','wiredep','karma:unit']);
 
 };

@@ -220,10 +220,17 @@
                 <artifactId>maven-war-plugin</artifactId>
                 <extensions>false</extensions>
                 <configuration>
-                    <warSourceExcludes>
-                        **/*.tpl.html
-                    </warSourceExcludes>
                     <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <webResources>
+                        <resource>
+                            <directory>src/main/webapp</directory>
+                            <filtering>true</filtering>
+                            <includes>
+                                <include>**/*.js</include>
+                                <include>**/*.html</include>
+                            </includes>
+                        </resource>
+                    </webResources>
                 </configuration>
                 <executions>
                     <execution>
@@ -289,7 +296,7 @@
                         <phase>generate-resources</phase>
                         <configuration>
                             <nodeVersion>v0.12.7</nodeVersion>
-                            <npmVersion>2.13.4</npmVersion>
+                            <npmVersion>3.3.3</npmVersion>
                         </configuration>
                     </execution>
                     <execution>
