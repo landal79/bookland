@@ -11,7 +11,7 @@
 		</div>
 	</div>
 	<div class="panel-body">
-		<tabset> <tab heading="General">
+		<uib-tabset> <uib-tab heading="General">
 		<div class="tab-content">
 			<div class="row">
 				<div class="col-md-2">
@@ -48,16 +48,15 @@
 						<div class="form-group">
 							<label for="rating" class="col-sm-2 control-label">Rating</label>
 							<div class="col-sm-10">
-								<rating id="rating" ng-model="book.rating" max="5"></rating>
+								<uib-rating id="rating" ng-model="book.rating" max="5" />
 							</div>
-						</div>	
-				
+						</div>
 						<bl-tag-selection book="book" />
 					</form>
 				</div>
 			</div>
 		</div>
-		</tab> <tab heading="Authors">
+		</uib-tab><uib-tab heading="Authors">
 		<div class="tab-content panel panel-info form-group" ng-controller="BookAuthorTabController"
 			style="margin: 5px; margin-left: 25px;">
 			<div class="panel-body">
@@ -94,7 +93,7 @@
 				</div>
 			</div>
 		</div>
-		</tab> </tabset>
+		</uib-tab> </uib-tabset>
 	</div>
 
 	<div class="panel-footer">

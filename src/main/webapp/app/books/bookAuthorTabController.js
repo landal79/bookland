@@ -1,7 +1,7 @@
 define([], function () {
 
     // @ngInject
-    function BookAuthorTabController($scope, $modal) {
+    function BookAuthorTabController($scope, $uibModal) {
 
         $scope.addAuthor = function (author) {
 
@@ -30,7 +30,7 @@ define([], function () {
 
         $scope.open = function () {
 
-            var modalInstance = $modal.open({
+            var modalInstance = $uibModal.open({
                 templateUrl: 'app/authors/authorDialog.html',
                 controller: 'AuthorModalCtrl',
                 size: 'md'
@@ -38,9 +38,7 @@ define([], function () {
 
             modalInstance.result.then(function (author) {
                 $scope.addAuthor(author);
-            }, function () {
-
-            });
+            }, function () { });
         };
     }
 

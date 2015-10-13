@@ -1,6 +1,6 @@
 define([], function () {
 
-    /*@ngInject*/
+    // @ngInject
     function AboutController() {
         // TODO
     }

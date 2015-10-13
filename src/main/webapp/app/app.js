@@ -70,9 +70,9 @@ requirejs(['require'
             };
         }
 
-        function blRun($modal, $rootScope) {
+        function blRun($uibModal, $rootScope) {
             $rootScope.$on('event:httpError', function (event, error) {
-                $modal.open({
+                $uibModal.open({
                     templateUrl: 'app/components/errorModal.html',
                     controller: ErrorModal,
                     resolve: {
