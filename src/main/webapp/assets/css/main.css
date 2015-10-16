@@ -1,9 +1,9 @@
-.header {
-  text-shadow: 4px 4px 2px rgba(150, 150, 150, 1);
+body {
+  margin-top: 70px;
 }
 
-nav {
-	border-bottom: 1px solid #393F3F !important;
+.header {
+  text-shadow: 4px 4px 2px rgba(150, 150, 150, 1);
 }
 
 .thumb-img {
@@ -17,6 +17,10 @@ nav {
 
 .thumb-img:hover {
   transform: scale(2);
+}
+
+.navbar {
+  border-bottom: 1px solid #393F3F !important;
 }
 
 .navbar-inner {
@@ -55,31 +59,24 @@ a {
 }
 
 .angular-input-stars {
-  
   display: inline-block;
   padding: 0;
   padding-left: -5px;
   list-style: none;
-
 }
+
 /* stars directive */
 .angular-input-stars > li {
-    
   font-size: 17px;
-
   display: inline-block;
   padding-right: 5px;
   padding-left: 5px;
-  
   cursor: pointer;
-
 }
 
 .angular-input-stars > li .active {
-
     color: #FDE35E;
     text-shadow: black 0 0 1px, 0 0 1px ;
-
 }
 
 /* animate ngRepeat in book listing */
