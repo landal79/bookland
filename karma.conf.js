@@ -1,7 +1,7 @@
 module.exports = function(config) {
     config.set({
 
-        basePath: '',
+        basePath: './',
 
         // frameworks to use
         // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
@@ -9,15 +9,16 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
-            {pattern: 'target/bookland/app/**/*.js', included: false},
+            {pattern: 'src/test/javascript/test-main.js', included: true},
             {pattern: 'target/bookland/lib/**/*.js', included: false},
-            {pattern: 'src/test/javascript/specs/**/*Spec.js', included: false},
-            'src/test/javascript/test-main.js'
+            {pattern: 'target/bookland/app/**/*.js', included: false},
+            {pattern: 'src/test/javascript/specs/**/*Spec.js', included: false}
         ],
 
         // list of files to exclude
         exclude: [
-            'target/bookland/app/config.js'
+            'target/bookland/app/config.js',
+            'target/bookland/app/app.js',
         ],
 
         // preprocess matching files before serving them to the browser
