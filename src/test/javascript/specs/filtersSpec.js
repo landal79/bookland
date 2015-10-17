@@ -1,4 +1,4 @@
-define([''], function(App) {
+define(['filters/filters','angular-mocks'], function() {
 
     describe('filter', function () {
         beforeEach(module('bookland.filters'));
@@ -10,5 +10,7 @@ define([''], function(App) {
         });
 
     });
+
+
 
 });
