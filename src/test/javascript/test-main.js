@@ -1,6 +1,8 @@
 var TEST_REGEXP = /(spec|test)\.js$/i;
 var allTestFiles = [];
 
+var basePath = '/base/target/bookland/';
+
 Object.keys(window.__karma__.files).forEach(function(file) {
     if (TEST_REGEXP.test(file)) {
         allTestFiles.push(file);
@@ -9,7 +11,7 @@ Object.keys(window.__karma__.files).forEach(function(file) {
 
 requirejs.config({
     // Karma serves files from '/base'
-    baseUrl: '/target/bookland/app',
+    baseUrl: basePath + 'app',
 
     shim: {
         jquery: {
@@ -43,17 +45,17 @@ requirejs.config({
         require: []
     },
     paths: {
-        angular: '../lib/angular/angular',
-        'angular-animate': '../lib/angular-animate/angular-animate',
-        'angular-aria': '../lib/angular-aria/angular-aria',
-        'angular-bootstrap': '../lib/angular-bootstrap/ui-bootstrap-tpls',
-        'angular-mocks': '../lib/angular-mocks/angular-mocks',
-        'angular-resource': '../lib/angular-resource/angular-resource',
-        'angular-scenario': '../lib/angular-scenario/angular-scenario',
-        'angular-ui-router': '../lib/angular-ui-router/release/angular-ui-router',
-        bootstrap: '../lib/bootstrap/dist/js/bootstrap.min',
-        'es6-shim': '../lib/es6-shim/es6-shim',
-        jquery: '../lib/jquery/dist/jquery'
+        angular: basePath + 'lib/angular/angular',
+        'angular-animate': basePath + 'lib/angular-animate/angular-animate',
+        'angular-aria': basePath + 'lib/angular-aria/angular-aria',
+        'angular-bootstrap': basePath + 'lib/angular-bootstrap/ui-bootstrap-tpls',
+        'angular-mocks': basePath + 'lib/angular-mocks/angular-mocks',
+        'angular-resource': basePath + 'lib/angular-resource/angular-resource',
+        'angular-scenario': basePath + 'lib/angular-scenario/angular-scenario',
+        'angular-ui-router': basePath + 'lib/angular-ui-router/release/angular-ui-router',
+        bootstrap: basePath + 'lib/bootstrap/dist/js/bootstrap.min',
+        'es6-shim': basePath + 'lib/es6-shim/es6-shim',
+        jquery: basePath + 'lib/jquery/dist/jquery'
     },
 
     // dynamically load all test files

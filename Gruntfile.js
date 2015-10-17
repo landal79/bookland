@@ -149,39 +149,16 @@ module.exports = function(grunt) {
         },
 
         karma: {
-            options: {
-                basePath: '',
-                files:['<%= config.bowlerLib %>/jquery/dist/jquery.js',
-                    '<%= config.bowlerLib %>/angular/angular.js',
-                    '<%= config.bowlerLib %>/angular-mocks/angular-mocks.js',
-                    '<%= config.bowlerLib %>/angular-route/angular-route.js',
-                    '<%= config.bowlerLib %>/angular-resource/angular-resource.js',
-                    '<%= config.bowlerLib %>/angular-animate/angular-animate.js',
-                    '<%= config.bowlerLib %>/bootstrap/dist/js/bootstrap.min.js',
-                    '<%= config.bowlerLib %>/angular-bootstrap/ui-bootstrap-tpls.js',
-                    '<%= config.bowlerLib %>/es6-shim/es6-shim.js',
-                    '<%= config.destSrcFolder %>/**/*.js'],
-                port: 9876,
-                logLevel: 'INFO',
-                colors: true
-            },
             unit: {
-                files: [
-                    { src: ['<%= config.testFolder %>/**/*.js'] , served: true }
-                ],
-                frameworks: ['jasmine','es6-shim'],
-                browsers: ['PhantomJS'],
-                reporters: ['progress'],
+                configFile: 'karma.conf.js',
                 autoWatch: false,
                 singleRun: true
             },
             autoUnit: {
-                files: [
-                    { src: ['<%= config.testFolder %>/**/*.js'] , served: true }
-                ],
-                frameworks: ['jasmine'],
+                configFile: 'karma.conf.js',
                 browsers: ['Chrome'],
-                autoWatch: true
+                autoWatch: true,
+                singleRun: false
             }
         },
 
@@ -193,7 +170,7 @@ module.exports = function(grunt) {
     });
 
     grunt.registerTask('karmaAuto', ['mavenEffectivePom','karma:autoUnit']);
-    grunt.registerTask('dev', ['mavenEffectivePom','bower-install-simple:dev','includeSource','wiredep','ngAnnotate','bowerRequirejs']);
-    grunt.registerTask('default', ['mavenEffectivePom','bower-install-simple:prod',/*'jshint',*/'concat','ngAnnotate',/*'uglify',*/'includeSource','wiredep','karma:unit']);
+    grunt.registerTask('dev', ['mavenEffectivePom','bower-install-simple:dev','includeSource','wiredep','ngAnnotate','bowerRequirejs','karma:unit']);
+    grunt.registerTask('default', ['mavenEffectivePom','bower-install-simple:prod',/*'jshint',*/'concat','ngAnnotate',/*'uglify',*/'includeSource','bowerRequirejs','karma:unit']);
 
 };
