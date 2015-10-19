@@ -226,8 +226,8 @@
                             <directory>src/main/webapp</directory>
                             <filtering>true</filtering>
                             <includes>
-                                <include>**/*.js</include>
-                                <include>**/*.html</include>
+                                <include>**/main.js</include>
+                                <include>**/app.js</include>
                             </includes>
                         </resource>
                     </webResources>

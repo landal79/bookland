@@ -1,33 +1,57 @@
-requirejs(['require'
-        , 'angular'
-        , './about/module'
-        , './authors/module'
-        , './alerts/module'
-        , './animations/animations'
-        , './books/module'
-        , './components/module'
-        , './filters/filters'
-        , './navbar/module'
-        , './settings/module'
-        , './tags/module'
+requirejs.config({
+    shim: {
+        'jquery': {
+            exports: '$'
+        },
+        'angular': {
+            exports: 'angular',
+            deps: ['jquery']
+        },
+        'angular-ui-router': {
+            deps: ['angular']
+        },
+        'angular-animate': {
+            deps: ['angular']
+        },
+        'angular-bootstrap': {
+            deps: ['angular', 'bootstrap']
+        },
+        'angular-resource': {
+            deps: ['angular']
+        },
+        'angular-aria': {
+            deps: ['angular']
+        },
+        'bootstrap': {
+            deps: ['jquery']
+        }
+    },
+    packages: [
+        'about', 'alerts', 'animations', 'authors', 'books', 'components', 'filters', 'navbar', 'settings', 'tags'
+    ]
+
+});
+
+requirejs(['angular'
+        , 'about'
+        , 'authors'
+        , 'alerts'
+        , 'animations'
+        , 'books'
+        , 'components'
+        , 'filters'
+        , 'navbar'
+        , 'settings'
+        , 'tags'
         , 'angular-resource'
         , 'angular-ui-router'
         , 'angular-bootstrap'
         , 'es6-shim'
         , 'bootstrap'],
-    function (require, angular, about) {
+    function (angular, about, authors, alerts, animations, books, components, filters, navbar, settings, tags) {
 
         var bookland = angular.module('bookland',
-            [require('./about/module')
-                , require('./authors/module')
-                , require('./alerts/module')
-                , require('./animations/animations')
-                , require('./books/module')
-                , require('./components/module')
-                , require('./filters/filters')
-                , require('./navbar/module')
-                , require('./settings/module')
-                , require('./tags/module')
+            [about, authors, alerts, animations, books, components, filters, navbar, settings, tags
                 , 'ngResource'
                 , 'ui.router'
                 , 'ui.bootstrap']);
@@ -89,4 +113,4 @@ requirejs(['require'
 
         angular.bootstrap(document, ['bookland']);
 
-});
+    });
