@@ -372,7 +372,7 @@
                                 </goals>
                                 <phase>prepare-package</phase>
                                 <configuration>
-                                    <arguments>--baseurl=${baseurl}</arguments>
+                                    <arguments>dev --baseurl=${baseurl}</arguments>
                                 </configuration>
                             </execution>
                         </executions>

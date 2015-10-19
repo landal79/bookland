@@ -152,6 +152,6 @@ module.exports = function(grunt) {
 
     grunt.registerTask('karmaAuto', ['mavenEffectivePom','karma:autoUnit']);
     grunt.registerTask('dev', ['mavenEffectivePom','bower-install-simple:dev','includeSource','wiredep','ngAnnotate','bowerRequirejs', 'requirejs:dev', 'karma:unit']);
-    grunt.registerTask('default', ['mavenEffectivePom','bower-install-simple:release',/*'jshint',*/,'ngAnnotate','includeSource','bowerRequirejs', 'requirejs:release', 'karma:unit']);
+    grunt.registerTask('default', ['mavenEffectivePom','bower-install-simple:release','includeSource','wiredep','ngAnnotate','bowerRequirejs', 'requirejs:release', 'karma:unit']);
 
 };
