@@ -1,4 +1,4 @@
-define(['require','angular','angular-ui-router',
+define(['require', 'angular', 'angular-ui-router'
         , './alertsController']
     , function (require, angular) {
 

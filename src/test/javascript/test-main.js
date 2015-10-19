@@ -44,6 +44,9 @@ requirejs.config({
         },
         require: []
     },
+    packages: [
+        'about', 'alerts', 'animations', 'authors', 'books', 'components', 'filters', 'navbar', 'settings', 'tags'
+    ],
     paths: {
         angular: basePath + 'lib/angular/angular',
         'angular-animate': basePath + 'lib/angular-animate/angular-animate',
