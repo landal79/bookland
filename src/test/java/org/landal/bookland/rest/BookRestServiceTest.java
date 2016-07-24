@@ -29,6 +29,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.landal.bookland.model.Author;
 import org.landal.bookland.model.Book;
+import org.landal.bookland.repositories.Repository;
 import org.landal.bookland.resources.ResourcesProvider;
 import org.landal.bookland.services.BookService;
 
@@ -43,7 +44,7 @@ public class BookRestServiceTest {
     public static Archive<?> createDeployment() {
         return ShrinkWrap
                 .create(WebArchive.class, "test.war")
-                .addPackages(true, ResourcesProvider.class.getPackage(), Book.class.getPackage(),
+                .addPackages(true, ResourcesProvider.class.getPackage(), Book.class.getPackage(), Repository.class.getPackage(),
                         BookService.class.getPackage(), BookRestService.class.getPackage())
                 .addAsResource("META-INF/test-persistence.xml", "META-INF/persistence.xml")
                 .addAsWebInfResource(EmptyAsset.INSTANCE, "beans.xml").addAsWebInfResource("test-ds.xml")
