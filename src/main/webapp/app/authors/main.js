@@ -1,4 +1,4 @@
-define(['require','angular','angular-ui-router','angular-resource','es6-shim'
+define(['require','angular','angular-ui-router','angular-resource','angular-bootstrap','es6-shim'
         ,'./authorModalController'
         ,'./authorNewController'
         ,'./authorService'
@@ -6,7 +6,7 @@ define(['require','angular','angular-ui-router','angular-resource','es6-shim'
     ], function (require, angular) {
 
         var moduleName = 'bookland.author';
-        var authors = angular.module(moduleName, ['ngResource']);
+        var authors = angular.module(moduleName, ['ngResource','ui.bootstrap']);
 
         function blAuthorConfig($stateProvider) {
             $stateProvider

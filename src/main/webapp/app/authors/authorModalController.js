@@ -1,7 +1,7 @@
 define([], function () {
 
     // @ngInject
-    function AuthorModalController($scope, $rootScope, authorService, $modalInstance) {
+    function AuthorModalController($scope, $rootScope, authorService, $uibModalInstance) {
         $scope.author = {};
         $scope.save = function (author_form) {
             if (!author_form.$valid) {
@@ -14,10 +14,10 @@ define([], function () {
 
             $rootScope.$broadcast("author:added", author);
 
-            $modalInstance.close(author);
+            $uibModalInstance.close(author);
         };
         $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
+            $uibModalInstance.dismiss('cancel');
         };
     };
 
