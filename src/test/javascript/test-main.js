@@ -14,12 +14,12 @@ requirejs.config({
     baseUrl: basePath + 'app',
 
     shim: {
-        jquery: {
+        'jquery': {
             exports: '$'
         },
-        angular: {
+        'angular': {
             exports: 'angular',
-            deps: ['jquery']
+            deps: ['jquery','es6-shim']
         },
         'angular-ui-router': {
             deps: ['angular']
@@ -48,7 +48,7 @@ requirejs.config({
         'about', 'alerts', 'animations', 'authors', 'books', 'components', 'filters', 'navbar', 'settings', 'tags'
     ],
     paths: {
-        angular: basePath + 'lib/angular/angular',
+        'angular': basePath + 'lib/angular/angular',
         'angular-animate': basePath + 'lib/angular-animate/angular-animate',
         'angular-aria': basePath + 'lib/angular-aria/angular-aria',
         'angular-bootstrap': basePath + 'lib/angular-bootstrap/ui-bootstrap-tpls',
@@ -56,9 +56,9 @@ requirejs.config({
         'angular-resource': basePath + 'lib/angular-resource/angular-resource',
         'angular-scenario': basePath + 'lib/angular-scenario/angular-scenario',
         'angular-ui-router': basePath + 'lib/angular-ui-router/release/angular-ui-router',
-        bootstrap: basePath + 'lib/bootstrap/dist/js/bootstrap.min',
+        'bootstrap': basePath + 'lib/bootstrap/dist/js/bootstrap.min',
         'es6-shim': basePath + 'lib/es6-shim/es6-shim',
-        jquery: basePath + 'lib/jquery/dist/jquery'
+        'jquery': basePath + 'lib/jquery/dist/jquery'
     },
 
     // dynamically load all test files

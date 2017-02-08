@@ -5,7 +5,7 @@ requirejs.config({
         },
         'angular': {
             exports: 'angular',
-            deps: ['jquery']
+            deps: ['jquery','es6-shim']
         },
         'angular-ui-router': {
             deps: ['angular']
@@ -27,8 +27,8 @@ requirejs.config({
         }
     },
     packages: [
-        'about', 'alerts', 'animations', 'authors', 'books', 'components', 'filters', 'navbar', 'settings', 'tags'
-    ]
+        'components', 'filters', 'about', 'alerts', 'animations', 'authors', 'books', 'navbar', 'settings', 'tags'
+    ],
 
 });
 
@@ -38,23 +38,16 @@ requirejs(['angular'
         , 'alerts'
         , 'animations'
         , 'books'
-        , 'components'
-        , 'filters'
         , 'navbar'
         , 'settings'
         , 'tags'
-        , 'angular-resource'
-        , 'angular-ui-router'
-        , 'angular-bootstrap'
-        , 'es6-shim'
-        , 'bootstrap'],
-    function (angular, about, authors, alerts, animations, books, components, filters, navbar, settings, tags) {
+        , 'angular-ui-router'],
+    function (angular, about, authors, alerts, animations, books, navbar, settings, tags) {
 
         var bookland = angular.module('bookland',
-            [about, authors, alerts, animations, books, components, filters, navbar, settings, tags
-                , 'ngResource'
+            [about, authors, alerts, animations, books, navbar, settings, tags
                 , 'ui.router'
-                , 'ui.bootstrap']);
+                ]);
 
         /**
          * Application base url, is parametrized to make it work both on localhost and

@@ -2,33 +2,32 @@
 <html>
 
 <head>
-	<meta charset="UTF-8">
-	<title>Bookland</title>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Bookland &copy;</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<!-- bower:css -->
-	<!-- endbower -->
+    <!-- bower:css -->
+    <!-- endbower -->
 
-	<!-- include: "type": "css", "files": "assets/css/**/*.css" -->
+    <!-- include: "type": "css", "files": "assets/css/**/*.css" -->
 
 </head>
 
 <body>
-	<div ng-include src="'app/navbar/navbar.html'"></div>
+<div ng-include src="'app/navbar/navbar.html'"></div>
 
-	<div ng-include src="'app/alerts/alerts.html'"></div>
+<div ng-include src="'app/alerts/alerts.html'"></div>
 
-	<div class="container">
-		<div class="row">
-			 <div ui-view class="col-md-12"></div>
-		</div>
-		<footer>
-			<p>&copy; Landal 2015</p>
-		</footer>
-	</div>
+<div ui-view></div>
 
-	<script data-main="app/app" src="lib/requirejs/require.js"></script>
+<footer class="footer">
+    <div class="container-fluid">
+        <p>&copy; Landal 2015</p>
+    </div>
+</footer>
+
+<script data-main="app/app" src="lib/requirejs/require.js"></script>
 
 </body>
 

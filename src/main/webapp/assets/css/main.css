@@ -1,82 +1,82 @@
 body {
-  margin-top: 70px;
+    margin-top: 70px;
 }
 
 .header {
-  text-shadow: 4px 4px 2px rgba(150, 150, 150, 1);
+    text-shadow: 4px 4px 2px rgba(150, 150, 150, 1);
 }
 
 .thumb-img {
-  width: 80px;
-  height: 80px;
-  border: solid 1px black;
-  border-radius: 5px;
-  padding: 1px;
-  transition: all .2s ease-in-out;
+    width: 80px;
+    height: 80px;
+    border: solid 1px black;
+    border-radius: 5px;
+    padding: 1px;
+    transition: all .2s ease-in-out;
 }
 
 .thumb-img:hover {
-  transform: scale(2);
+    transform: scale(2);
 }
 
 .navbar {
-  border-bottom: 1px solid #393F3F !important;
+    border-bottom: 1px solid #393F3F !important;
 }
 
 .navbar-inner {
-  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.175) !important;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.175) !important;
 }
 
 .navbar a.btn {
-  padding: 10px !important;
-  margin-top: 2px;
+    padding: 10px !important;
+    margin-top: 2px;
 }
 
 a {
-  outline: none !important;
+    outline: none !important;
 }
 
 .action-bar {
-  margin-top: 30px;
-  font-style: italic;
+    margin-top: 30px;
+    font-style: italic;
 }
 
 .action-bar a {
-  padding-top: 25px !important;
-  padding-bottom: 5px !important;
+    padding-top: 25px !important;
+    padding-bottom: 5px !important;
 }
 
 .tab-content {
-  padding: 5px;
+    padding: 5px;
 }
 
 .tags {
-  line-height: 2.2;
+    line-height: 2.2;
 }
 
 .tag {
-  margin-right: 5px !important;
+    margin-right: 5px !important;
 }
 
 .angular-input-stars {
-  display: inline-block;
-  padding: 0;
-  padding-left: -5px;
-  list-style: none;
+    display: inline-block;
+    padding: 0;
+    padding-left: -5px;
+    list-style: none;
 }
 
 /* stars directive */
 .angular-input-stars > li {
-  font-size: 17px;
-  display: inline-block;
-  padding-right: 5px;
-  padding-left: 5px;
-  cursor: pointer;
+    font-size: 17px;
+    display: inline-block;
+    padding-right: 5px;
+    padding-left: 5px;
+    cursor: pointer;
 }
 
 .angular-input-stars > li .active {
     color: #FDE35E;
-    text-shadow: black 0 0 1px, 0 0 1px ;
+    text-shadow: black 0 0 1px, 0 0 1px;
 }
 
 /* animate ngRepeat in book listing */
@@ -84,33 +84,40 @@ a {
 .book-listing.ng-enter,
 .book-listing.ng-leave,
 .book-listing.ng-move {
-  -webkit-transition: 0.5s linear all;
-  -moz-transition: 0.5s linear all;
-  -o-transition: 0.5s linear all;
-  transition: 0.5s linear all;
+    -webkit-transition: 0.5s linear all;
+    -moz-transition: 0.5s linear all;
+    -o-transition: 0.5s linear all;
+    transition: 0.5s linear all;
 }
 
 .book-listing.ng-enter,
 .book-listing.ng-move {
-  opacity: 0;
-  height: 0;
-  overflow: hidden;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
 }
 
 .book-listing.ng-move.ng-move-active,
 .book-listing.ng-enter.ng-enter-active {
-  opacity: 1;
-  height: 120px;
+    opacity: 1;
+    height: 120px;
 }
 
 .book-listing.ng-leave {
-  opacity: 1;
-  overflow: hidden;
+    opacity: 1;
+    overflow: hidden;
 }
 
 .book-listing.ng-leave.ng-leave-active {
-  opacity: 0;
-  height: 0;
-  padding-top: 0;
-  padding-bottom: 0;
+    opacity: 0;
+    height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+#loader indicator
+.loading {
+    padding: 20px;
+    margin: 40px 5px;
+    width: 80px;
 }

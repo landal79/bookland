@@ -98,7 +98,7 @@ module.exports = function(grunt) {
             options: {
                 baseUrl: '<%= config.destSrcFolder %>',
                 mainConfigFile: '<%= config.destSrcFolder %>/main.js',
-                exclude: ['main','jquery', 'angular', 'angular-ui-router', 'angular-animate', 'angular-bootstrap', 'angular-resource', 'angular-aria', 'bootstrap','es6-shim'],
+                exclude: ['jquery', 'angular', 'angular-ui-router', 'angular-animate', 'angular-bootstrap', 'angular-resource', 'angular-aria', 'bootstrap','es6-shim'],
                 out: '<%= config.destSrcFolder %>/app.js',
                 name: 'main',
                 removeCombined: true,

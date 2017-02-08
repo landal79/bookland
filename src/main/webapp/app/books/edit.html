@@ -1,107 +1,117 @@
-<div class="panel panel-default">
-	<div class="panel-heading">
-		<div class="row">
-			<div class="col-sm-2">
-				<h4>Book detail</h4>
-			</div>
-			<div class="col-sm-offset-8 col-sm-2 btn-group">
-				<button type="submit" class="btn btn-danger" ng-click="cancel()">Cancel</button>
-				<button type="submit" class="btn btn-default" ng-click="save()">Save</button>
-			</div>
-		</div>
-	</div>
-	<div class="panel-body">
-		<uib-tabset> <uib-tab heading="General">
-		<div class="tab-content">
-			<div class="row">
-				<div class="col-md-2">
-					<img alt="book cover" ng-src="{{imageUrl}}" style="border: 1px dashed #000; width: 180px; height: 250px;">
-				</div>
-				<div class="col-md-10">
-					<form class="form-horizontal" role="form" name="bookForm">
-						<div class="form-group">
-							<label for="inputTitle" class="col-sm-2 control-label">Title</label>
-							<div class="col-sm-10">
-								<input ng-model="book.title" required type="text" class="form-control" id="inputTitle"
-									placeholder="Enter book title ...">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="inputISBN" class="col-sm-2 control-label">ISBN</label>
-							<div class="col-sm-10">
-								<input ng-model="book.isbn" required type="text" class="form-control" id="inputISBN"
-									placeholder="Enter ISBN ...">
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="pubDate" class="col-sm-2 control-label">Pub. date</label>
-							<div class="col-sm-10">
-								<bl-datepicker date-model="book.publishingDate" date-options="dateOptions" opened="opened" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label for="exampleInputFile" class="col-sm-2 control-label">Book cover</label>
-							<div class="col-sm-10">
-								<bl-file-upload onfileselected="onFileSelected(event)" />
-							</div>
-						</div>	
-						<div class="form-group">
-							<label for="rating" class="col-sm-2 control-label">Rating</label>
-							<div class="col-sm-10">
-								<uib-rating id="rating" ng-model="book.rating" max="5" />
-							</div>
-						</div>
-						<bl-tag-selection book="book" />
-					</form>
-				</div>
-			</div>
-		</div>
-		</uib-tab><uib-tab heading="Authors">
-		<div class="tab-content panel panel-info form-group" ng-controller="BookAuthorTabController"
-			style="margin: 5px; margin-left: 25px;">
-			<div class="panel-body">
-				<div class="row form-group">
-					<label for="authorSelect" class="col-sm-2 control-label">Authors</label>
-					<div class="col-sm-4">
-						<div class="input-group">
+<div class="container-fluid">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-sm-2">
+                    <h4>Book detail</h4>
+                </div>
+                <div class="col-sm-offset-8 col-sm-2 btn-group">
+                    <button type="submit" class="btn btn-danger" ng-click="cancel()">Cancel</button>
+                    <button type="submit" class="btn btn-default" ng-click="save()">Save</button>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <uib-tabset>
+                <uib-tab heading="General">
+                    <div class="tab-content">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img alt="book cover" ng-src="{{imageUrl}}"
+                                     style="border: 1px dashed #000; width: 180px; height: 250px;">
+                            </div>
+                            <div class="col-md-10">
+                                <form class="form-horizontal" role="form" name="bookForm">
+                                    <div class="form-group">
+                                        <label for="inputTitle" class="col-sm-2 control-label">Title</label>
+                                        <div class="col-sm-10">
+                                            <input ng-model="book.title" required type="text" class="form-control"
+                                                   id="inputTitle"
+                                                   placeholder="Enter book title ...">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputISBN" class="col-sm-2 control-label">ISBN</label>
+                                        <div class="col-sm-10">
+                                            <input ng-model="book.isbn" required type="text" class="form-control"
+                                                   id="inputISBN"
+                                                   placeholder="Enter ISBN ...">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="pubDate" class="col-sm-2 control-label">Pub. date</label>
+                                        <div class="col-sm-10">
+                                            <bl-datepicker date-model="book.publishingDate" date-options="dateOptions"
+                                                           opened="opened"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputFile" class="col-sm-2 control-label">Book cover</label>
+                                        <div class="col-sm-10">
+                                            <bl-file-upload onfileselected="onFileSelected(event)"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="rating" class="col-sm-2 control-label">Rating</label>
+                                        <div class="col-sm-10">
+                                            <uib-rating id="rating" ng-model="book.rating" max="5"/>
+                                        </div>
+                                    </div>
+                                    <bl-tag-selection book="book"/>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </uib-tab>
+                <uib-tab heading="Authors">
+                    <div class="tab-content panel panel-info form-group" ng-controller="BookAuthorTabController"
+                         style="margin: 5px; margin-left: 25px;">
+                        <div class="panel-body">
+                            <div class="row form-group">
+                                <label for="authorSelect" class="col-sm-2 control-label">Authors</label>
+                                <div class="col-sm-4">
+                                    <div class="input-group">
 							<span class="input-group-btn">
 								<button type="button" class="btn btn-default btn-primary" ng-click="addAuthor(author)">
 									<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 								</button>
 							</span>
-							<bl-author-select author="author" />
-						</div>
-					</div>
-					<div class="col-sm-3">
-						<button type="button" class="btn btn-default btn-primary col-sm-4" ng-click="open()" title="Insert new author">
-							<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-							<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-						</button>
-					</div>
-				</div>
-				<div class="row form-group">
-					<div class="col-md-offset-2 col-md-4">
-						<ul class="list-group">
-							<li ng-repeat="author in book.authors" class="list-group-item">
-								<span class=""> {{author.name}} {{author.surname}} </span>
-								<span class="pull-right">
+                                        <bl-author-select author="author"/>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <button type="button" class="btn btn-default btn-primary col-sm-4" ng-click="open()"
+                                            title="Insert new author">
+                                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-md-offset-2 col-md-4">
+                                    <ul class="list-group">
+                                        <li ng-repeat="author in book.authors" class="list-group-item">
+                                            <span class=""> {{author.name}} {{author.surname}} </span>
+                                            <span class="pull-right">
 									<a href class="btn btn-danger btn-xs" ng-click="removeAuthor($index)">X</a>
 								</span>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-		</uib-tab> </uib-tabset>
-	</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </uib-tab>
+            </uib-tabset>
+        </div>
 
-	<div class="panel-footer">
-		<div class="row">
-			<div class="col-sm-offset-10 col-sm-2 btn-group">
-				<button type="submit" class="btn btn-danger" ng-click="cancel()">Cancel</button>
-				<button type="submit" class="btn btn-default" ng-click="save()">Save</button>
-			</div>
-		</div>
-	</div>
+        <div class="panel-footer">
+            <div class="row">
+                <div class="col-sm-offset-10 col-sm-2 btn-group">
+                    <button type="submit" class="btn btn-danger" ng-click="cancel()">Cancel</button>
+                    <button type="submit" class="btn btn-default" ng-click="save()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

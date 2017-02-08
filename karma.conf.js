@@ -17,8 +17,8 @@ module.exports = function(config) {
 
         // list of files to exclude
         exclude: [
-            'target/bookland/app/config.js',
             'target/bookland/app/app.js',
+            'target/bookland/app/main.js',
         ],
 
         // preprocess matching files before serving them to the browser

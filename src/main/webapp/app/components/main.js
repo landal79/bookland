@@ -1,7 +1,11 @@
-define(['require','angular', 'angular-bootstrap'
+define(['require'
+        , 'angular'
+        , 'angular-bootstrap'
         , './fileReaderService'
         , './datepickerDirective'
-        , './fileUploadDirective'],
+        , './fileUploadDirective'
+        ,  './loadingDirective'
+    ],
 
     function (require, angular) {
 
@@ -13,6 +17,7 @@ define(['require','angular', 'angular-bootstrap'
 
         blComponents.directive("blDatepicker", require('./datepickerDirective'));
         blComponents.directive('blFileUpload', require('./fileUploadDirective'));
+        blComponents.directive('blLoader', require('./loadingDirective'));
 
         return moduleName;
 

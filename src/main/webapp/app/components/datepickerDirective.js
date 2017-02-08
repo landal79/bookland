@@ -3,6 +3,7 @@ define([], function () {
     function blDatepicker() {
         return {
             restrict: "E",
+            templateUrl: 'app/components/datepicker.html',
             scope: {
                 dateModel: "=",
                 dateOptions: "=",
@@ -26,9 +27,8 @@ define([], function () {
                     'show-weeks': false
                 };
 
-            },
+            }
 
-            templateUrl: 'app/components/datepicker.html'
         };
     }
 

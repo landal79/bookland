@@ -1,4 +1,9 @@
-define(['require', 'angular', 'angular-ui-router', 'angular-resource', 'es6-shim'
+define(['require'
+        , 'angular'
+        , 'angular-ui-router'
+        , 'angular-resource'
+        , 'components'
+        , 'filters'
         , './bookService'
         , './bookImageService'
         , './blListItemDirective'
@@ -6,10 +11,10 @@ define(['require', 'angular', 'angular-ui-router', 'angular-resource', 'es6-shim
         , './bookController'
         , './bookAuthorTabController'
         , './bookDetailController'],
-    function (require, angular) {
+    function (require, angular, components, filters) {
 
         var moduleName = 'bookland.book';
-        var blBooks = angular.module(moduleName, ['ngResource']);
+        var blBooks = angular.module(moduleName, ['ngResource','ui.router','ui.bootstrap', 'bookland.components', 'bookland.filters']);
 
         function blConfig($stateProvider) {
             $stateProvider
