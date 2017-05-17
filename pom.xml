@@ -11,10 +11,13 @@
     <properties>
 
         <!-- dependencies versions -->
+        <version.wildfly.bom>10.1.1.Final</version.wildfly.bom>
+
         <version.junit>4.12</version.junit>
         <hibernate.version>4.3.10.Final</hibernate.version>
 
         <version.arquillian.core>1.1.11.Final</version.arquillian.core>
+
         <version.arquillian.persistence>1.0.0.Alpha5</version.arquillian.persistence>
 
         <version.resteasy>3.0.14.Final</version.resteasy>
@@ -44,11 +47,11 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.jboss.spec</groupId>
-                <artifactId>jboss-javaee-7.0</artifactId>
-                <version>1.0.3.Final</version>
-                <type>pom</type>
+                <groupId>org.wildfly.bom</groupId>
+                <artifactId>wildfly-javaee7-with-tools</artifactId>
                 <scope>import</scope>
+                <type>pom</type>
+                <version>${version.wildfly.bom}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.deltaspike.distribution</groupId>
@@ -57,20 +60,21 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>org.jboss.arquillian</groupId>
-                <artifactId>arquillian-bom</artifactId>
-                <version>${version.arquillian.core}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>org.jboss.resteasy</groupId>
-                <artifactId>resteasy-bom</artifactId>
-                <version>${version.resteasy}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
+
+            <!--<dependency>-->
+                <!--<groupId>org.jboss.arquillian</groupId>-->
+                <!--<artifactId>arquillian-bom</artifactId>-->
+                <!--<version>${version.arquillian.core}</version>-->
+                <!--<scope>import</scope>-->
+                <!--<type>pom</type>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>org.jboss.resteasy</groupId>-->
+                <!--<artifactId>resteasy-bom</artifactId>-->
+                <!--<version>${version.resteasy}</version>-->
+                <!--<type>pom</type>-->
+                <!--<scope>import</scope>-->
+            <!--</dependency>-->
         </dependencies>
     </dependencyManagement>
 
@@ -158,11 +162,11 @@
             <scope>runtime</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.jboss.resteasy</groupId>
-            <artifactId>resteasy-jaxrs</artifactId>
-            <scope>provided</scope>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.jboss.resteasy</groupId>-->
+            <!--<artifactId>resteasy-jaxrs</artifactId>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
@@ -187,12 +191,16 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>${version.junit}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jboss.arquillian.junit</groupId>
             <artifactId>arquillian-junit-container</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.arquillian.protocol</groupId>
+            <artifactId>arquillian-protocol-servlet</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -209,7 +217,6 @@
         <dependency>
             <groupId>org.jboss.logging</groupId>
             <artifactId>jboss-logging</artifactId>
-            <version>3.2.0.Final</version>
             <scope>test</scope>
         </dependency>
 
@@ -291,10 +298,11 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>${version.plugin.surefire}</version>
                 <configuration>
-                    <skipTests>true</skipTests>
+                    <!--<skipTests>true</skipTests>
                     <systemPropertyVariables>
                         <arquillian.launch>arquillian-wildfly-remote</arquillian.launch>
                     </systemPropertyVariables>
+                    -->
                 </configuration>
             </plugin>
             <plugin>
