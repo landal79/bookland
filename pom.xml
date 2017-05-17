@@ -12,20 +12,12 @@
 
         <!-- dependencies versions -->
         <version.wildfly.bom>10.1.1.Final</version.wildfly.bom>
-
-        <version.junit>4.12</version.junit>
-        <hibernate.version>4.3.10.Final</hibernate.version>
-
-        <version.arquillian.core>1.1.11.Final</version.arquillian.core>
-
-        <version.arquillian.persistence>1.0.0.Alpha5</version.arquillian.persistence>
-
-        <version.resteasy>3.0.14.Final</version.resteasy>
         <version.deltaspike>1.7.2</version.deltaspike>
         <version.slf4j>1.7.25</version.slf4j>
         <version.apache.commons.lang>3.5</version.apache.commons.lang>
         <version.apache.commons.io>2.5</version.apache.commons.io>
         <version.guava>21.0</version.guava>
+        <version.arquillian.persistence>1.0.0.Alpha7</version.arquillian.persistence>
 
         <!-- plugins versions -->
         <version.plugin.compiler>3.6.1</version.plugin.compiler>
@@ -177,15 +169,15 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-jpamodelgen</artifactId>
-            <version>${hibernate.version}</version>
             <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.hibernate.javax.persistence</groupId>
-                    <artifactId>hibernate-jpa-2.0-api</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator-annotation-processor</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
 
         <!-- TEST -->
         <dependency>
@@ -203,6 +195,7 @@
             <artifactId>arquillian-protocol-servlet</artifactId>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-jaxb-provider</artifactId>
@@ -222,7 +215,7 @@
 
         <dependency>
             <groupId>org.jboss.arquillian.extension</groupId>
-            <artifactId>arquillian-persistence-impl</artifactId>
+            <artifactId>arquillian-persistence-dbunit</artifactId>
             <version>${version.arquillian.persistence}</version>
             <scope>test</scope>
             <exclusions>
