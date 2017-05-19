@@ -14,6 +14,7 @@
         <version.wildfly.bom>10.1.1.Final</version.wildfly.bom>
         <version.deltaspike>1.7.2</version.deltaspike>
         <version.slf4j>1.7.25</version.slf4j>
+        <version.logback>1.2.2</version.logback>
         <version.apache.commons.lang>3.5</version.apache.commons.lang>
         <version.apache.commons.io>2.5</version.apache.commons.io>
         <version.guava>21.0</version.guava>
@@ -135,10 +136,16 @@
             <version>${version.slf4j}</version>
         </dependency>
 
+        <!--<dependency>-->
+            <!--<groupId>org.slf4j</groupId>-->
+            <!--<artifactId>slf4j-log4j12</artifactId>-->
+            <!--<version>${version.slf4j}</version>-->
+        <!--</dependency>-->
+
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>${version.slf4j}</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${version.logback}</version>
         </dependency>
 
         <!-- DeltaSpike -->
