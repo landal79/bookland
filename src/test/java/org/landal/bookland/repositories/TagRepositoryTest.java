@@ -12,6 +12,7 @@ import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.arquillian.persistence.ShouldMatchDataSet;
+import org.jboss.arquillian.transaction.api.annotation.Transactional;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.asset.EmptyAsset;
 import org.jboss.shrinkwrap.api.asset.StringAsset;
@@ -22,6 +23,7 @@ import org.landal.bookland.model.Tag;
 import org.landal.bookland.utils.CoreDeployments;
 import org.landal.bookland.utils.PersistenceDeployments;
 
+@Transactional
 @RunWith(Arquillian.class)
 public class TagRepositoryTest {
 
@@ -45,22 +47,16 @@ public class TagRepositoryTest {
     @ShouldMatchDataSet(value = { "tags.yml" }, excludeColumns = { "*id" })
     public void test_persist() throws Exception {
 
-        transaction.begin();
-
         Tag tag = new Tag("popular");
         tag = tagRepository.persist(tag);
 
         assertThat(tag.getId(), notNullValue());
-
-        transaction.commit();
 
     }
 
 
     @Test
     public void test_getAll() throws Exception {
-
-        transaction.begin();
 
         tagRepository.persist(new Tag("popular"));
         tagRepository.persist(new Tag("scifi"));
