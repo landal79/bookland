@@ -55,18 +55,18 @@
             </dependency>
 
             <!--<dependency>-->
-                <!--<groupId>org.jboss.arquillian</groupId>-->
-                <!--<artifactId>arquillian-bom</artifactId>-->
-                <!--<version>${version.arquillian.core}</version>-->
-                <!--<scope>import</scope>-->
-                <!--<type>pom</type>-->
+            <!--<groupId>org.jboss.arquillian</groupId>-->
+            <!--<artifactId>arquillian-bom</artifactId>-->
+            <!--<version>${version.arquillian.core}</version>-->
+            <!--<scope>import</scope>-->
+            <!--<type>pom</type>-->
             <!--</dependency>-->
             <!--<dependency>-->
-                <!--<groupId>org.jboss.resteasy</groupId>-->
-                <!--<artifactId>resteasy-bom</artifactId>-->
-                <!--<version>${version.resteasy}</version>-->
-                <!--<type>pom</type>-->
-                <!--<scope>import</scope>-->
+            <!--<groupId>org.jboss.resteasy</groupId>-->
+            <!--<artifactId>resteasy-bom</artifactId>-->
+            <!--<version>${version.resteasy}</version>-->
+            <!--<type>pom</type>-->
+            <!--<scope>import</scope>-->
             <!--</dependency>-->
         </dependencies>
     </dependencyManagement>
@@ -85,10 +85,12 @@
         <dependency>
             <groupId>org.jboss.spec.javax.interceptor</groupId>
             <artifactId>jboss-interceptors-api_1.2_spec</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.jboss.spec.javax.transaction</groupId>
             <artifactId>jboss-transaction-api_1.2_spec</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.jboss.spec.javax.servlet</groupId>
@@ -137,9 +139,9 @@
         </dependency>
 
         <!--<dependency>-->
-            <!--<groupId>org.slf4j</groupId>-->
-            <!--<artifactId>slf4j-log4j12</artifactId>-->
-            <!--<version>${version.slf4j}</version>-->
+        <!--<groupId>org.slf4j</groupId>-->
+        <!--<artifactId>slf4j-log4j12</artifactId>-->
+        <!--<version>${version.slf4j}</version>-->
         <!--</dependency>-->
 
         <dependency>
@@ -162,9 +164,9 @@
         </dependency>
 
         <!--<dependency>-->
-            <!--<groupId>org.jboss.resteasy</groupId>-->
-            <!--<artifactId>resteasy-jaxrs</artifactId>-->
-            <!--<scope>provided</scope>-->
+        <!--<groupId>org.jboss.resteasy</groupId>-->
+        <!--<artifactId>resteasy-jaxrs</artifactId>-->
+        <!--<scope>provided</scope>-->
         <!--</dependency>-->
 
         <dependency>
