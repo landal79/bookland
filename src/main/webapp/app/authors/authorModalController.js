@@ -19,8 +19,7 @@ define([], function () {
         $scope.cancel = function () {
             $uibModalInstance.dismiss('cancel');
         };
-    };
-
+    }
     return AuthorModalController;
 
 });

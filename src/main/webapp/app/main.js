@@ -100,8 +100,7 @@ requirejs(['angular'
                     size: 'md'
                 });
             });
-        };
-
+        }
         bookland.run(blRun);
 
         angular.bootstrap(document, ['bookland']);

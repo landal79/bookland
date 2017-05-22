@@ -6,13 +6,14 @@
     "type": "git",
     "url": "git+https://github.com/landal79/bookland.git"
   },
-  "dependencies": {},
+  "dependencies": {
+  },
   "devDependencies": {
     "bower": "~1.8.0",
     "es5-shim": "^ 4.5.9",
     "es6-shim": "^0.35.3",
     "grunt": "^1.0.1",
-    "grunt-bower-install-simple": "^1.2.3",
+    "grunt-bower-install-simple": "^1.2.4",
     "grunt-bower-requirejs": "~2.0.0",
     "grunt-cli": "~1.2.0",
     "grunt-contrib-concat": "~1.0.1",
