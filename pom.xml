@@ -19,6 +19,7 @@
         <version.apache.commons.io>2.5</version.apache.commons.io>
         <version.guava>21.0</version.guava>
         <version.arquillian.persistence>1.0.0.Alpha7</version.arquillian.persistence>
+        <version.google-api-services-books>v1-rev92-1.22.0</version.google-api-services-books>
 
         <!-- plugins versions -->
         <version.plugin.compiler>3.6.1</version.plugin.compiler>
@@ -34,6 +35,7 @@
         <maven.compiler.source>${version.java}</maven.compiler.source>
 
         <baseurl>/bookland</baseurl>
+
 
     </properties>
 
@@ -148,6 +150,12 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>${version.logback}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-books</artifactId>
+            <version>${version.google-api-services-books}</version>
         </dependency>
 
         <!-- DeltaSpike -->

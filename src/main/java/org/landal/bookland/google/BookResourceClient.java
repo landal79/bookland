@@ -16,7 +16,7 @@ public class BookResourceClient {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BookResourceClient.class);
 
-    private static final String BASE_URL = "https://www.googleapis.com/books/v1/volumes";
+    private static final String BASE_URL = "https://www.googleapis.com/books/v1";
 
     private Client restClient;
     private WebTarget volumeResource;
@@ -28,7 +28,10 @@ public class BookResourceClient {
     }
 
     public String findByName(String name) {
-        Response response = volumeResource.path("?q={query}").resolveTemplate("query", name).request().get();
-        return response.toString();
+        Response response = volumeResource.path("volumes")
+                .queryParam("q",name)
+                .request()
+                .get();
+        return response.readEntity(String.class);
     }
 }
