@@ -8,11 +8,28 @@ import com.google.api.services.books.Books.Volumes.List;
 import com.google.api.services.books.BooksRequestInitializer;
 import com.google.api.services.books.model.Volume;
 import com.google.api.services.books.model.Volumes;
+import com.google.common.base.Preconditions;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.deltaspike.core.util.CollectionUtils;
+import org.slf4j.LoggerFactory;
+import org.slf4j.bridge.SLF4JBridgeHandler;
 
 import java.net.URLEncoder;
 import java.text.NumberFormat;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 public class GoogleBooksClient {
+
+    private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(GoogleBooksClient.class);
+
+    static {
+        LogManager.getLogManager().reset();
+        SLF4JBridgeHandler.removeHandlersForRootLogger();
+        SLF4JBridgeHandler.install();
+        Logger.getLogger("global").setLevel(Level.FINEST);
+    }
 
     private static final String APPLICATION_NAME = "bookland/v1.0";
 
@@ -20,6 +37,10 @@ public class GoogleBooksClient {
     private static final NumberFormat PERCENT_FORMATTER = NumberFormat.getPercentInstance();
 
     public void query(String query) throws Exception{
+        Preconditions.checkArgument(StringUtils.isNotBlank(query));
+
+        LOGGER.debug("Query string: {}", query);
+
         ClientCredentials.errorIfNotSpecified();
 
         JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
