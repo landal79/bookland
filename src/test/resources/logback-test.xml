@@ -1,28 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Example LOGBACK Configuration File
+  http://logback.qos.ch/manual/configuration.html
+  -->
 <configuration debug="true">
-
-    <!--
+    <!-- address performance concern with jul-to-slf4j -->
     <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
         <resetJUL>true</resetJUL>
     </contextListener>
-    -->
 
-  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-    <!-- encoders are assigned the type
-         ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
-    <encoder>
-      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
-    </encoder>
-  </appender> 
-  
-  <logger name="org.hibernate" level="ERROR"/>
-  <logger name="org.hibernate.type" level="WARN"/>
-  <logger name="org.hibernate.sql" level="WARN"/>
-  <logger name="org.jboss.weld" level="WARN"/>
-  <logger name="bitronix.tm" level="TRACE"/>
-  <logger name="com.google" level="ALL"/>
-  <logger name="org.apache.http" level="ALL"/>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoders are assigned the type
+             ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
 
-  <root level="all">
-    <appender-ref ref="STDOUT" />
-  </root>
+    <logger name="org.hibernate" level="ERROR"/>
+    <logger name="org.hibernate.type" level="WARN"/>
+    <logger name="org.hibernate.sql" level="WARN"/>
+    <logger name="org.jboss.weld" level="WARN"/>
+    <logger name="bitronix.tm" level="TRACE"/>
+    <logger name="com.google" level="ALL"/>
+    <logger name="org.apache.http" level="TRACE"/>
+
+    <root level="all">
+        <appender-ref ref="STDOUT"/>
+    </root>
 </configuration>

@@ -40,52 +40,39 @@ public class QueryParams {
             return this;
         }
 
-        private void build() {
-            StringBuilder query = new StringBuilder();
-
-            if (StringUtils.isNotBlank(author)) {
-                query.append(PREFIX_AUTHOR).append(author);
-            }
-
-            if (StringUtils.isNotBlank(isbn)) {
-                query.append(PREFIX_ISBN).append(isbn);
-            }
-
-            if (StringUtils.isNotBlank(title)) {
-                query.append(PREFIX_TITLE).append(title);
-            }
-
-           // return query.toString();
+        private QueryParams build() {
+           return new QueryParams(this);
         }
 
     }
 
-    private String intitle;
-    private String author;
-    private String isbn;
+    private String query;
 
-    private QueryParams(String intitle, String author, String isbn) {
-        this.intitle = intitle;
-        this.author = author;
-        this.isbn = isbn;
+    private QueryParams(Builder builder) {
+        StringBuilder queryBuilder = new StringBuilder();
+
+        if (StringUtils.isNotBlank(builder.author)) {
+            queryBuilder.append(PREFIX_AUTHOR).append(builder.author);
+        }
+
+        if (StringUtils.isNotBlank(builder.isbn)) {
+            queryBuilder.append(PREFIX_ISBN).append(builder.isbn);
+        }
+
+        if (StringUtils.isNotBlank(builder.title)) {
+            queryBuilder.append(PREFIX_TITLE).append(builder.title);
+        }
+
+        this.query = builder.query;
     }
 
-    String toQueryString() {
-        StringBuilder query = new StringBuilder();
+    @Override
+    public String toString() {
+        return query;
+    }
 
-        if (StringUtils.isNotBlank(author)) {
-            query.append(PREFIX_AUTHOR).append(author);
-        }
-
-        if (StringUtils.isNotBlank(isbn)) {
-            query.append(PREFIX_ISBN).append(isbn);
-        }
-
-        if (StringUtils.isNotBlank(intitle)) {
-            query.append(PREFIX_TITLE).append(intitle);
-        }
-
-        return query.toString();
+    public String getQuery() {
+        return query;
     }
 
 

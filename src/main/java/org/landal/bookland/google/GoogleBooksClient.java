@@ -14,12 +14,17 @@ import org.apache.deltaspike.core.util.CollectionUtils;
 import org.slf4j.LoggerFactory;
 import org.slf4j.bridge.SLF4JBridgeHandler;
 
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import java.net.URLEncoder;
 import java.text.NumberFormat;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 
+@RequestScoped
 public class GoogleBooksClient {
 
     private static final org.slf4j.Logger LOGGER = LoggerFactory.getLogger(GoogleBooksClient.class);
@@ -36,25 +41,40 @@ public class GoogleBooksClient {
     private static final NumberFormat CURRENCY_FORMATTER = NumberFormat.getCurrencyInstance();
     private static final NumberFormat PERCENT_FORMATTER = NumberFormat.getPercentInstance();
 
-    public void query(String query) throws Exception{
-        Preconditions.checkArgument(StringUtils.isNotBlank(query));
+    @Inject
+    private GoogleBookMapper mapper;
 
-        LOGGER.debug("Query string: {}", query);
+    private Books booksClient;
 
-        ClientCredentials.errorIfNotSpecified();
+    @PostConstruct
+    private void onPostConstuct() {
+        try {
+            ClientCredentials.errorIfNotSpecified();
 
-        JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
-        // Set up Books client.
-        final Books books = new Books.Builder(GoogleNetHttpTransport.newTrustedTransport(), jsonFactory, null)
-                .setApplicationName(APPLICATION_NAME)
-                .setGoogleClientRequestInitializer(new BooksRequestInitializer(ClientCredentials.API_KEY))
-                .build();
+            JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
+            // Set up Books client.
+            booksClient = new Books.Builder(GoogleNetHttpTransport.newTrustedTransport(),
+                     jsonFactory, null)
+                    .setApplicationName(APPLICATION_NAME)
+                    .setGoogleClientRequestInitializer(new BooksRequestInitializer(ClientCredentials.API_KEY))
+                    .build();
+        } catch(Exception e) {
+            throw new RuntimeException(e);
+        }
 
-        List volumesList = books.volumes().list(query);
+    }
+
+    public void query(QueryParams params) throws Exception{
+        Objects.requireNonNull(params);
+
+        LOGGER.debug("Query string: {}", params);
+
+        List volumesList = booksClient.volumes().list(params.getQuery());
 
         Volumes volumes = volumesList.execute();
+
         if (volumes.getTotalItems() == 0 || volumes.getItems() == null) {
-            System.out.println("No matches found.");
+            LOGGER.info("No books found for query: {}", params.getQuery());
             return;
         }
 
@@ -120,7 +140,7 @@ public class GoogleBooksClient {
         System.out.println("==========");
         System.out.println(
                 volumes.getTotalItems() + " total results at http://books.google.com/ebooks?q="
-                        + URLEncoder.encode(query, "UTF-8"));
+                        + URLEncoder.encode(params.getQuery(), "UTF-8"));
     }
 
 }

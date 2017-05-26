@@ -20,6 +20,7 @@
         <version.guava>21.0</version.guava>
         <version.arquillian.persistence>1.0.0.Alpha7</version.arquillian.persistence>
         <version.google-api-services-books>v1-rev92-1.22.0</version.google-api-services-books>
+        <version.mapstruct>1.1.0.Final</version.mapstruct>
 
         <!-- plugins versions -->
         <version.plugin.compiler>3.6.1</version.plugin.compiler>
@@ -132,6 +133,12 @@
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>${version.guava}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-jdk8</artifactId> <!-- use mapstruct-jdk8 for Java 8 or higher -->
+            <version>${version.mapstruct}</version>
         </dependency>
 
         <dependency>
@@ -299,6 +306,13 @@
                 <configuration>
                     <!-- workaround for generated classes due to maven bug -->
                     <useIncrementalCompilation>false</useIncrementalCompilation>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.mapstruct</groupId>
+                            <artifactId>mapstruct-processor</artifactId>
+                            <version>${version.mapstruct}</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
             <plugin>
