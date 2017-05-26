@@ -22,25 +22,25 @@ public class QueryParams {
 
         }
 
-        public Builder title(String title) {
+        public Builder withTitle(String title) {
             Preconditions.checkArgument(StringUtils.isNotBlank(title));
             this.title = title;
             return this;
         }
 
-        public Builder author(String author) {
+        public Builder withAuthor(String author) {
             Preconditions.checkArgument(StringUtils.isNotBlank(author));
             this.author = author;
             return this;
         }
 
-        public Builder isbn(String isbn) {
+        public Builder withIsbn(String isbn) {
             Preconditions.checkArgument(StringUtils.isNotBlank(isbn));
             this.isbn = isbn;
             return this;
         }
 
-        private QueryParams build() {
+        public QueryParams build() {
            return new QueryParams(this);
         }
 

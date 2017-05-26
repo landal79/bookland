@@ -16,7 +16,7 @@ public class GoogleBookClientTest {
 
     @Test
     public void test_find_by_name() throws Exception {
-        googleBooksClient.query("intitle:" + "domain driven design");
+        googleBooksClient.query(new QueryParams.Builder().withTitle("domain driven design").build());
         Assert.assertTrue(true);
     }
 

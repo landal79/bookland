@@ -63,7 +63,7 @@ public class Book extends BaseEntity {
     @Basic(fetch = FetchType.LAZY)
     private String review;
 
-    protected Book() {
+    public Book() {
     }
 
     public Book(String isbn, String title, String description, Author... authors) {
