@@ -3,11 +3,15 @@ package org.landal.bookland.google;
 import com.google.api.services.books.model.Volume;
 import org.landal.bookland.mappers.DateMapper;
 import org.landal.bookland.model.Book;
+import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-@Mapper(componentModel = "cdi", uses=DateMapper.class)
+@Mapper(
+        componentModel = "cdi",
+        uses={DateMapper.class,AuthorMapper.class}
+        )
 public interface GoogleBookMapper {
 
 //    @Mappings({
@@ -21,5 +25,7 @@ public interface GoogleBookMapper {
     @Mapping(source ="volumeInfo.description", target = "description")
     @Mapping(source ="volumeInfo.ratingsCount", target = "rating")
     @Mapping(source ="volumeInfo.publishedDate", target = "publishingDate")
+    @Mapping(source = "volumeInfo.authors", target = "authors")
     Book volumeToBook(Volume volume);
+
 }

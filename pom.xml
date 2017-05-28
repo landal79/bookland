@@ -234,6 +234,12 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>${version.mapstruct}</version>
+            <scope>provided</scope>
+        </dependency>
 
         <!-- TEST -->
         <dependency>
@@ -332,13 +338,13 @@
                 <configuration>
                     <!-- workaround for generated classes due to maven bug -->
                     <useIncrementalCompilation>false</useIncrementalCompilation>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.mapstruct</groupId>
-                            <artifactId>mapstruct-processor</artifactId>
-                            <version>${version.mapstruct}</version>
-                        </path>
-                    </annotationProcessorPaths>
+                    <!--<annotationProcessorPaths>-->
+                        <!--<path>-->
+                            <!--<groupId>org.mapstruct</groupId>-->
+                            <!--<artifactId>mapstruct-processor</artifactId>-->
+                            <!--<version>${version.mapstruct}</version>-->
+                        <!--</path>-->
+                    <!--</annotationProcessorPaths>-->
                 </configuration>
             </plugin>
             <plugin>

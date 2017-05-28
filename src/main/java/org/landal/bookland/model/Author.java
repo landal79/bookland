@@ -6,6 +6,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import com.google.common.base.Preconditions;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 @XmlRootElement(name = "author")
@@ -17,6 +19,15 @@ public class Author extends BaseEntity {
 	private static final long serialVersionUID = 1L;
 
 	public static final String DELETE = "Author.delete";
+
+	public static final Author newInstance(String name, String surname) {
+		Preconditions.checkArgument(StringUtils.isNotBlank(name));
+		Preconditions.checkArgument(StringUtils.isNotBlank(surname));
+		Author author = new Author();
+		author.setName(name);
+		author.setSurname(surname);
+		return author;
+	}
 
 	private String name;
 	private String surname;
