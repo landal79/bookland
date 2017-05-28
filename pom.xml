@@ -21,6 +21,7 @@
         <version.arquillian.persistence>1.0.0.Alpha7</version.arquillian.persistence>
         <version.google-api-services-books>v1-rev92-1.22.0</version.google-api-services-books>
         <version.mapstruct>1.1.0.Final</version.mapstruct>
+        <version.weld>2.4.3.Final</version.weld>
 
         <!-- plugins versions -->
         <version.plugin.compiler>3.6.1</version.plugin.compiler>
@@ -292,6 +293,31 @@
         <dependency>
             <groupId>org.jboss.shrinkwrap.descriptors</groupId>
             <artifactId>shrinkwrap-descriptors-impl-javaee</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.deltaspike.modules</groupId>
+            <artifactId>deltaspike-test-control-module-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.deltaspike.modules</groupId>
+            <artifactId>deltaspike-test-control-module-impl</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.deltaspike.cdictrl</groupId>
+            <artifactId>deltaspike-cdictrl-weld</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.weld.se</groupId>
+            <artifactId>weld-se-core</artifactId>
+            <version>${version.weld}</version>
             <scope>test</scope>
         </dependency>
 

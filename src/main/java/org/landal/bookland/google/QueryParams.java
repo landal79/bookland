@@ -63,7 +63,7 @@ public class QueryParams {
             queryBuilder.append(PREFIX_TITLE).append(builder.title);
         }
 
-        this.query = builder.query;
+        this.query = queryBuilder.length() == 0 ? builder.query : queryBuilder.toString();
     }
 
     @Override
