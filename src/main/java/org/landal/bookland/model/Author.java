@@ -1,9 +1,6 @@
 package org.landal.bookland.model;
 
-import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.google.common.base.Preconditions;
@@ -13,7 +10,9 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 @XmlRootElement(name = "author")
 @Entity
 @Table(name = "AUTHORS")
-@NamedQueries({ @NamedQuery(name = Author.DELETE, query = "delete from Author") })
+@NamedQueries({
+        @NamedQuery(name = Author.DELETE, query = "delete from Author")
+})
 public class Author extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
@@ -29,7 +28,10 @@ public class Author extends BaseEntity {
 		return author;
 	}
 
+    @Column(nullable=false, length=255)
 	private String name;
+
+    @Column(nullable=false, length=255)
 	private String surname;
 
 	protected Author() {

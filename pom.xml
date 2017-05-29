@@ -17,6 +17,7 @@
         <version.logback>1.2.2</version.logback>
         <version.apache.commons.lang>3.5</version.apache.commons.lang>
         <version.apache.commons.io>2.5</version.apache.commons.io>
+        <version.commons-collections4>4.1</version.commons-collections4>
         <version.guava>21.0</version.guava>
         <version.arquillian.persistence>1.0.0.Alpha7</version.arquillian.persistence>
         <version.google-api-services-books>v1-rev92-1.22.0</version.google-api-services-books>
@@ -37,7 +38,6 @@
         <maven.compiler.source>${version.java}</maven.compiler.source>
 
         <baseurl>/bookland</baseurl>
-
 
     </properties>
 
@@ -128,6 +128,12 @@
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
             <version>${version.apache.commons.io}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${version.commons-collections4}</version>
         </dependency>
 
         <dependency>

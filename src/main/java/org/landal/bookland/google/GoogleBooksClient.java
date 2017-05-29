@@ -79,13 +79,10 @@ public class GoogleBooksClient {
             return Collections.emptyList();
         }
 
-
        return  volumes.getItems()
                .stream()
                .map(volume -> mapper.volumeToBook(volume))
                .collect(Collectors.toList());
-
-
     }
 
 }

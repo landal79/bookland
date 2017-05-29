@@ -30,4 +30,12 @@ public class GoogleBookClientTest {
         books.forEach(b -> Assert.assertTrue(b.getTitle().toLowerCase().contains("domain")));
     }
 
+    @Test
+    public void test_find_with_author() throws Exception {
+        Collection<Book> books = googleBooksClient.query(new QueryParams.Builder().withAuthor("Eric Evans").build());
+        Assert.assertNotNull(books);
+        Assert.assertFalse(books.isEmpty());
+        books.forEach(b -> b.getAuthors().stream().forEach(a -> Assert.assertTrue("eric".equals(a.getName().toLowerCase()))));
+    }
+
 }
